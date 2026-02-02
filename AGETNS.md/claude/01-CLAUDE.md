@@ -21,8 +21,8 @@
 Find reuse opportunities + Trace the call/dependency chain and impact radius:
 
 - Use semantic code search first via `codebase-retrieval` tool.
-- Confirm understanding with LSP: `goToDefinition`, `findReferences`.
 - Use Grep/Glob for verifying and understanding additional code snippets.
+  - **Tool priority**: `rg` (ripgrep) > `grep` for content search.
 
 ## Red Lines
 
