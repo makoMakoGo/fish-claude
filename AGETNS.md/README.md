@@ -6,10 +6,10 @@ Why this ?
 
 ## Claude Code
 
-
-| 预设 | 优点1 | 优点2 | 优点3 | 优点4 | 优点5 |
-| ---- | ----- | ----- | ----- | ----- | ----- |
-| [claude-code-01](claude-code/01-CLAUDE.md) | 清晰的边界约束 | 明确的各情形工具指导 | | | |
+| 预设 | 一句话简介 | 覆盖范围 |
+| ---- | ---------- | -------- |
+| [01-quality-git-research](claude/01-quality-git-research.md) | 编码规范全家桶：代码质量红线 + Git/Commit 流程 + 研究方法 + 安全与清理 | Code Quality, Red Lines, Research, Git, Security, Cleanup, Environment |
+| [02-priority-stack-mcp](claude/02-priority-stack-mcp.md) | 行为优先级栈 + MCP 工具调用规则，精简轻量 | Priority Stack, MCP Tool Rules, Environment |
 
 
 ## Codex
