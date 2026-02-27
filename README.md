@@ -18,7 +18,7 @@
 
 ```text
 .
-├── AGENTS.md/       # 全局约束文件
+├── memory/          # 规则模块（可拼装）
 ├── sub-agents/      # Sub-Agents 配置
 ├── slash-commands/  # Slash Commands
 ├── skills/          # Skills 定义

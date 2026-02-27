@@ -1,0 +1,43 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## What This Repo Is
+
+An **AI coding assistant configuration sharing repository** — NOT a business application.
+Contains reusable rule fragments, MCP setup guides, skills, and output styles for Claude Code, Codex, Gemini CLI, etc.
+
+**There is no build system, no test suite, no `src/` directory.** Do not look for or create them.
+
+## Architecture
+
+### Composable Module System
+
+Each `.md` file in `memory/claude/` is an **independent, composable rule fragment**. Users browse, pick what they need, and concatenate modules into their own project config:
+
+```bash
+cat claude/01-defaults.md claude/02-code-quality.md ... > CLAUDE.md
+```
+
+Module details and dependency info are documented in `memory/README.md`.
+
+### Directory Layout
+
+| Directory | Purpose |
+|---|---|
+| `memory/claude/` | Claude Code rule modules (composable fragments) |
+| `memory/codex/` | Codex rule modules |
+| `mcp/` | MCP server installation & usage guides |
+| `skills/` | Custom skill definitions |
+| `output-styles/` | Personality/style presets for AI output |
+| `sub-agents/` | Sub-agent configurations (reserved) |
+| `slash-commands/` | Command templates (reserved) |
+
+## Rules for Editing This Repo
+
+1. **Not a business code repo.** No builds, deploys, or `src/` assumptions.
+2. **Do NOT rewrite rule fragments into tutorials or monolithic docs.**
+3. **Do NOT force optional modules into default configurations.**
+4. **Keep modules composable**: one file = one responsibility; edits must preserve copy-paste assembly.
+5. **Minimal changes only**: small, focused edits scoped to the user's request; do not modify unrelated modules.
+6. **If file structure changes**, update index docs (`memory/README.md`, `mcp/README.md`).
