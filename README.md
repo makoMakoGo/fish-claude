@@ -19,10 +19,11 @@
 ```text
 .
 ├── memory/          # 规则模块（可拼装）
-├── sub-agents/      # Sub-Agents 配置
-├── slash-commands/  # Slash Commands
+├── mcp/             # MCP Server 安装配置指南
+├── output-styles/   # AI 输出风格/人格预设
 ├── skills/          # Skills 定义
-└── docs/            # 文档说明
+├── sub-agents/      # Sub-Agents 配置
+└── slash-commands/  # Slash Commands
 ```
 
 ## 使用方法

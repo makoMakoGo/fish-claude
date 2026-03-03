@@ -13,11 +13,17 @@ Contains reusable rule fragments, MCP setup guides, skills, and output styles fo
 
 ### Composable Module System
 
-Each `.md` file in `memory/claude/` is an **independent, composable rule fragment**. Users browse, pick what they need, and concatenate modules into their own project config:
+Each `.md` file in `memory/claude/` and `memory/codex/` is an **independent, composable rule fragment**. Users browse, pick what they need, and concatenate modules into their own project config:
 
 ```bash
+# Claude Code
 cat claude/01-defaults.md claude/02-code-quality.md ... > CLAUDE.md
+
+# Codex
+cat codex/01-basic-rules.md codex/02-text-editing-tool.md ... > AGENTS.md
 ```
+
+For Codex, `config.toml` provides a `developer_instructions` field as a high-priority override slot — modules that Codex follows poorly can be moved from `AGENTS.md` into `developer_instructions` for stronger enforcement.
 
 Module details and dependency info are documented in `memory/README.md`.
 
