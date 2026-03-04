@@ -5,3 +5,7 @@ desktop.ini
 # Windows system files
 Thumbs.db
 *.lnk
+
+# Python caches
+__pycache__/
+*.pyc
