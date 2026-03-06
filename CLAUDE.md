@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## What This Repo Is
 
 An **AI coding assistant configuration sharing repository** — NOT a business application.
-Contains reusable rule fragments, MCP setup guides, skills, and output styles for Claude Code, Codex, Gemini CLI, etc.
+Contains reusable rule fragments, ready-to-use profiles, MCP setup guides, skills, and output styles for Claude Code, Codex, Gemini CLI, etc.
 
 **There is no build system, no test suite, no `src/` directory.** Do not look for or create them.
 
@@ -25,7 +25,7 @@ cat codex/01-basic-rules.md codex/02-text-editing-tool.md ... > AGENTS.md
 
 For Codex, `config.toml` provides a `developer_instructions` field as a high-priority override slot — modules that Codex follows poorly can be moved from `AGENTS.md` into `developer_instructions` for stronger enforcement.
 
-Module details and dependency info are documented in `memory/README.md`.
+Module details and dependency info are documented in `memory/README.md`. Ready-to-use profiles live under `profile/`.
 
 ### Directory Layout
 
@@ -33,6 +33,7 @@ Module details and dependency info are documented in `memory/README.md`.
 |---|---|
 | `memory/claude/` | Claude Code rule modules (composable fragments) |
 | `memory/codex/` | Codex rule modules |
+| `profile/` | Ready-to-use configuration profiles |
 | `mcp/` | MCP server installation & usage guides |
 | `skills/` | Custom skill definitions |
 | `output-styles/` | Personality/style presets for AI output |

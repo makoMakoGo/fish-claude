@@ -1,0 +1,49 @@
+sandbox_mode = "danger-full-access"
+model = "gpt-5.4"
+model_context_window = 1000000
+model_reasoning_effort = "xhigh"
+disable_response_storage = true
+model_reasoning_summary = "detailed"
+network_access = true
+service_tier = "fast"
+
+[features]
+undo = true
+shell_tool = true
+unified_exec = true
+shell_snapshot = true
+powershell_utf8 = true
+enable_request_compression = true
+skill_mcp_dependency_install = true
+steer = true
+collaboration_modes = true
+personality = true
+multi_agent = true
+
+[agents.default]
+config_file = "agents/default.toml"
+
+[agents.worker]
+config_file = "agents/worker.toml"
+
+[agents.explorer]
+config_file = "agents/explorer.toml"
+
+[agents.awaiter]
+config_file = "agents/awaiter.toml"
+
+[tui]
+status_line = ["model-with-reasoning", "current-dir", "git-branch", "context-used", "context-window-size"]
+
+[mcp_servers]
+
+[mcp_servers.context7]
+type = "stdio"
+command = "cmd"
+args = ["/c", "npx", "-y", "@upstash/context7-mcp", "--api-key", "YOUR_CONTEXT7_API_KEY"]
+
+[notice.model_migrations]
+"gpt-5.2" = "gpt-5.3-codex"
+
+[windows]
+sandbox = "elevated"

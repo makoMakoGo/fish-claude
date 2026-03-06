@@ -36,7 +36,9 @@
 
 以下模块**独立、可自由组合**——按需选取后拼接为项目的 `AGENTS.md`。
 
-配合 `config.toml` 使用：`developer_instructions` 默认留空，哪条规则遵循不佳就从 `AGENTS.md` 剪切到 `developer_instructions` 中加强。参考配置见 [refer-for-config.toml](codex/refer-for-config.toml)。
+配合 `config.toml` 使用：`developer_instructions` 默认留空，哪条规则遵循不佳就从 `AGENTS.md` 剪切到 `developer_instructions` 中加强。可直接参考 [`../profile/codex/default.config.toml`](../profile/codex/default.config.toml) 和配套的 `../profile/codex/agents/*.toml`。`memory/codex/` 只存放可拼装规则模块，成品配置统一放到 `profile/`。
+
+Codex 自定义 provider 建议使用稳定 key，例如 `custom`；如果频繁改 `model_provider` 的 key，历史会按 provider 分桶，默认 chat history / resume / fork 会看不到旧会话。需要归并旧 bucket 时，可用 `scripts/migrate_codex_provider_history.py`。
 
 ### 模块清单
 

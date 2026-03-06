@@ -6,7 +6,7 @@
 
 ## 简介
 
-这个仓库用于分享我本人各种 Coding CLI的自定义 AGENTS.md， sub-agents，slash commands 和 skills 等，包括但不限于：
+这个仓库用于分享我本人各种 Coding CLI 的自定义规则模块、成品 profile、sub-agents、slash commands 和 skills 等，包括但不限于：
 
 - Claude Code
 - Codex
@@ -19,6 +19,7 @@
 ```text
 .
 ├── memory/          # 规则模块（可拼装）
+├── profile/         # 可直接复制使用的成品配置
 ├── mcp/             # MCP Server 安装配置指南
 ├── output-styles/   # AI 输出风格/人格预设
 ├── skills/          # Skills 定义
@@ -29,7 +30,7 @@
 ## 使用方法
 
 1. 克隆仓库到本地
-2. 根据需要复制 AGENTS.md、sub-agents、slash commands 或 skills 文件
+2. 根据需要选用 `memory/` 中的模块，或直接复制 `profile/` 下的成品配置
 3. 将文件放置到对应 CLI 工具的配置目录
 4. 根据个人需求调整配置
 
