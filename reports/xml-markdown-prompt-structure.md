@@ -211,7 +211,7 @@ Assistant reads the route, finds existing validation patterns, updates the route
 - `03-research.md`：库文档、通用搜索、版本差异都属于场景触发，适合 `<important if>`。
 - `04-dev-workflow.md`：只在 `/dev ...` 或 `code-dispatcher` 场景相关，适合单个 `<important if>` 包住 workflow contract。
 - `05-playwright.md`：如果只在 UI / browser verification / Playwright 场景相关，适合加窄条件。
-- `06-agent-teams.md`：如果只在 team / subagent / parallel agent 场景相关，适合加窄条件。
+- `07-plan-mode-default.md`：只在 plan-mode / planning-first 场景相关，适合加窄条件。
 
 ## 注意事项
 

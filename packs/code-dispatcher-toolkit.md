@@ -1,6 +1,6 @@
 # code-dispatcher-toolkit
 
-多后端 AI 编码工具集：CLI 调度器 + workflow skill + 安装脚本。
+多后端 AI 编码工具集：`code-dispatcher` CLI + 可安装 Skills + 安装脚本。
 
 ## 来源
 
@@ -8,7 +8,7 @@
 
 ## 是什么
 
-核心是一个 CLI 调度器 `code-dispatcher`，统一入口调度 `codex`、`claude`、`gemini` 三个后端：
+核心是一个 CLI 调度器 `code-dispatcher`，统一调度 `codex`、`claude`、`gemini` 三个后端：
 
 接收任务 → 选后端 → 构建参数 → 分发执行 → 收集结果
 
@@ -27,18 +27,24 @@
 
 ## Skills
 
-| 名称 | 用途 |
-|------|------|
-| `dev` | 需求澄清 → 计划 → 并行执行 → 验证 |
-| `code-council` | 2-3 个 AI reviewer 并行 + host 终审 |
-| `pr-review-reply` | 自主处理 PR bot review，修复或反驳 |
-| `code-dispatcher` | 执行器使用说明，`--parallel` / `--resume` 机制 |
+| 名称 | 用途 | 依赖 CLI |
+|------|------|----------|
+| `code-dispatcher` | 执行器使用说明；统一 3 个后端；覆盖 `--parallel` / `--resume` 机制 | 必需 |
+| `dev` | 需求澄清 → 计划 → 选择后端 → 并行执行（DAG 调度）→ 验证 | 必需 |
+| `pr-review-reply` | 自主处理 PR bot review，修复或反驳并回复线程 | 可选 |
 
 ## 安装
 
 ```bash
-python3 install.py                    # 下载 CLI 二进制 + 生成配置
-python3 install.py --skip-dispatcher  # 仅安装 skills
+python3 install.py                                      # 下载 CLI 二进制 + 生成配置
+python3 install.py --install-dir ~/.code-dispatcher --force
+python3 install.py --skip-dispatcher                    # 仅安装 skills
 ```
 
-Skill 复制到对应 CLI 的 skills 目录（`~/.claude/skills/`、`~/.codex/skills/`、`~/.gemini/skills/` 等）即可。
+脚本默认安装：
+
+- `~/.code-dispatcher/.env`：运行时唯一配置源
+- `~/.code-dispatcher/prompts/*-prompt.md`：各后端默认 prompt 模板
+- `~/.code-dispatcher/bin/code-dispatcher`：执行器二进制
+
+Skill 复制到对应 CLI 的 skills 目录（`~/.agents/skills/`、`~/.claude/skills/`、`~/.codex/skills/`、`~/.config/opencode/skills/`、`~/.gemini/skills/` 等）即可。

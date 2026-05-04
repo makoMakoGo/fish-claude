@@ -31,7 +31,7 @@ cp -r <pack>/hooks/     <project>/.claude/hooks/
 
 | Pack | 说明 |
 | --- | --- |
-| [code-dispatcher-toolkit](code-dispatcher-toolkit.md) | 基于 `code-dispatcher` CLI 的多后端 AI 编码工具集，包含执行器、编排 skill、prompt 模板与安装脚本 |
+| [code-dispatcher-toolkit](code-dispatcher-toolkit.md) | 基于 `code-dispatcher` CLI 的多后端 AI 编码工具集，包含执行器、Skills 与安装脚本 |
 | [rtk](rtk.md) | RTK 外部工具参考页；说明 Claude/Codex 官方接入方式，以及基于 OMP rules 的本地 OMP 适配 |
 | [myclaude-harness](myclaude-harness.md) | `stellarlinkco/myclaude` 的 Claude Code harness |
 | [context-mode](context-mode.md) | Claude Code plugin + MCP server；sandbox 内处理大输出，~98% context 压缩，附 session continuity |

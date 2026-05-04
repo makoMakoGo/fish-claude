@@ -32,7 +32,7 @@
 | 03  | [research](claude/03-research.md)             | 查资料方法论（禁止猜测）               | [Context7](../mcp/context7.md), [Grok Search](../skills/grok-search.md) |
 | 04  | [dev-workflow](claude/04-dev-workflow.md)     | code-dispatcher 开发工作流（按需启用） | [code-dispatcher-toolkit](../packs/code-dispatcher-toolkit.md) |
 | 05  | [playwright](claude/05-playwright.md)         | Playwright UI 验证规则（按需启用）     | [Playwright](../mcp/playwright.md)                                |
-| 06  | [agent-teams](claude/06-agent-teams.md)       | Agent Teams 使用规范（按需启用）       | —                                                                 |
+| 07  | [plan-mode-default](claude/07-plan-mode-default.md) | Plan Mode 默认触发规则（按需启用）     | —                                                                 |
 
 
 
