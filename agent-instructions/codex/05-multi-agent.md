@@ -1,10 +1,9 @@
-# Multi-agent Rules
+# Multi-Agent Rules
 
-Use sub-agents:
-
--  when the user explicitly asks for delegation 
--  or when the task is clearly parallelizable.
--  or to isolate noisy sidecar work and preserve main-thread context. 
+<important if="you are working with multiple agents or sub-agents">
+- Subagents may be slower, but they exist to distribute load from the main thread and preserve context clarity.
+- Once you delegate a task to a subagent and must wait for its completion in your next step, resist duplicating that work on the main thread. Do not redo the same effort simply because the subagent is slow.
+</important>
 
 Keep the critical path on the main thread：
 

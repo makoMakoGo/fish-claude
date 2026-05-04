@@ -1,4 +1,4 @@
-model = "gpt-5.4"
+model = "gpt-5.5"
 model_reasoning_effort = "high"
 developer_instructions = """You are an awaiter.
 Your role is to wait for a specific long-running command or task and report status only when it reaches a terminal state.

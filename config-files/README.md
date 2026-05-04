@@ -25,4 +25,4 @@
 
 - `description` 是给 host agent 的调度提示，短、清楚、偏职责边界；sub-agent 实际 prompt 在 `developer_instructions`
 - `[agents.<role>]` 同名 shadow builtin；role layer 只覆写实际写出的键，其余继承父线程
-- spawn runtime 会重写 `approval_policy`、`shell_environment_policy`、`sandbox`、`cwd`，这些不用放进 role layer
+- spawn runtime 会重写 `approval_policy`、`shell_environment_policy`、`sandbox_mode`、`sandbox_workspace_write`、`cwd`，这些不用放进 role layer

@@ -1,39 +1,30 @@
-sandbox_mode = "danger-full-access"
-model = "gpt-5.4"
-model_context_window = 1000000
-model_auto_compact_token_limit = 800000
+model = "gpt-5.5"
+model_provider = "openai"
+cli_auth_credentials_store = "file"
 model_reasoning_effort = "xhigh"
-plan_mode_reasoning_effort = "high"
 model_reasoning_summary = "detailed"
+plan_mode_reasoning_effort = "high"
+sandbox_mode = "workspace-write"
+suppress_unstable_features_warning = true
+developer_instructions = "Minimize fault tolerance and avoid fallback mechanisms. No over-designing."
+personality = "pragmatic"
+web_search = "live"
+approvals_reviewer = "auto_review"
+approval_policy = "on-request"
+model_context_window = 1000000
 service_tier = "fast"
-developer_instructions = "Minimize fault tolerance and avoid fallback mechanisms."
 
 [features]
-undo = true
-shell_tool = true
-unified_exec = true
-shell_snapshot = true
-enable_request_compression = true
-skill_mcp_dependency_install = true
-personality = true
-# Current Codex still gates the v2 collaboration tools behind `multi_agent`,
-# so keep both flags enabled until upstream removes that dependency.
-multi_agent = true
 multi_agent_v2 = true
+prevent_idle_sleep = true
+goals = true
+apply_patch_freeform = true
+apply_patch_streaming_events = true
+tool_search_always_defer_mcp_tools = true
 
-# Optional v2-specific knobs:
-# [features.multi_agent_v2]
-# enabled = true
-# usage_hint_enabled = true
-# usage_hint_text = "Delegate only when the task is clearly separable."
-# hide_spawn_agent_metadata = false
-
-# Copy the canonical role-layer templates from `sub-agents/codex/*.toml`
-# into `~/.codex/agents/`, then keep the relative `config_file` paths below.
 [agents]
 max_depth = 1
 
-# Same-named `[agents.<role>]` entries override builtin role metadata.
 [agents.default]
 description = "Default agent."
 config_file = "agents/default.toml"
@@ -54,31 +45,24 @@ config_file = "agents/spark.toml"
 description = "Use for long-running wait or poll workflows."
 config_file = "agents/awaiter.toml"
 
-[tui]
-status_line = [
-    "model-with-reasoning",
-    "current-dir",
-    "git-branch",
-    "context-used",
-    "context-window-size",
-]
-
-[mcp_servers]
-
-[mcp_servers.context7]
-type = "stdio"
-command = "cmd"
-args = [
-    "/c",
-    "npx",
-    "-y",
-    "@upstash/context7-mcp",
-    "--api-key",
-    "YOUR_CONTEXT7_API_KEY",
-]
+[notice]
+fast_default_opt_out = true
 
 [notice.model_migrations]
 "gpt-5.2" = "gpt-5.3-codex"
 
-[windows]
-sandbox = "elevated"
+[tui]
+status_line = ["model-with-reasoning", "current-dir", "git-branch", "context-used", "context-window-size"]
+notifications = true
+notification_condition = "unfocused"
+terminal_title = ["spinner", "project", "model"]
+animations = true
+
+[mcp_servers.openaiDeveloperDocs]
+url = "https://developers.openai.com/mcp"
+
+[plugins."gmail@openai-curated"]
+enabled = true
+
+[plugins."github@openai-curated"]
+enabled = true
