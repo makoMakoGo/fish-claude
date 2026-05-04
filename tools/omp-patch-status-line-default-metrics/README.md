@@ -5,16 +5,16 @@
 默认 preset 的 `leftSegments` 顺序从：
 
 ```
-pi model plan_mode path git pr context_pct token_total cost
+pi model plan_mode path git pr context_pct cost
 ```
 
 调整为：
 
 ```
-pi model plan_mode context_pct token_total cost path git pr
+pi model plan_mode context_pct cost path git pr
 ```
 
-空间不足时优先保留 `context_pct`、`token_total`、`cost`，再裁掉 `path/git/pr`。
+空间不足时优先保留 `context_pct`、`cost`，再裁掉 `path/git/pr`。
 
 ```bash
 bun run tools/omp-patch-status-line-default-metrics/apply.ts           # apply

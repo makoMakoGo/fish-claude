@@ -7,7 +7,7 @@
 | Claude | frontmatter + markdown | 自动（按 description）或显式指名 | 禁止 | — | 专家卡片，独立 context |
 | Codex | TOML role layer | 主 agent spawn 子线程 | `max_depth` 控制 | — | 通用 lane 分工 |
 | OMP | 调用时 prompt 动态组装 | Task 工具派发 | 无限制（独立 session） | — | swarm DAG 编排 + 强制结构化返回 |
-| Gemini | frontmatter + markdown | 以 tool name 暴露，自动或 `@name` | 硬禁止 | A2A 协议 | tool 级白名单 + 远程 subagent |
+| Gemini | frontmatter + markdown | 以 tool name 暴露，自动或 `@name` | 硬禁止 | — | tool 级白名单 + 远程 subagent |
 
 ---
 
@@ -21,7 +21,7 @@ Claude 有两条协作路线：**subagent**（单会话内派发专家）和 **a
 
 ### Subagent
 
-每个 subagent 是一个 Markdown 文件，YAML frontmatter 写元数据，body 是它自己的 system prompt——本质上是一张具名专家卡片。
+每个 subagent 是一个 Markdown 文件，YAML frontmatter 写元数据，body 是它自己的 system prompt——即一张具名专家卡片。
 
 Host 会根据 subagent 的 `description` 结合当前任务自动派发，也可以显式指名调用。
 
@@ -78,7 +78,7 @@ Claude 是"预定义领域专家，host 按 description 自动派发"；Codex �
 
 ### multi-agent 底层
 
-multi-agent 的 feature flag 矩阵和配置生效细节见 [codex/multi-agent-internals.md](codex/multi-agent-internals.md)。
+multi-agent 的 feature flag 矩阵和配置生效细节见 [codex-multi-agent-internals.md](../reports/codex-multi-agent-internals.md)。
 
 ---
 
@@ -110,59 +110,13 @@ OMP 的 subagent 分两层：**内置 Task 工具** + **swarm-extension** 包。
 - skill 继承：Task subagent 走正常 session 创建流程，继承当前 session 的 discovered skills；**不支持** per-task skill pinning（源码 `docs/skills.md`）
 - 可选 `worktree` 参数：subagent 在隔离 git worktree 里干活，物理防误改主仓
 
-### swarm-extension（DAG 编排）
-
-官方 package：`packages/swarm-extension/`。把多 agent 工作流写成 YAML，调度器构建 DAG、拓扑排序成 wave。每个 agent 是完整 OMP subagent（full tool set：bash / python / read / write / edit / grep / find / fetch / web_search / browser）。
-
-入口：
-
-- TUI 内：`/swarm <path-to.yaml>`（注册自 `src/extension.ts`）
-- 独立运行：`bun run src/cli.ts <path-to.yaml>`（无 TUI、无 timeout，适合长跑）
-
-YAML 结构：
-
-```yaml
-swarm:
-  name: my-pipeline          # 必填，state 存在 .swarm_<name>/
-  workspace: ./workspace     # 必填，共享工作目录
-  mode: pipeline             # pipeline | parallel | sequential（默认 sequential）
-  target_count: 10           # pipeline 模式的迭代次数，默认 1
-  model: claude-opus-4-6     # 默认 model（可被 per-agent 覆盖）
-
-  agents:
-    finder:
-      role: web-scraper                 # 必填，作为 system prompt
-      task: |                           # 必填，多行 user prompt
-        Find 10 relevant URLs …
-      extra_context: |                  # 可选，附加到 system prompt
-        Only consider sources after 2024.
-      reports_to: [analyzer]            # 可选，声明下游
-      waits_for: []                     # 可选，声明上游
-      model: claude-sonnet-4-5          # 可选，per-agent 覆盖
-```
-
-三种执行模式：
-
-| Mode | 行为 |
-| ---- | ---- |
-| `sequential`（默认） | 按声明顺序串行跑一遍 |
-| `parallel` | 所有 agent 并发（除非 `waits_for` / `reports_to` 强制排序） |
-| `pipeline` | 整张 agent DAG 重复跑 `target_count` 次（累积式工作，如"找 50 个东西，每轮找一个"） |
-
-DAG 调度（源码 `src/swarm/dag.ts`）：
-
-- `waits_for: [a, b]` — 两者都完成才启动
-- `reports_to: [x]` — 等价于 `x.waits_for` 加上自己
-- 同一 wave 内并发执行；wave 之间按拓扑序串行
-- 有 cycle 直接拒绝执行
-
-Agent 间通信：**只走共享 workspace 文件系统**。orchestrator 不传数据，只管启停顺序。常见协议：signal files（`signals/*.txt` 状态标记）、结构化输出（`analyzed/item_N.md`、`results/*.json`）、tracking files（`processed.txt` 去重）。
+Swarm DAG 编排：[omp-swarm-dag.md](../reports/omp-swarm-dag.md)
 
 ---
 
 ## Gemini CLI
 
-Gemini CLI 把每个 subagent 暴露成**同名 tool**给主 agent——主 agent 调这个 tool 就等于委派任务。支持 local 和 remote（Agent2Agent / A2A 协议）两种形态。
+Gemini CLI 把每个 subagent 暴露成**同名 tool**给主 agent——主 agent 调这个 tool 就等于委派任务。支持 local 和 remote 两种形态。
 
 ### 定义
 
@@ -226,21 +180,3 @@ max_turns: 10
 每个 subagent 可独立声明 `tools` 白名单（支持三级通配符 `*` / `mcp_*` / `mcp_<server>_*`）和 inline `mcpServers`（只对本 subagent 可见，不污染全局）。Policy Engine 的 `[[rules]]` 可加 `subagent = "..."` 做 per-subagent 权限规则（`policy.toml`）。
 
 **subagent 不能调用其他 subagent**——即使 `tools: ["*"]` 也看不到其他 agent tool。硬规则，防无限嵌套。
-
-### Remote Subagent（A2A 协议）
-
-源码 `packages/a2a-server/` + `packages/core/src/agents/a2a-client-manager.ts`。frontmatter 用 `kind: remote` 并给 `agent_card_url` 或 `agent_card_json`：
-
-```yaml
----
-name: my-remote-agent
-kind: remote
-agent_card_url: https://my-agent.example.com/.well-known/agent.json
-auth:
-  type: http
-  scheme: Bearer
-  token: $MY_BEARER_TOKEN
----
-```
-
-支持的鉴权：`apiKey` / `http`（Bearer / Basic / Raw）/ `google-credentials`（ADC）/ `oauth`。secret 值支持动态解析：`$ENV_VAR`、`!command`（shell 输出）、字面量、`$$` / `!!` 转义。

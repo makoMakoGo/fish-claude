@@ -5,8 +5,8 @@
 
  export const STATUS_LINE_PRESETS: Record<StatusLinePreset, PresetDef> = {
  	default: {
--		leftSegments: ["pi", "model", "mode", "path", "git", "pr", "context_pct", "token_total", "cost"],
-+		leftSegments: ["pi", "model", "mode", "context_pct", "token_total", "cost", "path", "git", "pr"],
+-		leftSegments: ["pi", "model", "mode", "path", "git", "pr", "context_pct", "cost"],
++		leftSegments: ["pi", "model", "mode", "context_pct", "cost", "path", "git", "pr"],
  		rightSegments: ["session_name"],
  		separator: "powerline-thin",
  		segmentOptions: {

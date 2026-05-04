@@ -25,6 +25,16 @@
 - note: Gemini CLI composes the final prompt dynamically from `snippets.ts`
 - note: `gemini-cli.md` records the Gemini 3 / modern / interactive baseline plus the major conditional sections injected at runtime
 
+## OpenCode
+
+- file: `opencode.md`
+- source remote: `https://github.com/anomalyco/opencode.git`
+- source branch: `dev`
+- source commit: `8299fb3e2`
+- source prompt paths: `packages/opencode/src/session/system.ts`, `packages/opencode/src/session/llm.ts`, `packages/opencode/src/session/prompt/*.txt`
+- synced date: `2026-05-03`
+- note: OpenCode does not use one static prompt file; the runtime prompt is assembled from provider-specific prompt text, environment metadata, project instructions, custom agent prompts, and skill descriptions
+
 ## Oh My Pi
 
 - source remote: `https://github.com/nicobailon/oh-my-pi.git`
