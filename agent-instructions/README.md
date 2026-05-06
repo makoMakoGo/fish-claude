@@ -21,14 +21,8 @@
 | 01  | [no-extra-notes](general/01-no-extra-notes.md)   | 禁止在文档主结构外多嘴补注释或说明 | — |
 | 02  | [environment](general/02-environment.md)         | Windows + WSL2 环境模板（Python / Go / Rust / Git） | 本机环境可选模块 |
 | 03  | [git-commit-push](general/03-git-commit-push.md) | Git 提交 / push / commit message 通用规则 | — |
-
-
-## Experimental
-
-| #   | 模块                                         | 职责                                      | 依赖 |
-| --- | -------------------------------------------- | ----------------------------------------- | ---- |
-| 01  | [completion-discipline](experimental/01-completion-discipline.md) | 防止局部验证、连续 patch、乐观完成 | — |
-
+| 04  | [completion-discipline](general/04-completion-discipline.md) | 防止局部验证、连续 patch、乐观完成 | — |
+| 05  | [serena](general/05-serena.md) | Serena 可用时的语义检索与 memory 使用约束 | Serena MCP 可选模块 |
 ## Claude Code
 
 | #   | 模块                                          | 职责                                   | 依赖                                                              |
@@ -70,10 +64,3 @@
 | #   | 模块                                          | 职责                                   | 依赖                                                              |
 | --- | --------------------------------------------- | -------------------------------------- | ----------------------------------------------------------------- |
 | 01  | [code-search](opencode/01-code-search.md)     | Semble 优先的代码探索规则              | [Semble](../mcp/semble.md)                                        |
-
-## _archived
-
-| 文件                                                         | 归档原因                                       |
-| ------------------------------------------------------------ | ---------------------------------------------- |
-| [text-editing-tool](_archived/text-editing-tool.md) | Codex 已很少出现 apply_patch 调用错误，不再需要 |
-| [serena](_archived/serena.md) | Serena MCP 当前很少使用了 |

@@ -8,6 +8,3 @@
 
 - USE TOOL DIRECTLY. AVOID shell wrappers such as `bash -lc` **unless necessary**.   
 
-## Tool Orchestration (Default: Parallel)
-
-Use `multi_tool_use.parallel` to parallel tool invocation (accelerates batch reading, searching, and execution) whenever possible.

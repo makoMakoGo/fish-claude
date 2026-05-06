@@ -8,6 +8,12 @@
 | Codex multi-agent 底层细节 | [Codex Multi-Agent 底层细节](https://makomakogo.github.io/posts/2026/05/01/codex-multi-agent-internals.html) |
 | OMP swarm DAG 编排 | [OMP Swarm DAG 编排](https://makomakogo.github.io/posts/2026/05/01/omp-swarm-dag.html) |
 | Claude / Codex / OMP / Gemini CLI 的 Sub-Agent 机制整理 | [Claude / Codex / OMP / Gemini CLI 的 Sub-Agent 机制整理](https://makomakogo.github.io/posts/2026/05/06/claude-codex-omp-gemini-subagents.html) |
+| Oh My Pi 中的 Agent、Subagent 与 Swarm 学习笔记 | [Oh My Pi 中的 Agent、Subagent 与 Swarm 学习笔记](https://makomakogo.github.io/posts/2026/05/06/omp-agents-subagents-and-swarm.html) |
+| OMP Codex 搜索后端选择笔记 | [OMP Codex 搜索后端选择笔记](https://makomakogo.github.io/posts/2026/05/06/omp-codex-search-backend-selection.html) |
+| OMP /compact、Responses 网关与 CLIProxyAPI 联调笔记 | [OMP /compact、Responses 网关与 CLIProxyAPI 联调笔记](https://makomakogo.github.io/posts/2026/05/06/omp-compact-gateway-cpa.html) |
+| OMP Memory 功能笔记 | [OMP Memory 功能笔记](https://makomakogo.github.io/posts/2026/05/06/omp-memory-notes.html) |
+| OMP provider 与 extension 控制粒度笔记 | [OMP provider 与 extension 控制粒度笔记](https://makomakogo.github.io/posts/2026/05/06/omp-provider-extension-control.html) |
+| OMP 搜索功能与 Codex 自定义反代补丁设计笔记 | [OMP 搜索功能与 Codex 自定义反代补丁设计笔记](https://makomakogo.github.io/posts/2026/05/06/omp-search-codex-proxy-patch.html) |
 | GPT-5.4 口癖研究报告 | [GPT-5.4 口癖研究报告](https://makomakogo.github.io/posts/2026/04/24/gpt-5.4-verbal-tics.html) |
 | OMP vs Codex 系统提示词风格差异 | [OMP 与 Codex 内置系统提示词风格差异](https://makomakogo.github.io/posts/2026/05/01/omp-codex-system-prompt-style.html) |
 | OpenCode 系统提示词模型名路由 | [OpenCode 系统提示词的模型名路由机制](https://makomakogo.github.io/posts/2026/05/05/opencode-system-prompt-routing.html) |

@@ -17,7 +17,8 @@
         "ENABLE_TOOL_SEARCH": "1",
         "CLAUDE_CODE_FORK_SUBAGENT": "1",
         "CLAUDE_CODE_DISABLE_BACKGROUND_TASKS": "1",
-        "CLAUDE_CODE_SIMPLE_SYSTEM_PROMPT": "1"
+        "CLAUDE_CODE_SIMPLE_SYSTEM_PROMPT": "1",
+        "CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY": "1"
     },
     "includeCoAuthoredBy": true,
     "statusLine": {
@@ -25,6 +26,7 @@
         "type": "command"
     },
     "alwaysThinkingEnabled": true,
+    "skillListingBudgetFraction": 0.02,
     "attribution": {
         "commit": "",
         "pr": ""
