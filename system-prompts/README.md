@@ -10,9 +10,9 @@
 
 - file: `codex-cli.md`
 - source remote: `https://github.com/openai/codex.git`
-- source prompt path: `codex-rs/models-manager/prompt.md` (also `codex-rs/protocol/src/prompts/base_instructions/default.md`)
-- synced date: `2026-04-13`
-- note: Codex CLI currently uses a mostly static primary system prompt file, so this copy is close to a direct source sync
+- source prompt path: `codex-rs/models-manager/models.json` (`gpt-5.5` `model_messages.instructions_template` + `personality_pragmatic`)
+- synced date: `2026-05-04`
+- note: Codex CLI now resolves model instructions from the model catalog; this copy records the resolved `gpt-5.5` prompt for the fish-claude default `personality = "pragmatic"` config
 
 ## Gemini CLI
 

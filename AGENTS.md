@@ -13,7 +13,7 @@ Contains reusable rule fragments for project docs, baseline CLI config reference
 
 ### Composable Module System
 
-Each `.md` file in `agent-instructions/general/`, `agent-instructions/claude/`, `agent-instructions/codex/`, `agent-instructions/oh-my-pi/`, and `agent-instructions/gemini/` is an **independent, composable rule fragment**. Users browse, pick what they need, and concatenate modules into their own global config:
+Each `.md` file in `agent-instructions/general/`, `agent-instructions/claude/`, `agent-instructions/codex/`, `agent-instructions/opencode/`, `agent-instructions/oh-my-pi/`, and `agent-instructions/gemini/` is an **independent, composable rule fragment**. Users browse, pick what they need, and concatenate modules into their own global config:
 
 ```bash
 # Claude Code
@@ -21,6 +21,9 @@ cat general/01-no-extra-notes.md claude/01-defaults.md claude/02-code-quality.md
 
 # Codex
 cat general/01-no-extra-notes.md codex/01-basic-rules.md codex/02-inherited-tool.md ... > AGENTS.md
+
+# OpenCode
+cat general/01-no-extra-notes.md opencode/01-code-search.md ... > AGENTS.md
 
 # Oh My Pi
 cat general/01-no-extra-notes.md oh-my-pi/01-defaults.md oh-my-pi/02-code-style.md ... > AGENTS.md
@@ -40,6 +43,7 @@ Module details and dependency info are documented in `agent-instructions/README.
 | `agent-instructions/general/`  | Shared cross-CLI rule modules                                                              |
 | `agent-instructions/claude/`   | Claude Code rule modules (composable fragments)                                            |
 | `agent-instructions/codex/`    | Codex rule modules                                                                         |
+| `agent-instructions/opencode/` | OpenCode rule modules                                                                      |
 | `agent-instructions/oh-my-pi/` | Oh My Pi rule modules                                                                      |
 | `agent-instructions/gemini/`   | Gemini CLI rule modules                                                                    |
 | `config-files/`                | Baseline CLI config references (`settings.json`, `config.toml`, etc.)                      |
@@ -53,7 +57,7 @@ Module details and dependency info are documented in `agent-instructions/README.
 | `preset-cards/`                | Reusable preset cards / personality presets                                                 |
 | `themes/`                      | Warp / Claude Code theme references                                                         |
 | `tips/`                        | Practical knowledge fragments                                                               |
-| `reports/`                     | Deep-dive research reports                                                                  |
+| `reports/`                     | Blog report link index                                                                       |
 
 ## Rules for Editing This Repo
 
@@ -61,7 +65,7 @@ Module details and dependency info are documented in `agent-instructions/README.
 2. **Do NOT rewrite rule fragments into tutorials or monolithic docs.**
 3. **Do NOT force optional modules into default configurations.**
 4. **Keep modules composable**: one file = one responsibility; edits must preserve copy-paste assembly.
-5. **Minimal changes only**: small, focused edits scoped to the user's request; do not modify unrelated modules.
+5. **Correctness first**: make all related index/structure updates needed for a coherent change; do not modify unrelated modules.
 6. **If file structure changes**, update the corresponding directory's `README.md` (every second-level directory carries its own index).
 7. **For `tools/`**, keep published `README.md` files reader-facing only. Put maintenance conventions in this `AGENTS.md`, not in tool docs. Organize `tools/` as one tool per second-level directory with a colocated `README.md`, and keep `tools/README.md` as the index.
 

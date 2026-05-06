@@ -35,6 +35,7 @@ Covers:
 - Gemini CLI
 - Oh My Pi
 - Warp
+- OpenCode
 
 ## What You Can Steal
 
@@ -48,7 +49,7 @@ Covers:
 | Tools / patches | [`tools/`](tools/) | Local maintenance tools, migration scripts, and OMP patch runners |
 | Output styles and themes | [`output-styles/`](output-styles/) / [`preset-cards/`](preset-cards/) / [`themes/`](themes/) | Output personas, preset cards, and Warp / Claude Code themes |
 | Sub-agents and commands | [`sub-agents/`](sub-agents/) / [`slash-commands/`](slash-commands/) | Sub-agent role layers and slash command templates |
-| Tips / reports / services | [`tips/`](tips/) / [`reports/`](reports/) / [`ai-services/`](ai-services/) | Practical notes, research reports, and external API service references |
+| Tips / reports / services | [`tips/`](tips/) / [`reports/`](reports/) / [`ai-services/`](ai-services/) | Practical notes, blog report index, and external API service references |
 
 ## Start Here
 

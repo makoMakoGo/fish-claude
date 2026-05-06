@@ -1,6 +1,6 @@
 --- a/src/config/settings-schema.ts
 +++ b/src/config/settings-schema.ts
-@@ -1414,6 +1414,18 @@
+@@ -1913,6 +1913,18 @@
  		ui: { tab: "tools", label: "MCP Project Config", description: "Load .mcp.json/mcp.json from project root" },
  	},
  
@@ -19,7 +19,7 @@
  	"mcp.discoveryMode": {
  		type: "boolean",
  		default: false,
-@@ -1874,6 +1886,16 @@
+@@ -2534,6 +2546,16 @@
  	disabledExtensions?: string[];
  }
  
@@ -104,7 +104,7 @@
  		});
 --- a/src/mcp/manager.ts
 +++ b/src/mcp/manager.ts
-@@ -103,6 +103,10 @@
+@@ -118,6 +118,10 @@
  export interface MCPDiscoverOptions {
  	/** Whether to load project-level config (default: true) */
  	enableProjectConfig?: boolean;
@@ -115,7 +115,7 @@
  	/** Whether to filter out Exa MCP servers (default: true) */
  	filterExa?: boolean;
  	/** Whether to filter out browser MCP servers when builtin browser tool is enabled (default: false) */
-@@ -244,6 +248,8 @@
+@@ -263,6 +267,8 @@
  	async discoverAndConnect(options?: MCPDiscoverOptions): Promise<MCPLoadResult> {
  		const { configs, exaApiKeys, sources } = await loadAllMCPConfigs(this.cwd, {
  			enableProjectConfig: options?.enableProjectConfig,
@@ -126,7 +126,7 @@
  		});
 --- a/src/sdk.ts
 +++ b/src/sdk.ts
-@@ -1016,6 +1016,8 @@
+@@ -1071,6 +1071,8 @@
  					}
  				},
  				enableProjectConfig: settings.get("mcp.enableProjectConfig") ?? true,
@@ -137,7 +137,7 @@
  				// Filter browser MCP servers when builtin browser tool is active
 --- a/src/modes/controllers/mcp-command-controller.ts
 +++ b/src/modes/controllers/mcp-command-controller.ts
-@@ -1443,7 +1443,13 @@
+@@ -1466,7 +1466,13 @@
  		await this.ctx.mcpManager.disconnectAll();
  
  		// Rediscover and connect

@@ -11,6 +11,7 @@
 | Codex       | `~/.codex/AGENTS.md`           |
 | Gemini CLI  | `~/.gemini/GEMINI.md`          |
 | Warp        | Warp Drive（云端，App 内 Personal → Rules，或 `/add-rule`） |
+| OpenCode    | `~/.config/opencode/AGENTS.md` |
 
 
 ## General
@@ -20,8 +21,13 @@
 | 01  | [no-extra-notes](general/01-no-extra-notes.md)   | 禁止在文档主结构外多嘴补注释或说明 | — |
 | 02  | [environment](general/02-environment.md)         | Windows + WSL2 环境模板（Python / Go / Rust / Git） | 本机环境可选模块 |
 | 03  | [git-commit-push](general/03-git-commit-push.md) | Git 提交 / push / commit message 通用规则 | — |
-| 04  | [reply-style](general/04-reply-style.md)         | 回答风格（简洁直接、反模板化）            | — |
 
+
+## Experimental
+
+| #   | 模块                                         | 职责                                      | 依赖 |
+| --- | -------------------------------------------- | ----------------------------------------- | ---- |
+| 01  | [completion-discipline](experimental/01-completion-discipline.md) | 防止局部验证、连续 patch、乐观完成 | — |
 
 ## Claude Code
 
@@ -34,8 +40,6 @@
 | 05  | [playwright](claude/05-playwright.md)         | Playwright UI 验证规则（按需启用）     | [Playwright](../mcp/playwright.md)                                |
 | 07  | [plan-mode-default](claude/07-plan-mode-default.md) | Plan Mode 默认触发规则（按需启用）     | —                                                                 |
 
-
-
 ## Codex
 
 | #   | 模块                                               | 职责                                     | 依赖                                                            |
@@ -46,9 +50,6 @@
 | 04  | [debug-first](codex/04-debug-first.md)             | 调试策略（禁止静默兜底）                 | —                                                               |
 | 05  | [multi-agent](codex/05-multi-agent.md)             | 多智能体协作规范                         | 默认开启；显式配置见 [default.config.toml](../config-files/codex/default.config.toml) |
 | 06  | [no-compat](codex/06-no-compat.md)                 | 禁止向后兼容（优先干净架构）             | —                                                               |
-
-
-
 
 ## Oh My Pi
 
@@ -63,6 +64,12 @@
 | #   | 模块                                         | 职责                                      | 依赖 |
 | --- | -------------------------------------------- | ----------------------------------------- | ---- |
 | 01  | [reasoning-depth](gemini/01-reasoning-depth.md) | Gemini 深度推理 prompt hack（`EFFORT LEVEL`） | — |
+
+## OpenCode
+
+| #   | 模块                                          | 职责                                   | 依赖                                                              |
+| --- | --------------------------------------------- | -------------------------------------- | ----------------------------------------------------------------- |
+| 01  | [code-search](opencode/01-code-search.md)     | Semble 优先的代码探索规则              | [Semble](../mcp/semble.md)                                        |
 
 ## _archived
 

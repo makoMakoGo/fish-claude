@@ -35,6 +35,7 @@
 - Gemini CLI
 - Oh My Pi
 - Warp
+- OpenCode
 
 ## 可以直接拿什么
 
@@ -48,7 +49,7 @@
 | Tools / patches | [`tools/`](tools/) | 本地维护工具、迁移脚本、OMP patch runner |
 | 输出风格与主题 | [`output-styles/`](output-styles/) / [`preset-cards/`](preset-cards/) / [`themes/`](themes/) | 输出人格、preset card、Warp / Claude Code 主题 |
 | Sub-agents 与命令 | [`sub-agents/`](sub-agents/) / [`slash-commands/`](slash-commands/) | 子 agent role layer 和 slash command 模板 |
-| Tips / reports / services | [`tips/`](tips/) / [`reports/`](reports/) / [`ai-services/`](ai-services/) | 实用知识碎片、调研报告和外部 API 服务参考 |
+| Tips / reports / services | [`tips/`](tips/) / [`reports/`](reports/) / [`ai-services/`](ai-services/) | 实用知识碎片、博客报告索引和外部 API 服务参考 |
 
 ## 从哪里开始
 
