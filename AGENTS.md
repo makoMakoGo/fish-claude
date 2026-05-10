@@ -54,10 +54,12 @@ Module details and dependency info are documented in `agent-instructions/README.
 | `slash-commands/`              | Slash command prompt templates                                                             |
 | `sub-agents/`                  | Sub-agent role layers and related examples                                                 |
 | `packs/`                       | Composite packages (commands + skills + hooks + subagents) and external toolkit references |
-| `preset-cards/`                | Reusable preset cards / personality presets                                                 |
-| `themes/`                      | Warp / Claude Code theme references                                                         |
-| `tips/`                        | Practical knowledge fragments                                                               |
-| `reports/`                     | Blog report link index                                                                       |
+| `preset-cards/`                | Reusable preset cards / personality presets                                                |
+| `themes/`                      | Warp / Claude Code theme references                                                        |
+| `tips/`                        | Practical knowledge fragments                                                              |
+| `reports/`                     | Blog report link index                                                                     |
+| `tools/`                       | Local maintenance tools, migration scripts, OMP patch runners                              |
+| `ai-services/`                 | External AI-adjacent API services (search, reader, embedding)                              |
 
 ## Rules for Editing This Repo
 
@@ -84,6 +86,6 @@ Use conventional commits format:
 ## Local Repo Clones
 
 If you are on my WSL2 environment, you find these git repo cloned when you need:
-- `codex`, `oh-my-pi`, `gemini-cli`, `rtk`, `caveman`, `context-mode`, `pi-mono`, `tokscale` → `~/01-workspace/`
+- `codex`, `oh-my-pi`, `gemini-cli`, `rtk`, `context-mode`, `pi-mono`, `tokscale` → `~/01-workspace/`
 - `myclaude`, `beautiful-mermaid-cli`, `awesome-deepseek-agent` → `~/02-workspace/`
 - `code-dispatcher-toolkit` → `~/personal-workspace/`

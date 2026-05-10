@@ -11,6 +11,9 @@ from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
 
+NON_OVERRIDABLE_BUILT_IN_PROVIDER_IDS = {'openai', 'ollama', 'lmstudio'}
+
+
 
 @dataclass
 class ConfigStatus:
@@ -18,8 +21,10 @@ class ConfigStatus:
     active_provider: str | None = None
     provider_keys: list[str] = field(default_factory=list)
     target_defined: bool = False
+    target_is_builtin: bool = False
+    openai_base_url: str | None = None
+    reserved_provider_overrides: list[str] = field(default_factory=list)
     sqlite_home: Path | None = None
-
 
 @dataclass
 class RolloutReport:
@@ -53,7 +58,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         '--target-provider',
         default='openai',
-        help='迁移后的目标 provider key，默认 openai',
+        choices=['openai'],
+        help='迁移后的目标 provider key；当前只支持 openai，保持 ChatGPT 订阅和 BYOK 同 bucket',
     )
     parser.add_argument(
         '--keep-provider',
@@ -88,18 +94,24 @@ def default_codex_home() -> Path:
     return Path.home() / '.codex'
 
 
-def inspect_config(config_path: Path, target_provider: str) -> ConfigStatus:
-    status = ConfigStatus(path=config_path)
+def inspect_config(config_path: Path) -> ConfigStatus:
+    status = ConfigStatus(path=config_path, target_is_builtin=True)
     if not config_path.exists():
         return status
     data = tomllib.loads(config_path.read_text(encoding='utf-8'))
     active_provider = data.get('model_provider')
     if isinstance(active_provider, str) and active_provider.strip():
         status.active_provider = active_provider
+    openai_base_url = data.get('openai_base_url')
+    if isinstance(openai_base_url, str) and openai_base_url.strip():
+        status.openai_base_url = openai_base_url
     providers = data.get('model_providers')
     if isinstance(providers, dict):
         status.provider_keys = sorted(str(key) for key in providers.keys())
-        status.target_defined = target_provider in providers
+        status.target_defined = 'openai' in providers
+        status.reserved_provider_overrides = sorted(
+            str(key) for key in providers.keys() if str(key) in NON_OVERRIDABLE_BUILT_IN_PROVIDER_IDS
+        )
     sqlite_home = data.get('sqlite_home')
     if isinstance(sqlite_home, str) and sqlite_home.strip():
         status.sqlite_home = Path(sqlite_home).expanduser()
@@ -178,6 +190,10 @@ def backup_file(src: Path, codex_home: Path, backup_root: Path | None) -> None:
         shutil.copy2(src, destination)
 
 
+def should_migrate_provider(provider_value: object, keep_providers: set[str]) -> bool:
+    return isinstance(provider_value, str) and bool(provider_value) and provider_value not in keep_providers
+
+
 def rewrite_rollout_file(
     path: Path,
     codex_home: Path,
@@ -211,7 +227,7 @@ def rewrite_rollout_file(
             provider_key = provider_value if isinstance(provider_value, str) and provider_value else '<missing>'
             report.provider_counts_before[provider_key] += 1
             simulated_provider = provider_key
-            if isinstance(provider_value, str) and provider_value not in keep_providers:
+            if should_migrate_provider(provider_value, keep_providers):
                 session_meta['model_provider'] = target_provider
                 payload['payload'] = session_meta
                 report.session_meta_rewritten += 1
@@ -292,10 +308,10 @@ def simulate_sqlite_counts(
     for provider_key, count in provider_counts_before:
         if provider_key is None:
             final_provider = None
-        elif provider_key in keep_providers:
-            final_provider = provider_key
-        else:
+        elif should_migrate_provider(provider_key, keep_providers):
             final_provider = target_provider
+        else:
+            final_provider = provider_key
         counter[final_provider] += count
     return sorted(counter.items(), key=lambda item: (-item[1], '' if item[0] is None else item[0]))
 
@@ -380,13 +396,17 @@ def print_summary(
     print('\n配置检查')
     print(f'- config.toml: {config_status.path}')
     print(f'- 当前 model_provider: {config_status.active_provider or "<missing>"}')
-    print(f'- 目标 provider 已定义: {"yes" if config_status.target_defined else "no"}')
+    print(f'- 目标 provider 已定义: {"built-in" if config_status.target_is_builtin else "yes" if config_status.target_defined else "no"}')
     if config_status.provider_keys:
         print(f'- 已定义 providers: {", ".join(config_status.provider_keys)}')
+    if config_status.openai_base_url:
+        print(f'- openai_base_url: {config_status.openai_base_url}')
+    if config_status.reserved_provider_overrides:
+        print(f'- 错误: config.toml 仍在 model_providers 中覆盖内建 provider: {", ".join(config_status.reserved_provider_overrides)}')
     if config_status.active_provider != target_provider:
         print('- 警告: config.toml 的 model_provider 与目标 provider 不一致；仅迁移历史不会自动修正配置。')
-    if not config_status.target_defined:
-        print('- 提示: config.toml 中未在 model_providers 下定义目标 provider；如果目标是内建 provider，这可能是正常现象，否则 Codex 仍可能无法按目标 bucket 加载历史。')
+    if not config_status.target_defined and not config_status.target_is_builtin:
+        print('- 警告: config.toml 中未在 model_providers 下定义目标 provider；Codex 仍可能无法按目标 bucket 加载历史。')
 
     print('\nrollout 扫描')
     print(f'- 扫描文件数: {rollout_report.files_scanned}')
@@ -415,6 +435,8 @@ def print_summary(
         print('\n当前为预览模式；追加 --apply 才会真正写入。')
 
 
+
+
 def main() -> int:
     args = parse_args()
     codex_home = args.codex_home.expanduser().resolve()
@@ -422,7 +444,7 @@ def main() -> int:
     keep_providers = set(args.keep_provider or ['openai'])
     keep_providers.add(args.target_provider)
 
-    config_status = inspect_config(codex_home / 'config.toml', args.target_provider)
+    config_status = inspect_config(codex_home / 'config.toml')
     rollout_report = migrate_rollouts(
         codex_home=codex_home,
         target_provider=args.target_provider,

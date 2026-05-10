@@ -8,7 +8,7 @@ Codex 的 history / resume / fork 不是只看会话文件在不在，而是先�
 
 ## 解决
 
-把旧 provider key 的历史统一迁到一个稳定 key（如 `custom`），之后只改 `name`、`base_url`、鉴权，不再动 key。
+把旧 provider key 的历史统一迁到一个稳定 key。现在 Codex 不允许在 `[model_providers]` 中覆盖内建 `openai`，所以推荐稳定 key 仍然是 `openai`，自定义中转地址通过 `openai_base_url` 配置。
 
 脚本处理两部分：
 
@@ -19,17 +19,16 @@ Codex 的 history / resume / fork 不是只看会话文件在不在，而是先�
 
 ## 推荐配置
 
+继续沿用 `openai` bucket，同时把请求转到 BYOK / 中转后端：
+
 ```toml
 model_provider = "openai"
-
-[model_providers.openai]
-name = "cc-switch"
-base_url = "http://127.0.0.1:15721/v1"
-wire_api = "responses"
-requires_openai_auth = true
+openai_base_url = "http://127.0.0.1:15721/v1"
 ```
 
-`openai` 是稳定 bucket key（ChatGPT OAuth 默认值），`cc-switch` 是显示名。换代理只改显示名，key 不变，历史不会切桶。
+不要再写 `[model_providers.openai]`。`openai` 是 Codex 内建 provider ID，当前版本不允许覆盖；API key 仍然走 `auth.json` 里的 `OPENAI_API_KEY`，ChatGPT 订阅登录也仍然落在同一个 `openai` bucket。
+
+`openai` 是唯一推荐 bucket。不要把历史迁到 `openai-custom`，否则 ChatGPT 订阅和 BYOK 会再次分桶。
 
 ## 用法
 

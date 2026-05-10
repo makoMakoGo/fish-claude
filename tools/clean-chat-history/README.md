@@ -17,9 +17,3 @@ python tools/clean-chat-history/clean.py
 - 文件类历史按 `mtime` 过滤删除
 - JSONL 历史按时间字段剪裁行，不删整文件
 - 删除前必须预览，执行前必须输入 `DELETE`
-
-## 注意事项
-
-- 先用小范围试跑
-- 删除前关闭相关 CLI
-- 删除后重启查看器检查结果

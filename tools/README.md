@@ -9,4 +9,3 @@
 | [codex-provider-history-migrator](codex-provider-history-migrator/) | migration | Python | 迁移 Codex `model_provider`，恢复 history / resume / fork |
 | [omp-patch-codex-websearch-byok](omp-patch-codex-websearch-byok/) | patch | Bun/TS | OMP codex web_search 支持自定义后端 |
 | [omp-patch-custom-mcp](omp-patch-custom-mcp/) | patch | Bun/TS | OMP MCP 发现增加 Claude/Codex 用户级开关 |
-| [omp-patch-status-line-default-metrics](omp-patch-status-line-default-metrics/) | patch | Bun/TS | 调整 OMP status line 窄宽度保留优先级 |

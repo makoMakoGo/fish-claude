@@ -27,6 +27,16 @@
             "context": 400000,
             "output": 128000
           },
+          "attachment": true,
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
           "options": {
             "store": false
           },
@@ -42,6 +52,16 @@
           "limit": {
             "context": 272000,
             "output": 128000
+          },
+          "attachment": true,
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
           },
           "options": {
             "store": false
@@ -59,6 +79,16 @@
             "context": 1050000,
             "output": 128000
           },
+          "attachment": true,
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
           "options": {
             "store": false
           },
@@ -74,6 +104,16 @@
           "limit": {
             "context": 400000,
             "output": 128000
+          },
+          "attachment": true,
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
           },
           "options": {
             "store": false
@@ -91,6 +131,16 @@
             "context": 128000,
             "output": 32000
           },
+          "attachment": true,
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
           "options": {
             "store": false
           },
@@ -106,6 +156,16 @@
           "limit": {
             "context": 400000,
             "output": 128000
+          },
+          "attachment": true,
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
           },
           "options": {
             "store": false

@@ -35,6 +35,6 @@ cp -r <pack>/hooks/     <project>/.claude/hooks/
 | [rtk](rtk.md) | RTK 外部工具参考页；说明 Claude/Codex 官方接入方式，以及基于 OMP rules 的本地 OMP 适配 |
 | [myclaude-harness](myclaude-harness.md) | `stellarlinkco/myclaude` 的 Claude Code harness |
 | [context-mode](context-mode.md) | Claude Code plugin + MCP server；sandbox 内处理大输出，~98% context 压缩，附 session continuity |
-| [caveman](caveman.md) | Claude Code/Codex plugin；caveman-speak 削减 ~75% 输出 token，附 commit/review/compress 子命令 |
 | [nmem](nmem.md) | Nowledge Mem CLI；跨 AI 工具共享的本地记忆库，本地 HTTP server + 知识图谱 + MCP 集成 |
 | [mattpocock-skills](mattpocock-skills.md) | Matt Pocock 的可组合 AI agent skills 集合，覆盖需求澄清、文档协作、TDD、debugging 等工程工作流 |
+| [openspec](openspec.md) | 轻量 spec-driven 框架：spec 和 change 存进 `openspec/`，通过 `/opsx:*` slash commands 驱动 Claude / Codex / Gemini / OpenCode / Cursor 等 |

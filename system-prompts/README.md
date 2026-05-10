@@ -25,6 +25,11 @@
 - note: Gemini CLI composes the final prompt dynamically from `snippets.ts`
 - note: `gemini-cli.md` records the Gemini 3 / modern / interactive baseline plus the major conditional sections injected at runtime
 
+## Gemini Deep Think
+
+- file: `gemini-deep-think.md`
+- note: captured reference of the Gemini consumer-product "Deep Think" system prompt (model identity, formatting toolkit, LaTeX rules, capability disclosure). Kept here as the upstream reference; the agent-facing reasoning preset is mirrored in [`skills/gemini-deep-reasoning/`](../skills/gemini-deep-reasoning/) and [`preset-cards/gemini-deep-reasoning.md`](../preset-cards/gemini-deep-reasoning.md).
+
 ## OpenCode
 
 - file: `opencode.md`

@@ -1,0 +1,3 @@
+servers:
+  rust-analyzer:
+    warmupTimeoutMs: 20000

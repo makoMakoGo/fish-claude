@@ -8,6 +8,8 @@
 |------|---------|
 | `oh-my-pi/agent.config.yml` | `~/.omp/agent/config.yml` |
 | `oh-my-pi/agent.models.yml` | `~/.omp/agent/models.yml` |
+| `oh-my-pi/keybindings.json` | `~/.omp/agent/keybindings.json` |
+| `oh-my-pi/lsp.yml` | `~/.omp/agent/lsp.yml` |
 
 ## Claude Code
 
@@ -32,3 +34,5 @@
 | 文件 | 目标路径 |
 |------|---------|
 | `opencode/opencode.json` | `~/.config/opencode/opencode.json` |
+| `opencode/plugins/rtk.ts` | `~/.config/opencode/plugins/rtk.ts` |
+| `opencode/package.json` | `~/.config/opencode/package.json` |
