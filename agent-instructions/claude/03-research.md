@@ -12,8 +12,8 @@ If something is unfamiliar or version-sensitive, look it up — never guess.
 
 <important if="you need general web search or non-library information">
 - Prefer the `grok-search` skill for general / non-library queries.
-- If `grok-search` is unavailable or not usable, fall back to `exa` MCP when available.
-- Use the built-in `Web Search` tool only as the last fallback.
+- If `grok-search` is unavailable or not usable, use any available search MCP among `brave-search`, `exa-search`, or `serper-search`.
+- Use the built-in `Web Search` tool only as the final fallback.
 </important>
 
 ## Version and Source Checks

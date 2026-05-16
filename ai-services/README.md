@@ -4,6 +4,7 @@
 
 | 服务 | 说明 | 免费额度 |
 | --- | ---- | ---- |
+| [Brave Search](brave-search.md) | Brave Search API，适合通用网页搜索 | Free 计划可用，订阅可能要求信用卡 |
 | [Serper](serper.md) | Google 搜索 API，结构化 JSON 返回 | 注册送 2,500 credits，$0.30–1.00/1K 次按量 |
 | [Jina AI](jina.md) | Reader / Embeddings / Reranker / Classifier | 新 Key 免费 tokens，无需信用卡，按 token 计费 |
 | [Exa](exa.md) | 语义搜索 API（支持内容提取） | 注册送免费 credits，Search $7/1K，Deep $12/1K |
