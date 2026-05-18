@@ -71,6 +71,14 @@ Module details and dependency info are documented in `agent-instructions/README.
 6. **If file structure changes**, update the corresponding directory's `README.md` (every second-level directory carries its own index).
 7. **For `tools/`**, keep published `README.md` files reader-facing only. Put maintenance conventions in this `AGENTS.md`, not in tool docs. Organize `tools/` as one tool per second-level directory with a colocated `README.md`, and keep `tools/README.md` as the index.
 
+## Validation
+
+Before submitting utility-script changes, run:
+
+```bash
+bash tools/validate.sh
+```
+
 # Git Commit Message Format
 
 Use conventional commits format:

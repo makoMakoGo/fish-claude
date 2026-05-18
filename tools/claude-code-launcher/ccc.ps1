@@ -12,27 +12,27 @@ function ccc {
         $settingsFiles = Get-ChildItem -Path $claudeDir -Filter "settings*" -File
 
         if ($settingsFiles.Count -eq 0) {
-            Write-Host "没有找到 settings 文件"
+            Write-Output "No settings files found."
             return
         }
 
-        Write-Host "选择配置文件:"
+        Write-Output "Select a settings file:"
         for ($i = 0; $i -lt $settingsFiles.Count; $i++) {
-            Write-Host "$($i + 1). $($settingsFiles[$i].Name)"
+            Write-Output "$($i + 1). $($settingsFiles[$i].Name)"
         }
 
-        $choice = Read-Host "选择"
+        $choice = Read-Host "Choice"
 
         if ($choice -match '^\d+$' -and [int]$choice -ge 1 -and [int]$choice -le $settingsFiles.Count) {
             $selected = $settingsFiles[[int]$choice - 1]
-            Write-Host "执行: claude --dangerously-skip-permissions  --settings $claudeDir\$($selected.Name)"
+            Write-Output "Running: claude --dangerously-skip-permissions --settings $claudeDir\$($selected.Name)"
             & claude --dangerously-skip-permissions --settings "$claudeDir\$($selected.Name)"
         }
         else {
-            Write-Host "无效选择"
+            Write-Output "Invalid choice."
         }
     }
     else {
-        Write-Host "$claudeDir 目录不存在"
+        Write-Output "$claudeDir does not exist."
     }
 }

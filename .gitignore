@@ -4,17 +4,51 @@
 .omp/
 desktop.ini
 .vscode/
+.idea/
 fish-notes/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
 # Windows system files
 Thumbs.db
+ehthumbs.db
+Desktop.ini
 *.lnk
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Logs
+*.log
+logs/
 
 # Python caches
 __pycache__/
 *.pyc
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
 
 # Sisyphus orchestration state
 .sisyphus/
 
 # CommandCode
 .commandcode/
+
+# Package and build outputs
+node_modules/
+dist/
+build/
+coverage/
+.turbo/
+.next/
+.cache/

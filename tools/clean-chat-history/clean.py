@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import sys
 import tempfile
+from argparse import ArgumentParser
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
@@ -469,6 +470,11 @@ def execute_plan(plans: list[CliCleanupPlan], cutoff_epoch_s: float) -> int:
 
 
 def main() -> int:
+    parser = ArgumentParser(
+        description="交互式清理 Claude Code / Codex / Gemini CLI 对话历史。",
+    )
+    parser.parse_args()
+
     selected = prompt_cli_selection()
     if not selected:
         print("已取消。")

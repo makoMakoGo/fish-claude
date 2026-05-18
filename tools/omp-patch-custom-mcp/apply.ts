@@ -21,6 +21,23 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const patchPath = path.join(__dirname, "patch.diff");
 
+function hasHelpFlag(argv: string[]): boolean {
+	return argv.includes("--help") || argv.includes("-h");
+}
+
+function printHelp(): void {
+	console.log(`Usage: bun run tools/omp-patch-custom-mcp/apply.ts [options]
+
+Options:
+  --status         Report whether the patch can be applied or is already applied.
+  --check          Check whether the patch can be applied.
+  --check-reverse  Check whether the patch can be reversed.
+  --reverse        Reverse the patch.
+  -h, --help       Show this help.
+
+Default: apply the patch.`);
+}
+
 function parseMode(argv: string[]): Mode {
 	if (argv.includes("--status")) return "status";
 	if (argv.includes("--check-reverse")) return "check-reverse";
@@ -235,11 +252,17 @@ function handleDirectCheckMode(
 }
 
 function main(): void {
+	const argv = process.argv.slice(2);
+	if (hasHelpFlag(argv)) {
+		printHelp();
+		return;
+	}
+
 	if (!existsSync(patchPath)) {
 		throw new Error(`Patch file not found: ${patchPath}`);
 	}
 
-	const mode = parseMode(process.argv.slice(2));
+	const mode = parseMode(argv);
 	const ompEntry = resolveOmpBinary();
 	const packageRoot = findOmpPackageRoot(ompEntry);
 
