@@ -1,0 +1,173 @@
+{
+  "enabledPlugins": {
+    "core@factory-plugins": true,
+    "nowledge-mem@community": true
+  },
+  "logoAnimation": "off",
+  "customModels": [
+    {
+      "model": "gpt-5.5",
+      "id": "custom:gpt-5.5-medium",
+      "index": 0,
+      "baseUrl": "https://your-openai-compatible-endpoint.example.com/v1",
+      "apiKey": "YOUR_OPENAI_COMPATIBLE_API_KEY",
+      "displayName": "GPT-5.5 medium",
+      "maxOutputTokens": 128000,
+      "extraHeaders": {
+        "User-Agent": "codex_vscode/0.128.0-alpha.1"
+      },
+      "extraArgs": {
+        "reasoning": {
+          "effort": "medium"
+        }
+      },
+      "noImageSupport": false,
+      "provider": "openai",
+      "maxContextLimit": 272000
+    },
+    {
+      "model": "gpt-5.5",
+      "id": "custom:gpt-5.5-high",
+      "index": 1,
+      "baseUrl": "https://your-openai-compatible-endpoint.example.com/v1",
+      "apiKey": "YOUR_OPENAI_COMPATIBLE_API_KEY",
+      "displayName": "GPT-5.5 high",
+      "maxOutputTokens": 128000,
+      "extraHeaders": {
+        "User-Agent": "codex_vscode/0.128.0-alpha.1"
+      },
+      "extraArgs": {
+        "reasoning": {
+          "effort": "high"
+        }
+      },
+      "noImageSupport": false,
+      "provider": "openai",
+      "maxContextLimit": 272000
+    },
+    {
+      "model": "gpt-5.5",
+      "id": "custom:gpt-5.5-xhigh",
+      "index": 2,
+      "baseUrl": "https://your-openai-compatible-endpoint.example.com/v1",
+      "apiKey": "YOUR_OPENAI_COMPATIBLE_API_KEY",
+      "displayName": "GPT-5.5 xhigh",
+      "maxOutputTokens": 128000,
+      "extraHeaders": {
+        "User-Agent": "codex_vscode/0.128.0-alpha.1"
+      },
+      "extraArgs": {
+        "reasoning": {
+          "effort": "xhigh"
+        }
+      },
+      "noImageSupport": false,
+      "provider": "openai",
+      "maxContextLimit": 272000
+    },
+    {
+      "model": "gpt-5.4",
+      "id": "custom:gpt-5.4-medium",
+      "index": 3,
+      "baseUrl": "https://your-openai-compatible-endpoint.example.com/v1",
+      "apiKey": "YOUR_OPENAI_COMPATIBLE_API_KEY",
+      "displayName": "GPT-5.4 medium",
+      "maxOutputTokens": 128000,
+      "extraHeaders": {
+        "User-Agent": "codex_vscode/0.128.0-alpha.1"
+      },
+      "extraArgs": {
+        "reasoning": {
+          "effort": "medium"
+        }
+      },
+      "noImageSupport": false,
+      "provider": "openai",
+      "maxContextLimit": 888000
+    },
+    {
+      "model": "gpt-5.4",
+      "id": "custom:gpt-5.4-high",
+      "index": 4,
+      "baseUrl": "https://your-openai-compatible-endpoint.example.com/v1",
+      "apiKey": "YOUR_OPENAI_COMPATIBLE_API_KEY",
+      "displayName": "GPT-5.4 high",
+      "maxOutputTokens": 128000,
+      "extraHeaders": {
+        "User-Agent": "codex_vscode/0.128.0-alpha.1"
+      },
+      "extraArgs": {
+        "reasoning": {
+          "effort": "high"
+        }
+      },
+      "noImageSupport": false,
+      "provider": "openai",
+      "maxContextLimit": 888000
+    },
+    {
+      "model": "gpt-5.4",
+      "id": "custom:gpt-5.4-xhigh",
+      "index": 5,
+      "baseUrl": "https://your-openai-compatible-endpoint.example.com/v1",
+      "apiKey": "YOUR_OPENAI_COMPATIBLE_API_KEY",
+      "displayName": "GPT-5.4 xhigh",
+      "maxOutputTokens": 128000,
+      "extraHeaders": {
+        "User-Agent": "codex_vscode/0.128.0-alpha.1"
+      },
+      "extraArgs": {
+        "reasoning": {
+          "effort": "xhigh"
+        }
+      },
+      "noImageSupport": false,
+      "provider": "openai",
+      "maxContextLimit": 888000
+    },
+    {
+      "model": "glm-5.1",
+      "id": "custom:glm-5.1",
+      "baseUrl": "https://api.z.ai/api/anthropic",
+      "apiKey": "YOUR_ZAI_API_KEY",
+      "displayName": "GLM-5.1 [Z.AI Coding Plan]",
+      "maxOutputTokens": 131072,
+      "provider": "anthropic",
+      "noImageSupport": true,
+      "maxContextLimit": 204800
+    }
+  ],
+  "cloudSessionSync": false,
+  "sessionDefaultSettings": {
+    "model": "custom:gpt-5.5-xhigh",
+    "reasoningEffort": "xhigh",
+    "interactionMode": "auto",
+    "autonomyLevel": "high",
+    "autonomyMode": "auto-high"
+  },
+  "hasSeenMissionOnboarding": true,
+  "extraKnownMarketplaces": {
+    "community": {
+      "source": {
+        "source": "github",
+        "repo": "nowledge-co/community"
+      }
+    }
+  },
+  "missionOrchestratorModel": "custom:gpt-5.5-xhigh",
+  "missionOrchestratorReasoningEffort": "none",
+  "missionModelSettings": {
+    "validationWorkerModel": "custom:gpt-5.5-high",
+    "validationWorkerReasoningEffort": "none",
+    "skipUserTesting": true,
+    "workerModel": "custom:gpt-5.4-xhigh",
+    "workerReasoningEffort": "none"
+  },
+  "includeCoAuthoredByDroid": false,
+  "showThinkingInMainView": true,
+  "statusLine": {
+    "type": "command",
+    "command": "/home/travis/.factory/statusline.sh",
+    "maxRows": 1
+  }
+}

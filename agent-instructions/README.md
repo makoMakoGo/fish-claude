@@ -9,6 +9,7 @@
 | OMP         | `~/.omp/agent/AGENTS.md`       |
 | Claude Code | `~/.claude/CLAUDE.md`          |
 | Codex       | `~/.codex/AGENTS.md`           |
+| Droid       | `~/.factory/AGENTS.md`        |
 | Gemini CLI  | `~/.gemini/GEMINI.md`          |
 | Warp        | Warp Drive（云端，App 内 Personal → Rules，或 `/add-rule`） |
 | OpenCode    | `~/.config/opencode/AGENTS.md` |
@@ -64,3 +65,4 @@
 | #   | 模块                                          | 职责                                   | 依赖                                                              |
 | --- | --------------------------------------------- | -------------------------------------- | ----------------------------------------------------------------- |
 | 01  | [code-search](opencode/01-code-search.md)     | Semble 优先的代码探索规则              | [Semble](../mcp/semble.md)                                        |
+| 02  | [karpathy-rules](opencode/02-karpathy-rules.md) | 思考优先、简单实现、外科手术式修改与目标驱动执行规则 | — |

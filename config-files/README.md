@@ -17,6 +17,15 @@
 |------|---------|
 | `claude/example.settings.json` | `~/.claude/settings.json` |
 
+## Droid
+
+| 文件 | 目标路径 |
+|------|---------|
+| `droid/settings.json` | `~/.factory/settings.json` |
+| `droid/statusline.sh` | `~/.factory/statusline.sh` |
+
+
+
 ## Codex
 
 | 文件 | 目标路径 |
@@ -25,14 +34,9 @@
 | `../sub-agents/codex/*.toml` | `~/.codex/agents/` |
 | `../sub-agents/codex/role-layer.example.toml` | 写法示例 |
 
-- `description` 是给 host agent 的调度提示，短、清楚、偏职责边界；sub-agent 实际 prompt 在 `developer_instructions`
-- `[agents.<role>]` 同名 shadow builtin；role layer 只覆写实际写出的键，其余继承父线程
-- spawn runtime 会重写 `approval_policy`、`shell_environment_policy`、`sandbox_mode`、`sandbox_workspace_write`、`cwd`，这些不用放进 role layer
 
 ## OpenCode
 
 | 文件 | 目标路径 |
 |------|---------|
 | `opencode/opencode.json` | `~/.config/opencode/opencode.json` |
-| `opencode/plugins/rtk.ts` | `~/.config/opencode/plugins/rtk.ts` |
-| `opencode/package.json` | `~/.config/opencode/package.json` |

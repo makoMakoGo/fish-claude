@@ -14,6 +14,9 @@ approval_policy = "on-request"
 model_context_window = 1000000
 service_tier = "fast"
 
+[sandbox_workspace_write]
+network_access = true
+
 [features]
 multi_agent_v2 = true
 prevent_idle_sleep = true

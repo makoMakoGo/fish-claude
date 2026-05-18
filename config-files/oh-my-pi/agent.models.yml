@@ -1,7 +1,7 @@
 providers:
-  codex-owl:
-    baseUrl: https://api.example.com/v1
-    apiKey: sk-your-codex-owl-api-key-here
+  openai-owl:
+    baseUrl: https://your-openai-owl-compatible-endpoint.example.com/v1
+    apiKey: sk-your-openai-owl-api-key-here
     api: openai-responses
     authHeader: true
     models:
@@ -21,14 +21,14 @@ providers:
           - image
       - id: gpt-5.5(xhigh)
         name: GPT-5.5(xhigh)
-        contextWindow: 258000
+        contextWindow: 272000
         maxTokens: 128000
         input:
           - text
           - image
       - id: gpt-5.5(high)
         name: GPT-5.5(high)
-        contextWindow: 258000
+        contextWindow: 272000
         maxTokens: 128000
         input:
           - text
@@ -49,7 +49,7 @@ providers:
           minLevel: high
           maxLevel: xhigh
           mode: effort
-        contextWindow: 258000
+        contextWindow: 272000
         maxTokens: 128000
         input:
           - text
@@ -123,29 +123,54 @@ providers:
               type: enabled
 
   xiaomi-token-plan:
-    baseUrl: https://token-plan-cn.xiaomimimo.com/anthropic
+    baseUrl: https://token-plan-cn.xiaomimimo.com/v1
     apiKey: tp-your-xiaomi-token-plan-key-here
-    api: anthropic-messages
+    api: openai-completions
+    authHeader: true
     models:
       - id: mimo-v2.5-pro
         name: MiMo V2.5 Pro
         reasoning: true
         thinking:
-          minLevel: minimal
+          minLevel: high
           maxLevel: xhigh
-          mode: budget
+          mode: effort
         input:
           - text
         contextWindow: 1048576
         maxTokens: 131072
+        compat:
+          supportsDeveloperRole: false
+          supportsReasoningEffort: false
+          maxTokensField: max_tokens
+          supportsToolChoice: true
+          requiresReasoningContentForToolCalls: true
+          requiresAssistantContentForToolCalls: true
+          allowsSyntheticReasoningContentForToolCalls: false
+          reasoningContentField: reasoning_content
+          extraBody:
+            thinking:
+              type: enabled
       - id: mimo-v2.5
         name: MiMo V2.5
         reasoning: true
         thinking:
-          minLevel: minimal
+          minLevel: high
           maxLevel: xhigh
-          mode: budget
+          mode: effort
         input:
           - text
         contextWindow: 1048576
         maxTokens: 131072
+        compat:
+          supportsDeveloperRole: false
+          supportsReasoningEffort: false
+          maxTokensField: max_tokens
+          supportsToolChoice: true
+          requiresReasoningContentForToolCalls: true
+          requiresAssistantContentForToolCalls: true
+          allowsSyntheticReasoningContentForToolCalls: false
+          reasoningContentField: reasoning_content
+          extraBody:
+            thinking:
+              type: enabled
