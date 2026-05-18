@@ -57,7 +57,6 @@ Module details and dependency info are documented in `agent-instructions/README.
 | `preset-cards/`                | Reusable preset cards / personality presets                                                |
 | `themes/`                      | Warp / Claude Code theme references                                                        |
 | `tips/`                        | Practical knowledge fragments                                                              |
-| `reports/`                     | Blog report link index                                                                     |
 | `tools/`                       | Local maintenance tools, migration scripts, OMP patch runners                              |
 | `ai-services/`                 | External AI-adjacent API services (search, reader, embedding)                              |
 

@@ -24,5 +24,13 @@ jobs:
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
 
+      - name: Install PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+          Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force
+          Import-Module PSScriptAnalyzer
+          Get-Command Invoke-ScriptAnalyzer
+
       - name: Run lightweight validation
         run: bash tools/validate.sh
