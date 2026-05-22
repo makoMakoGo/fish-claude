@@ -1,185 +1,5 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "share": "disabled",
-  "small_model": "deepseek/deepseek-v4-flash",
-  "mcp": {
-    "semble": {
-      "type": "local",
-      "command": [
-        "/home/travis/.local/bin/semble-opencode-safe"
-      ],
-      "enabled": true,
-      "timeout": 60000
-    }
-  },
-  "provider": {
-    "gpt-pro-sub2api": {
-      "npm": "@ai-sdk/openai",
-      "name": "gpt-pro-sub2api",
-      "options": {
-        "baseURL": "https://your-local-mirror.example.com/v1",
-        "apiKey": "sk-your-local-mirror-api-key-here"
-      },
-      "models": {
-        "gpt-5.2": {
-          "name": "GPT-5.2",
-          "limit": {
-            "context": 400000,
-            "output": 128000
-          },
-          "attachment": true,
-          "modalities": {
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ]
-          },
-          "options": {
-            "store": false
-          },
-          "variants": {
-            "low": {},
-            "medium": {},
-            "high": {},
-            "xhigh": {}
-          }
-        },
-        "gpt-5.5": {
-          "name": "GPT-5.5",
-          "limit": {
-            "context": 272000,
-            "output": 128000
-          },
-          "attachment": true,
-          "modalities": {
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ]
-          },
-          "options": {
-            "store": false
-          },
-          "variants": {
-            "low": {},
-            "medium": {},
-            "high": {},
-            "xhigh": {}
-          }
-        },
-        "gpt-5.4": {
-          "name": "GPT-5.4",
-          "limit": {
-            "context": 1050000,
-            "output": 128000
-          },
-          "attachment": true,
-          "modalities": {
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ]
-          },
-          "options": {
-            "store": false
-          },
-          "variants": {
-            "low": {},
-            "medium": {},
-            "high": {},
-            "xhigh": {}
-          }
-        },
-        "gpt-5.4-mini": {
-          "name": "GPT-5.4 Mini",
-          "limit": {
-            "context": 400000,
-            "output": 128000
-          },
-          "attachment": true,
-          "modalities": {
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ]
-          },
-          "options": {
-            "store": false
-          },
-          "variants": {
-            "low": {},
-            "medium": {},
-            "high": {},
-            "xhigh": {}
-          }
-        },
-        "gpt-5.3-codex-spark": {
-          "name": "GPT-5.3 Codex Spark",
-          "limit": {
-            "context": 128000,
-            "output": 32000
-          },
-          "attachment": true,
-          "modalities": {
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ]
-          },
-          "options": {
-            "store": false
-          },
-          "variants": {
-            "low": {},
-            "medium": {},
-            "high": {},
-            "xhigh": {}
-          }
-        },
-        "gpt-5.3-codex": {
-          "name": "GPT-5.3 Codex",
-          "limit": {
-            "context": 400000,
-            "output": 128000
-          },
-          "attachment": true,
-          "modalities": {
-            "input": [
-              "text",
-              "image"
-            ],
-            "output": [
-              "text"
-            ]
-          },
-          "options": {
-            "store": false
-          },
-          "variants": {
-            "low": {},
-            "medium": {},
-            "high": {},
-            "xhigh": {}
-          }
-        }
-      }
-    }
-  },
   "agent": {
     "build": {
       "options": {
@@ -192,7 +12,184 @@
       }
     }
   },
-  "plugin": [
-    "opencode-nowledge-mem"
-  ]
+  "mcp": {
+    "semble": {
+      "command": [
+        "/home/travis/.local/bin/semble-opencode-safe"
+      ],
+      "enabled": true,
+      "timeout": 60000,
+      "type": "local"
+    }
+  },
+  "provider": {
+    "openai-pro": {
+      "models": {
+        "gpt-5.2": {
+          "attachment": true,
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "GPT-5.2",
+          "options": {
+            "store": false
+          },
+          "variants": {
+            "high": {},
+            "low": {},
+            "medium": {},
+            "xhigh": {}
+          }
+        },
+        "gpt-5.3-codex": {
+          "attachment": true,
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "GPT-5.3 Codex",
+          "options": {
+            "store": false
+          },
+          "variants": {
+            "high": {},
+            "low": {},
+            "medium": {},
+            "xhigh": {}
+          }
+        },
+        "gpt-5.3-codex-spark": {
+          "attachment": true,
+          "limit": {
+            "context": 128000,
+            "output": 32000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "GPT-5.3 Codex Spark",
+          "options": {
+            "store": false
+          },
+          "variants": {
+            "high": {},
+            "low": {},
+            "medium": {},
+            "xhigh": {}
+          }
+        },
+        "gpt-5.4": {
+          "attachment": true,
+          "limit": {
+            "context": 1050000,
+            "output": 128000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "GPT-5.4",
+          "options": {
+            "store": false
+          },
+          "variants": {
+            "high": {},
+            "low": {},
+            "medium": {},
+            "xhigh": {}
+          }
+        },
+        "gpt-5.4-mini": {
+          "attachment": true,
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "GPT-5.4 Mini",
+          "options": {
+            "store": false
+          },
+          "variants": {
+            "high": {},
+            "low": {},
+            "medium": {},
+            "xhigh": {}
+          }
+        },
+        "gpt-5.5": {
+          "attachment": true,
+          "limit": {
+            "context": 272000,
+            "output": 128000
+          },
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          },
+          "name": "GPT-5.5",
+          "options": {
+            "store": false
+          },
+          "variants": {
+            "high": {},
+            "low": {},
+            "medium": {},
+            "xhigh": {}
+          }
+        }
+      },
+      "name": "openai-pro",
+      "npm": "@ai-sdk/openai",
+      "options": {
+        "apiKey": "sk-your-openai-pro-api-key-here",
+        "baseURL": "https://your-openai-pro-compatible-endpoint.example.com/v1"
+      }
+    }
+  },
+  "share": "disabled",
+  "small_model": "deepseek/deepseek-v4-flash"
 }

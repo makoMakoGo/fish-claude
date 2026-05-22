@@ -1,7 +1,6 @@
 {
   "enabledPlugins": {
-    "core@factory-plugins": true,
-    "nowledge-mem@community": true
+    "core@factory-plugins": true
   },
   "logoAnimation": "off",
   "customModels": [

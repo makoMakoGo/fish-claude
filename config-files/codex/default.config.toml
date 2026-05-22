@@ -14,16 +14,18 @@ approval_policy = "on-request"
 model_context_window = 1000000
 service_tier = "fast"
 
-[sandbox_workspace_write]
-network_access = true
+[history]
+persistence = "save-all"
 
 [features]
+apps = false
 multi_agent_v2 = true
 prevent_idle_sleep = true
 goals = true
 apply_patch_freeform = true
 apply_patch_streaming_events = true
 tool_search_always_defer_mcp_tools = true
+terminal_resize_reflow = true
 
 [agents]
 max_depth = 1
@@ -55,17 +57,22 @@ fast_default_opt_out = true
 "gpt-5.2" = "gpt-5.3-codex"
 
 [tui]
-status_line = ["model-with-reasoning", "current-dir", "git-branch", "context-used", "context-window-size"]
+status_line = ["model-with-reasoning", "current-dir", "git-branch", "context-used", "used-tokens"]
 notifications = true
 notification_condition = "unfocused"
 terminal_title = ["spinner", "project", "model"]
 animations = true
+theme = "catppuccin-latte"
+status_line_use_colors = true
 
 [mcp_servers.openaiDeveloperDocs]
 url = "https://developers.openai.com/mcp"
 
 [plugins."gmail@openai-curated"]
-enabled = true
+enabled = false
 
 [plugins."github@openai-curated"]
 enabled = true
+
+[sandbox_workspace_write]
+network_access = true
