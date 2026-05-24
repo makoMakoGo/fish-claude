@@ -53,8 +53,8 @@ cd "$repo_root" || exit 1
 
 run_required "Python syntax" \
   python3 -m py_compile \
-  tools/clean-chat-history/clean.py \
-  tools/codex-provider-history-migrator/migrate.py
+  tools/codex-provider-history-migrator/migrate.py \
+  tools/codex-provider-history-migrator/test_migrate.py
 
 run_optional "Bun TypeScript build check: omp-patch-custom-mcp" bun \
   bun build tools/omp-patch-custom-mcp/apply.ts --target=node --format=esm --outdir /tmp/fish-claude-validate-custom-mcp --external "*"
@@ -67,8 +67,8 @@ run_required "Shell syntax" \
 
 run_optional "PowerShell ScriptAnalyzer lint" pwsh check_powershell
 
-run_required "Smoke: clean-chat-history help" \
-  python3 tools/clean-chat-history/clean.py --help
+run_required "Python unit tests" \
+  python3 -m unittest discover -s tools/codex-provider-history-migrator -p 'test_*.py'
 
 run_required "Smoke: codex-provider-history-migrator help" \
   python3 tools/codex-provider-history-migrator/migrate.py --help
