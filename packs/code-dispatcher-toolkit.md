@@ -8,7 +8,7 @@
 
 ## 是什么
 
-核心是一个 CLI 调度器 `code-dispatcher`，统一调度 `codex`、`claude`、`gemini` 三个后端：
+核心是一个 CLI 调度器 `code-dispatcher`，统一调度 `codex`、`claude`、`antigravity` 三个后端：
 
 接收任务 → 选后端 → 构建参数 → 分发执行 → 收集结果
 
@@ -21,7 +21,7 @@
 
 - `codex`：复杂逻辑、bug 修复、重构
 - `claude`：快速任务、review、补充分析
-- `gemini`：前端 UI/UX 原型
+- `antigravity`：前端 UI/UX 原型
 
 > 核心思路基于 [`cexll/myclaude`](https://github.com/cexll/myclaude) 的 codeagent wrapper，经大量重构。
 
@@ -47,4 +47,4 @@ python3 install.py --skip-dispatcher                    # 仅安装 skills
 - `~/.code-dispatcher/prompts/*-prompt.md`：各后端默认 prompt 模板
 - `~/.code-dispatcher/bin/code-dispatcher`：执行器二进制
 
-Skill 复制到对应 CLI 的 skills 目录（`~/.agents/skills/`、`~/.claude/skills/`、`~/.codex/skills/`、`~/.config/opencode/skills/`、`~/.gemini/skills/` 等）即可。
+Skill 复制到对应 CLI 的 skills 目录（`~/.agents/skills/`、`~/.claude/skills/`、`~/.codex/skills/`、`~/.config/opencode/skills/`、`~/.gemini/antigravity-cli/skills/` 等）即可。

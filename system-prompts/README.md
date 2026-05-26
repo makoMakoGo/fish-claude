@@ -22,11 +22,6 @@
 - source: `https://github.com/openai/codex.git`
 - date: `2026-05-04`
 
-## Gemini CLI
-
-- file: `gemini-cli.md`
-- source: `https://github.com/google-gemini/gemini-cli.git`
-- date: `2026-03-09`
 
 ## Gemini Deep Think
 

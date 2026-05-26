@@ -24,7 +24,7 @@
 
 ## 为什么选它
 
-我同时用 Claude Code、Codex、Gemini CLI，需要一个跨工具共享的记忆层，换 CLI 不丢上下文。
+我同时用 Claude Code、Codex、Antigravity CLI，需要一个跨工具共享的记忆层，换 CLI 不丢上下文。
 
 数据存在本地（`~/.nowledge-mem/`），不依赖第三方服务器。远程 LLM 是可选的，开了也只用于增强检索，Nowledge 不碰记忆数据。
 

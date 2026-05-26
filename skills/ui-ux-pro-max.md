@@ -11,5 +11,5 @@
 
 - 一个面向 AI coding agent 的 UI/UX skill，核心是提供设计检索和 design system 生成能力
 - 常见用法是先生成一份 design system，再按 domain 或 stack 补充细节
-- 公开资料里支持 Claude Code、Codex、Gemini CLI 等多种 agent/CLI
+- 公开资料里支持 Claude Code、Codex、Antigravity CLI 等多种 agent/CLI
 

@@ -5,7 +5,7 @@ This file provides guidance to AI coding agents working with code in this reposi
 ## What This Repo Is
 
 An **AI coding assistant configuration sharing repository** — NOT a business application.
-Contains reusable rule fragments for project docs, baseline CLI config references, pack references, MCP setup guides, skills, and output styles for Claude Code, Codex, Gemini CLI, etc.
+Contains reusable rule fragments for project docs, baseline CLI config references, pack references, MCP setup guides, skills, and output styles for Claude Code, Codex, Antigravity CLI, etc.
 
 **There is no build system, no test suite, no `src/` directory.** Do not look for or create them.
 
@@ -13,7 +13,7 @@ Contains reusable rule fragments for project docs, baseline CLI config reference
 
 ### Composable Module System
 
-Each `.md` file in `agent-instructions/general/`, `agent-instructions/claude/`, `agent-instructions/codex/`, `agent-instructions/opencode/`, `agent-instructions/oh-my-pi/`, and `agent-instructions/gemini/` is an **independent, composable rule fragment**. Users browse, pick what they need, and concatenate modules into their own global config:
+Each `.md` file in `agent-instructions/general/`, `agent-instructions/claude/`, `agent-instructions/codex/`, `agent-instructions/opencode/`, `agent-instructions/oh-my-pi/`, and `agent-instructions/antigravity/` is an **independent, composable rule fragment**. Users browse, pick what they need, and concatenate modules into their own global config:
 
 ```bash
 # Claude Code
@@ -28,8 +28,8 @@ cat general/01-no-extra-notes.md opencode/01-code-search.md ... > AGENTS.md
 # Oh My Pi
 cat general/01-no-extra-notes.md oh-my-pi/01-defaults.md oh-my-pi/02-code-style.md ... > AGENTS.md
 
-# Gemini CLI
-cat general/01-no-extra-notes.md gemini/01-reasoning-depth.md ... > GEMINI.md
+# Antigravity CLI
+cat general/01-no-extra-notes.md antigravity/01-reasoning-depth.md ... > GEMINI.md
 ```
 
 For Codex, `config.toml` provides a `developer_instructions` field as a high-priority override slot — modules that Codex follows poorly can be moved from `AGENTS.md` into `developer_instructions` for stronger enforcement.
@@ -45,7 +45,7 @@ Module details and dependency info are documented in `agent-instructions/README.
 | `agent-instructions/codex/`    | Codex rule modules                                                                         |
 | `agent-instructions/opencode/` | OpenCode rule modules                                                                      |
 | `agent-instructions/oh-my-pi/` | Oh My Pi rule modules                                                                      |
-| `agent-instructions/gemini/`   | Gemini CLI rule modules                                                                    |
+| `agent-instructions/antigravity/` | Antigravity CLI rule modules                                                               |
 | `config-files/`                | Baseline CLI config references (`settings.json`, `config.toml`, etc.)                      |
 | `system-prompts/`              | Upstream system prompt references                                                          |
 | `mcp/`                         | MCP server installation & usage guides                                                     |
@@ -93,6 +93,6 @@ Use conventional commits format:
 ## Local Repo Clones
 
 If you are on my WSL2 environment, you find these git repo cloned when you need:
-- `codex`, `oh-my-pi`, `gemini-cli`, `rtk`, `context-mode`, `pi-mono`, `tokscale` → `~/01-workspace/`
+- `codex`, `oh-my-pi`, `rtk`, `context-mode`, `pi-mono`, `tokscale` → `~/01-workspace/`
 - `myclaude`, `beautiful-mermaid-cli`, `awesome-deepseek-agent` → `~/02-workspace/`
 - `code-dispatcher-toolkit` → `~/personal-workspace/`

@@ -38,4 +38,4 @@ Cursor 官方插件包，把 Cursor 团队内部使用的 CI、review、发版�
 
 ## 适合什么时候用
 
-如果项目主要在 Cursor 里协作，而且已经有 GitHub Actions、PR review、前端 UI 验证或 CLI/TUI 验证需求，它可以作为一套现成的团队工作流模板。若你主要用 Claude Code、Codex、Gemini CLI 或 OpenCode，这个条目更多是参考页；不要硬拷它的 Cursor plugin 结构，笨蛋式跨平台搬运只会制造一堆不能加载的碎片。
+如果项目主要在 Cursor 里协作，而且已经有 GitHub Actions、PR review、前端 UI 验证或 CLI/TUI 验证需求，它可以作为一套现成的团队工作流模板。若你主要用 Claude Code、Codex、Antigravity CLI 或 OpenCode，这个条目更多是参考页；不要硬拷它的 Cursor plugin 结构，笨蛋式跨平台搬运只会制造一堆不能加载的碎片。

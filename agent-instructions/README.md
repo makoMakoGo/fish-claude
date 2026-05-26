@@ -10,7 +10,7 @@
 | Claude Code | `~/.claude/CLAUDE.md`          |
 | Codex       | `~/.codex/AGENTS.md`           |
 | Droid       | `~/.factory/AGENTS.md`        |
-| Gemini CLI  | `~/.gemini/GEMINI.md`          |
+| Antigravity CLI | `~/.gemini/GEMINI.md` / workspace `AGENTS.md` |
 | Warp        | Warp Drive（云端，App 内 Personal → Rules，或 `/add-rule`） |
 | OpenCode    | `~/.config/opencode/AGENTS.md` |
 
@@ -54,11 +54,11 @@
 | 02  | [code-style](oh-my-pi/02-code-style.md)       | 代码风格（函数式、KISS、DRY）                | [ai-coding-discipline](../skills/ai-coding-discipline.md)        |
 | 03  | [architecture](oh-my-pi/03-architecture.md)   | 架构与设计原则（第一性原理、反 XY）          | [software-design-philosophy](../skills/software-design-philosophy.md)        |
 
-## Gemini
+## Antigravity CLI
 
 | #   | 模块                                         | 职责                                      | 依赖 |
 | --- | -------------------------------------------- | ----------------------------------------- | ---- |
-| 01  | [reasoning-depth](gemini/01-reasoning-depth.md) | Gemini 深度推理 prompt hack（`EFFORT LEVEL`） | — |
+| 01  | [reasoning-depth](antigravity/01-reasoning-depth.md) | Antigravity 深度推理 prompt hint（`EFFORT LEVEL`） | — |
 
 ## OpenCode
 

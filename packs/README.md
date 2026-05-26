@@ -37,5 +37,5 @@ cp -r <pack>/hooks/     <project>/.claude/hooks/
 | [context-mode](context-mode.md) | Claude Code plugin + MCP server；sandbox 内处理大输出，~98% context 压缩，附 session continuity |
 | [nmem](nmem.md) | Nowledge Mem CLI；跨 AI 工具共享的本地记忆库，本地 HTTP server + 知识图谱 + MCP 集成 |
 | [mattpocock-skills](mattpocock-skills.md) | Matt Pocock 的可组合 AI agent skills 集合，覆盖需求澄清、文档协作、TDD、debugging 等工程工作流 |
-| [openspec](openspec.md) | 轻量 spec-driven 框架：spec 和 change 存进 `openspec/`，通过 `/opsx:*` slash commands 驱动 Claude / Codex / Gemini / OpenCode / Cursor 等 |
+| [openspec](openspec.md) | 轻量 spec-driven 框架：spec 和 change 存进 `openspec/`，通过 `/opsx:*` slash commands 驱动 Claude / Codex / OpenCode / Cursor 等 |
 | [cursor-team-kit](cursor-team-kit.md) | Cursor 官方 plugin；收录 CI、review、发版、验证、UI/CLI harness、代码清理和工作总结等团队工作流 |

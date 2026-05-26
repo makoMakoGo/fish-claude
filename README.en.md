@@ -14,7 +14,7 @@ A copyable, composable, install-what-you-need resource kit for AI coding CLIs.
 
 <img src="https://img.shields.io/badge/Claude_Code-D4A27F?style=flat-square&logo=anthropic&logoColor=white" alt="Claude Code">
 <img src="https://custom-icon-badges.demolab.com/badge/Codex-412991?style=flat-square&logo=openai&logoColor=white" alt="Codex">
-<img src="https://img.shields.io/badge/Gemini_CLI-4285F4?style=flat-square&logo=googlegemini&logoColor=white" alt="Gemini CLI">
+<img src="https://img.shields.io/badge/Antigravity_CLI-4285F4?style=flat-square&logo=googlegemini&logoColor=white" alt="Antigravity CLI">
 <img src="https://img.shields.io/badge/Oh_My_Pi-333333?style=flat-square&logo=data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4gPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgODAwIj4gPHBhdGggZmlsbD0iJTIzMDBENEFBIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9IiBNMTY1LjI5IDE2NS4yOSBINTE3LjM2IFY0MDAgSDQwMCBWNTE3LjM2IEgyODIuNjUgVjYzNC43MiBIMTY1LjI5IFogTTI4Mi42NSAyODIuNjUgVjQwMCBINDAwIFYyODIuNjUgWiAiLz4gPHBhdGggZmlsbD0iJTIzMDBENEFBIiBkPSJNNTE3LjM2IDQwMCBINjM0LjcyIFY2MzQuNzIgSDUxNy4zNiBaIi8+IDwvc3ZnPg==&logoColor=white" alt="Oh My Pi">
 <img src="https://img.shields.io/badge/Warp-01A1FF?style=flat-square&logo=warp&logoColor=white" alt="Warp">
 
@@ -32,7 +32,7 @@ Covers:
 
 - Claude Code
 - Codex
-- Gemini CLI
+- Antigravity CLI
 - Oh My Pi
 - Warp
 - OpenCode
@@ -42,7 +42,7 @@ Covers:
 | Content | Entry | Use |
 | --- | --- | --- |
 | Rule modules | [`agent-instructions/`](agent-instructions/) | Composable fragments for assembling `AGENTS.md` / `CLAUDE.md` / `GEMINI.md` |
-| Skills | [`skills/`](skills/) | Skill definitions and references installable in Claude Code / Codex / OMP / Gemini CLI |
+| Skills | [`skills/`](skills/) | Skill definitions and references installable in Claude Code / Codex / OMP / Antigravity CLI |
 | Config samples | [`config-files/`](config-files/) | Baseline config references for `settings.json`, `config.toml`, OMP agent config, and more |
 | MCP guides | [`mcp/`](mcp/) | Installation, configuration, and usage notes for common MCP servers |
 | Packs | [`packs/`](packs/) | Composite bundles, external toolchains, and reusable install references |

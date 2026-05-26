@@ -33,7 +33,7 @@ npm install -g @fission-ai/openspec@latest
 cd <your-project>
 openspec init                              # 交互式选择要接入的 CLI
 # 或非交互：
-openspec init --tools claude,codex,gemini,opencode --profile core
+openspec init --tools claude,codex,opencode --profile core
 openspec update                            # 升级后刷新所有已接入 CLI 的指令
 ```
 
@@ -45,7 +45,6 @@ openspec update                            # 升级后刷新所有已接入 CLI 
 | --- | --- | --- |
 | Claude Code | `.claude/skills/openspec-*/SKILL.md` | `.claude/commands/opsx/<id>.md` |
 | Codex | `.codex/skills/openspec-*/SKILL.md` | `$CODEX_HOME/prompts/opsx-<id>.md`（全局） |
-| Gemini CLI | `.gemini/skills/openspec-*/SKILL.md` | `.gemini/commands/opsx/<id>.toml` |
 | OpenCode | `.opencode/skills/openspec-*/SKILL.md` | `.opencode/commands/opsx-<id>.md` |
 | Cursor | `.cursor/skills/openspec-*/SKILL.md` | `.cursor/commands/opsx-<id>.md` |
 
