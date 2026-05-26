@@ -12,16 +12,6 @@
       }
     }
   },
-  "mcp": {
-    "semble": {
-      "command": [
-        "/home/travis/.local/bin/semble-opencode-safe"
-      ],
-      "enabled": true,
-      "timeout": 60000,
-      "type": "local"
-    }
-  },
   "provider": {
     "openai-pro": {
       "models": {

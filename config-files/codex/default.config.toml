@@ -53,6 +53,12 @@ config_file = "agents/awaiter.toml"
 [notice]
 fast_default_opt_out = true
 
+# [mcp_servers.playwright]
+# type = "stdio"
+# command = "/mnt/c/Windows/System32/cmd.exe"
+# args = ["/c", "npx", "@playwright/mcp@latest"]
+# startup_timeout_sec = 30
+
 [notice.model_migrations]
 "gpt-5.2" = "gpt-5.3-codex"
 
@@ -65,8 +71,8 @@ animations = true
 theme = "catppuccin-latte"
 status_line_use_colors = true
 
-[mcp_servers.openaiDeveloperDocs]
-url = "https://developers.openai.com/mcp"
+# [mcp_servers.openaiDeveloperDocs]
+# url = "https://developers.openai.com/mcp"
 
 [plugins."gmail@openai-curated"]
 enabled = false
@@ -76,3 +82,27 @@ enabled = true
 
 [sandbox_workspace_write]
 network_access = true
+
+[[skills.config]]
+path = "/home/travis/.codex/skills/.system/imagegen/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/home/travis/.codex/skills/.system/plugin-creator/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/home/travis/.codex/skills/.system/skill-creator/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/home/travis/.codex/skills/.system/skill-installer/SKILL.md"
+enabled = false
+
+[[skills.config]]
+path = "/home/travis/.codex/skills/.system/openai-docs/SKILL.md"
+enabled = false
+
+[mcp_servers.openaiDeveloperDocs]
+url = "https://developers.openai.com/mcp"
+enabled = false

@@ -68,7 +68,9 @@ Module details and dependency info are documented in `agent-instructions/README.
 4. **Keep modules composable**: one file = one responsibility; edits must preserve copy-paste assembly.
 5. **Correctness first**: make all related index/structure updates needed for a coherent change; do not modify unrelated modules.
 6. **If file structure changes**, update the corresponding directory's `README.md` (every second-level directory carries its own index).
-7. **For `tools/`**, keep published `README.md` files reader-facing only. Put maintenance conventions in this `AGENTS.md`, not in tool docs. Organize `tools/` as one tool per second-level directory with a colocated `README.md`, and keep `tools/README.md` as the index.
+7. **For `preset-cards/`**, keep preset files as directly reusable prompt text. Put source links, dates, and descriptions in `preset-cards/README.md`, not in the preset body.
+8. **For `mcp/`**, treat each file as an optional setup guide. If an MCP guide is removed, also remove related config samples, instruction dependencies, and README index rows.
+9. **For `tools/`**, keep published `README.md` files reader-facing only. Put maintenance conventions in this `AGENTS.md`, not in tool docs. Organize `tools/` as one tool per second-level directory with a colocated `README.md`, and keep `tools/README.md` as the index.
 
 ## Validation
 
