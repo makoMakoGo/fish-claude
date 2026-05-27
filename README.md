@@ -5,18 +5,22 @@
 
 **Fish's Coding Agent Configs**
 
-可复制、可拼装、可按需安装的 AI coding CLI 配置素材库。
+个人配置镜像仓库，请按需选用，切勿盲目照搬乱套。
+
+优秀的 Vibe Coder 是 "偷啃" 喂出来的。
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![GitHub stars](https://img.shields.io/github/stars/zhu-jl18/fish-claude?style=social)
 
 <br>
 
-<img src="https://img.shields.io/badge/Claude_Code-D4A27F?style=flat-square&logo=anthropic&logoColor=white" alt="Claude Code">
-<img src="https://custom-icon-badges.demolab.com/badge/Codex-412991?style=flat-square&logo=openai&logoColor=white" alt="Codex">
-<img src="https://img.shields.io/badge/Antigravity_CLI-4285F4?style=flat-square&logo=googlegemini&logoColor=white" alt="Antigravity CLI">
-<img src="https://img.shields.io/badge/Oh_My_Pi-333333?style=flat-square&logo=data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4gPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgODAwIj4gPHBhdGggZmlsbD0iJTIzMDBENEFBIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9IiBNMTY1LjI5IDE2NS4yOSBINTE3LjM2IFY0MDAgSDQwMCBWNTE3LjM2IEgyODIuNjUgVjYzNC43MiBIMTY1LjI5IFogTTI4Mi42NSAyODIuNjUgVjQwMCBINDAwIFYyODIuNjUgWiAiLz4gPHBhdGggZmlsbD0iJTIzMDBENEFBIiBkPSJNNTE3LjM2IDQwMCBINjM0LjcyIFY2MzQuNzIgSDUxNy4zNiBaIi8+IDwvc3ZnPg==&logoColor=white" alt="Oh My Pi">
-<img src="https://img.shields.io/badge/Warp-01A1FF?style=flat-square&logo=warp&logoColor=white" alt="Warp">
+<img src="assets/badges/claude-code.svg" alt="Claude Code">
+<img src="assets/badges/codex.svg" alt="Codex">
+<img src="assets/badges/antigravity.svg" alt="Antigravity">
+<img src="assets/badges/droid.svg" alt="Droid">
+<img src="assets/badges/oh-my-pi.svg" alt="Oh My Pi">
+<img src="assets/badges/warp.svg" alt="Warp">
+<img src="assets/badges/opencode.svg" alt="OpenCode">
 
 <br>
 
@@ -26,44 +30,40 @@
 
 ## 这是什么
 
-这是我本人在用的 Coding CLI 配置素材库：规则模块、skills、sub-agents、patches、MCP/config 参考、主题和调研笔记。它不是教程合集，也不是通用框架；更像一个可以抄、可以拼、可以拆的个人工作台。
+它不是教程合集，也不是通用框架；而是我本人在用的 Vibe Coding 配置备份仓库，带有强烈的个人色彩。覆盖的 code agents 有（也是我日常使用的，排名分先后，按我个人喜好）：
 
-覆盖：
-
-- Claude Code
-- Codex
-- Antigravity CLI
-- Oh My Pi
+- Pi + Claude Code
+- Oh My Pi + Codex + Droid
 - Warp
-- OpenCode
+- OpenCode + Antigravity
 
-## 可以直接拿什么
+## 都有什么
 
 | 内容 | 入口 | 用途 |
 | --- | --- | --- |
-| 规则模块 | [`agent-instructions/`](agent-instructions/) | 拼装 `AGENTS.md` / `CLAUDE.md` / `GEMINI.md` 的 composable fragments |
-| Skills | [`skills/`](skills/) | 可安装到 Claude Code / Codex / OMP / Antigravity CLI 的 skill 定义与参考 |
-| 配置样例 | [`config-files/`](config-files/) | `settings.json`、`config.toml`、OMP agent config 等基础配置参考 |
-| MCP 指南 | [`mcp/`](mcp/) | 常用 MCP server 的安装、配置和使用说明 |
-| Packs | [`packs/`](packs/) | 组合包、外部工具链和可复用安装参考 |
-| Tools / patches | [`tools/`](tools/) | 本地维护工具、迁移脚本、OMP patch runner |
-| 输出风格与主题 | [`output-styles/`](output-styles/) / [`preset-cards/`](preset-cards/) / [`themes/`](themes/) | 输出人格、preset card、Warp / Claude Code 主题 |
-| Sub-agents 与命令 | [`sub-agents/`](sub-agents/) / [`slash-commands/`](slash-commands/) | 子 agent role layer 和 slash command 模板 |
-| Tips / services | [`tips/`](tips/) / [`ai-services/`](ai-services/) | 实用知识碎片和外部 API 服务参考 |
+| 规则模块 | [`agent-instructions/`](agent-instructions/) | 拼装全局 `AGENTS.md`   |
+| Skills | [`skills/`](skills/) | 个人自用的 skills 合集  |
+| 配置样例 | [`config-files/`](config-files/) | 一些个性化配置字段参考 |
+| MCP | [`mcp/`](mcp/) | 还在用的 MCP server |
+| Packs | [`packs/`](packs/) | 组合包和外部工具链 |
+| Tools | [`tools/`](tools/) | 维护脚本和自定义 patch |
+| 输出风格 | [`output-styles/`](output-styles/) | 一些有意思的风格预设 |
+| Preset Cards | [`preset-cards/`](preset-cards/) | 有用的 Preset Card |
+| 主题 | [`themes/`](themes/) | Warp / Claude Code 等的主题 |
+| Sub-agents | [`sub-agents/`](sub-agents/) | subagent && multi-agent 实践 |
+| 命令 | [`slash-commands/`](slash-commands/) | Slash command 模板 |
+| Tips | [`tips/`](tips/) | 你不知道的实用小技巧 |
+| Services | [`ai-services/`](ai-services/) | 外部 API 服务参考 |
 
-## 从哪里开始
+## 食用指南
 
-- [规则模块索引](agent-instructions/README.md)：了解各 CLI 的 instruction fragments 怎么组合。
-- [Skills 指南](skills/README.md)：查看可安装的 community / custom skills。
-- [配置文件参考](config-files/README.md)：复制基础 CLI 配置样例。
-- [MCP 配置](mcp/README.md)：按需接入 MCP server。
-- [Packs](packs/README.md)：查看组合包和外部工具链入口。
-- [Tools](tools/README.md)：使用维护工具、迁移脚本和 patch runner。
-- [System prompts](system-prompts/README.md)：查看上游 system prompt 参考副本。
+看完哪些感兴趣就 copy paste 用呗。都是可插拔的，有联动的我也基本都标注了。我的不一定适合你，建议你感兴趣的就测试一下，不好用就不用，好用就留着，也可以自己去魔改。总之，最后你肯定是用 pi 自己魔改。
+
+配合 [Mako's Blog](https://makomakogo.github.io/) 食用更佳。
 
 ## 贡献
 
-欢迎提交 Issue；如需提交 Pull Request，请先沟通并获得许可。
+如有问题，欢迎提交 Issue 讨论交流；纯个人项目，已关闭 PR入口。
 
 ## 许可证
 

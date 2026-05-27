@@ -34,13 +34,6 @@
 | `../sub-agents/codex/*.toml` | `~/.codex/agents/` |
 | `../sub-agents/codex/role-layer.example.toml` | 写法示例 |
 
-## Antigravity CLI
-
-| 文件 | 目标路径 |
-|------|---------|
-| `antigravity/keybindings.json` | `~/.gemini/antigravity-cli/keybindings.json` |
-
-
 ## OpenCode
 
 | 文件 | 目标路径 |

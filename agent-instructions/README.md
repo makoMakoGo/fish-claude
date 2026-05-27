@@ -33,7 +33,7 @@
 | 03  | [research](claude/03-research.md)             | 查资料方法论（禁止猜测）               | [Context7](../mcp/context7.md), [Grok Search](../skills/grok-search.md) |
 | 04  | [dev-workflow](claude/04-dev-workflow.md)     | code-dispatcher 开发工作流（按需启用） | [code-dispatcher-toolkit](../packs/code-dispatcher-toolkit.md) |
 | 05  | [playwright](claude/05-playwright.md)         | Playwright UI 验证规则（按需启用）     | [Playwright](../mcp/playwright.md)                                |
-| 07  | [plan-mode-default](claude/07-plan-mode-default.md) | Plan Mode 默认触发规则（按需启用）     | —                                                                 |
+| 06  | [plan-mode-default](claude/06-plan-mode-default.md) | Plan Mode 默认触发规则（按需启用）     | —                                                                 |
 
 ## Codex
 
@@ -44,7 +44,6 @@
 | 03  | [role-play-sm](codex/03-role-play-sm.md)           | 角色扮演人设                             | —                                                               |
 | 04  | [debug-first](codex/04-debug-first.md)             | 调试策略（禁止静默兜底）                 | —                                                               |
 | 05  | [multi-agent](codex/05-multi-agent.md)             | 多智能体协作规范                         | 默认开启；显式配置见 [default.config.toml](../config-files/codex/default.config.toml) |
-| 06  | [no-compat](codex/06-no-compat.md)                 | 禁止向后兼容（优先干净架构）             | —                                                               |
 
 ## Oh My Pi
 
@@ -64,5 +63,4 @@
 
 | #   | 模块                                          | 职责                                   | 依赖                                                              |
 | --- | --------------------------------------------- | -------------------------------------- | ----------------------------------------------------------------- |
-| 01  | [code-search](opencode/01-code-search.md)     | 基于 `rg` 的代码探索规则               | —                                                                 |
-| 02  | [karpathy-rules](opencode/02-karpathy-rules.md) | 思考优先、简单实现、外科手术式修改与目标驱动执行规则 | — |
+| 01  | [karpathy-rules](opencode/01-karpathy-rules.md) | 思考优先、简单实现、外科手术式修改与目标驱动执行规则 | — |

@@ -27,6 +27,10 @@
 
 - file: `gemini-deep-think.md`
 
+## Gemini CLI
+
+- file: `gemini-cli.md`
+
 ## OpenCode
 
 - file: `opencode.md`

@@ -5,18 +5,22 @@
 
 **Fish's Coding Agent Configs**
 
-A copyable, composable, install-what-you-need resource kit for AI coding CLIs.
+A personal resource kit for AI coding agent configs—pick what you need, adapt to fit.
+
+Excellent vibe coding is fed one token at a time.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![GitHub stars](https://img.shields.io/github/stars/zhu-jl18/fish-claude?style=social)
 
 <br>
 
-<img src="https://img.shields.io/badge/Claude_Code-D4A27F?style=flat-square&logo=anthropic&logoColor=white" alt="Claude Code">
-<img src="https://custom-icon-badges.demolab.com/badge/Codex-412991?style=flat-square&logo=openai&logoColor=white" alt="Codex">
-<img src="https://img.shields.io/badge/Antigravity_CLI-4285F4?style=flat-square&logo=googlegemini&logoColor=white" alt="Antigravity CLI">
-<img src="https://img.shields.io/badge/Oh_My_Pi-333333?style=flat-square&logo=data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4gPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgODAwIj4gPHBhdGggZmlsbD0iJTIzMDBENEFBIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9IiBNMTY1LjI5IDE2NS4yOSBINTE3LjM2IFY0MDAgSDQwMCBWNTE3LjM2IEgyODIuNjUgVjYzNC43MiBIMTY1LjI5IFogTTI4Mi42NSAyODIuNjUgVjQwMCBINDAwIFYyODIuNjUgWiAiLz4gPHBhdGggZmlsbD0iJTIzMDBENEFBIiBkPSJNNTE3LjM2IDQwMCBINjM0LjcyIFY2MzQuNzIgSDUxNy4zNiBaIi8+IDwvc3ZnPg==&logoColor=white" alt="Oh My Pi">
-<img src="https://img.shields.io/badge/Warp-01A1FF?style=flat-square&logo=warp&logoColor=white" alt="Warp">
+<img src="assets/badges/claude-code.svg" alt="Claude Code">
+<img src="assets/badges/codex.svg" alt="Codex">
+<img src="assets/badges/antigravity.svg" alt="Antigravity">
+<img src="assets/badges/droid.svg" alt="Droid">
+<img src="assets/badges/oh-my-pi.svg" alt="Oh My Pi">
+<img src="assets/badges/warp.svg" alt="Warp">
+<img src="assets/badges/opencode.svg" alt="OpenCode">
 
 <br>
 
@@ -24,16 +28,12 @@ A copyable, composable, install-what-you-need resource kit for AI coding CLIs.
 
 </div>
 
-## What This Is
+It is not a tutorial collection or a generic framework; it is a personal Vibe Coding config backup kit I actually use, with a strong personal character. Covers the code agents I daily use (no particular ranking):
 
-My personal Coding CLI config resource kit: rule modules, skills, sub-agents, patches, MCP/config references, themes, and research notes. It is not a tutorial collection or a generic framework; it is a personal workbench you can copy from, assemble, and take apart.
-
-Covers:
-
-- Claude Code
-- Codex
-- Antigravity CLI
-- Oh My Pi
+- Claude Code + Pi
+- Oh My Pi + Codex + Droid
+- Warp
+- OpenCode + Antigravity
 - Warp
 - OpenCode
 
@@ -41,15 +41,19 @@ Covers:
 
 | Content | Entry | Use |
 | --- | --- | --- |
-| Rule modules | [`agent-instructions/`](agent-instructions/) | Composable fragments for assembling `AGENTS.md` / `CLAUDE.md` / `GEMINI.md` |
+| Rule modules | [`agent-instructions/`](agent-instructions/) | Composable fragments for assembling `AGENTS.md`, `CLAUDE.md`, and other CLI instruction files |
 | Skills | [`skills/`](skills/) | Skill definitions and references installable in Claude Code / Codex / OMP / Antigravity CLI |
 | Config samples | [`config-files/`](config-files/) | Baseline config references for `settings.json`, `config.toml`, OMP agent config, and more |
 | MCP guides | [`mcp/`](mcp/) | Installation, configuration, and usage notes for common MCP servers |
 | Packs | [`packs/`](packs/) | Composite bundles, external toolchains, and reusable install references |
 | Tools / patches | [`tools/`](tools/) | Local maintenance tools, migration scripts, and OMP patch runners |
-| Output styles and themes | [`output-styles/`](output-styles/) / [`preset-cards/`](preset-cards/) / [`themes/`](themes/) | Output personas, preset cards, and Warp / Claude Code themes |
-| Sub-agents and commands | [`sub-agents/`](sub-agents/) / [`slash-commands/`](slash-commands/) | Sub-agent role layers and slash command templates |
-| Tips / services | [`tips/`](tips/) / [`ai-services/`](ai-services/) | Practical notes and external API service references |
+| Output Styles | [`output-styles/`](output-styles/) | Output personas |
+| Preset Cards | [`preset-cards/`](preset-cards/) | Useful preset cards |
+| Themes | [`themes/`](themes/) | Warp / Claude Code themes |
+| Sub-agents | [`sub-agents/`](sub-agents/) | Sub-agent and multi-agent practices |
+| Slash Commands | [`slash-commands/`](slash-commands/) | Slash command templates |
+| Tips | [`tips/`](tips/) | Practical notes and tips |
+| Services | [`ai-services/`](ai-services/) | External API service references |
 
 ## Start Here
 
@@ -61,9 +65,15 @@ Covers:
 - [Tools](tools/README.md): use maintenance tools, migration scripts, and patch runners.
 - [System prompts](system-prompts/README.md): inspect upstream system prompt reference copies.
 
+## How to Use
+
+Just copy-paste what you like. Everything is pluggable; if components are linked I've noted it. What works for me may not work for you—test what interests you, drop what doesn't, keep what does, and feel free to mod it. In the end, you'll probably customize it with Pi anyway.
+
+Pair it with [Mako's Blog](https://makomakogo.github.io/) for more context.
+
 ## Contributing
 
-Issues are welcome. Please discuss and get permission before opening a Pull Request.
+If you run into problems, feel free to open an Issue for discussion and feedback. This is a personal project, and PRs are closed.
 
 ## License
 

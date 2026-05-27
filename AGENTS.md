@@ -7,7 +7,7 @@ This file provides guidance to AI coding agents working with code in this reposi
 An **AI coding assistant configuration sharing repository** — NOT a business application.
 Contains reusable rule fragments for project docs, baseline CLI config references, pack references, MCP setup guides, skills, and output styles for Claude Code, Codex, Antigravity CLI, etc.
 
-**There is no build system, no test suite, no `src/` directory.** Do not look for or create them.
+**There is no application build system, application test suite, or `src/` directory.** Utility scripts may have lightweight validation under `tools/`.
 
 ## Architecture
 
@@ -23,13 +23,13 @@ cat general/01-no-extra-notes.md claude/01-defaults.md claude/02-code-quality.md
 cat general/01-no-extra-notes.md codex/01-basic-rules.md codex/02-inherited-tool.md ... > AGENTS.md
 
 # OpenCode
-cat general/01-no-extra-notes.md opencode/01-code-search.md ... > AGENTS.md
+cat general/01-no-extra-notes.md opencode/01-karpathy-rules.md ... > AGENTS.md
 
 # Oh My Pi
 cat general/01-no-extra-notes.md oh-my-pi/01-defaults.md oh-my-pi/02-code-style.md ... > AGENTS.md
 
 # Antigravity CLI
-cat general/01-no-extra-notes.md antigravity/01-reasoning-depth.md ... > GEMINI.md
+cat general/01-no-extra-notes.md antigravity/01-reasoning-depth.md ... > AGENTS.md
 ```
 
 For Codex, `config.toml` provides a `developer_instructions` field as a high-priority override slot — modules that Codex follows poorly can be moved from `AGENTS.md` into `developer_instructions` for stronger enforcement.
@@ -57,6 +57,7 @@ Module details and dependency info are documented in `agent-instructions/README.
 | `preset-cards/`                | Reusable preset cards / personality presets                                                |
 | `themes/`                      | Warp / Claude Code theme references                                                        |
 | `tips/`                        | Practical knowledge fragments                                                              |
+| `assets/`                      | Local README image and badge assets                                                        |
 | `tools/`                       | Local maintenance tools, migration scripts, OMP patch runners                              |
 | `ai-services/`                 | External AI-adjacent API services (search, reader, embedding)                              |
 
@@ -82,15 +83,29 @@ bash tools/validate.sh
 
 # Git Commit Message Format
 
-Use conventional commits format:
+Use lightweight domain prefixes:
 
 ```
-<type>(<scope>): <subject>
+<prefix>: <subject>
 <body>
 <footer>
 ```
 
-<type> and <subject> are required; <body> and <footer> are optional.
+`<prefix>` and `<subject>` are required; `<body>` and `<footer>` are optional.
+
+Prefer direct repo domain prefixes over conventional-commit scoped forms. Do not write `chore(mcp): ...` when `mcp: ...` is clearer.
+
+Common prefixes:
+
+- `mcp:` MCP guides and MCP config references
+- `agy:` Antigravity CLI instructions/config
+- `omp:` Oh My Pi instructions/config/tools
+- `codex:` Codex instructions/config/tools
+- `opencode:` OpenCode instructions/config
+- `skills:` skill references and skill indexes
+- `tools:` maintenance tools and patch runners
+- `docs:` broad documentation-only updates
+- `chore:` broad repo maintenance that does not fit a tighter domain
 
 ## Local Repo Clones
 
