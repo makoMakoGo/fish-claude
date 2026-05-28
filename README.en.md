@@ -5,12 +5,12 @@
 
 **Fish's Coding Agent Configs**
 
-A personal resource kit for AI coding agent configs—pick what you need, adapt to fit.
+A personal config mirror repo — pick what you need, don't blindly copy.
 
-Excellent vibe coding is fed one token at a time.
+Great Vibe Coders are fed one stolen bite at a time.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![GitHub stars](https://img.shields.io/github/stars/zhu-jl18/fish-claude?style=social)
+![GitHub stars](https://img.shields.io/github/stars/makoMakoGo/fish-claude?style=social)
 
 <br>
 
@@ -28,52 +28,41 @@ Excellent vibe coding is fed one token at a time.
 
 </div>
 
-It is not a tutorial collection or a generic framework; it is a personal Vibe Coding config backup kit I actually use, with a strong personal character. Covers the code agents I daily use (no particular ranking):
+## What This Is
 
-- Claude Code + Pi
+Not a tutorial collection, not a generic framework — just a backup repo of the Vibe Coding configs I personally use, heavily flavored by my own taste. The code agents covered (also the ones I use daily, ordered by my personal preference):
+
+- Pi + Claude Code
 - Oh My Pi + Codex + Droid
 - Warp
 - OpenCode + Antigravity
-- Warp
-- OpenCode
 
-## What You Can Steal
+## What's Inside
 
 | Content | Entry | Use |
 | --- | --- | --- |
-| Rule modules | [`agent-instructions/`](agent-instructions/) | Composable fragments for assembling `AGENTS.md`, `CLAUDE.md`, and other CLI instruction files |
-| Skills | [`skills/`](skills/) | Skill definitions and references installable in Claude Code / Codex / OMP / Antigravity CLI |
-| Config samples | [`config-files/`](config-files/) | Baseline config references for `settings.json`, `config.toml`, OMP agent config, and more |
-| MCP guides | [`mcp/`](mcp/) | Installation, configuration, and usage notes for common MCP servers |
-| Packs | [`packs/`](packs/) | Composite bundles, external toolchains, and reusable install references |
-| Tools / patches | [`tools/`](tools/) | Local maintenance tools, migration scripts, and OMP patch runners |
-| Output Styles | [`output-styles/`](output-styles/) | Output personas |
+| Rule modules | [`agent-instructions/`](agent-instructions/) | Assemble a global `AGENTS.md` |
+| Skills | [`skills/`](skills/) | My personal skills collection |
+| Config samples | [`config-files/`](config-files/) | References for personalized config fields |
+| MCP | [`mcp/`](mcp/) | MCP servers I still use |
+| Packs | [`packs/`](packs/) | Composite bundles and external toolchains |
+| Tools | [`tools/`](tools/) | Maintenance scripts and custom patches |
+| Output styles | [`output-styles/`](output-styles/) | A few interesting style presets |
 | Preset Cards | [`preset-cards/`](preset-cards/) | Useful preset cards |
-| Themes | [`themes/`](themes/) | Warp / Claude Code themes |
-| Sub-agents | [`sub-agents/`](sub-agents/) | Sub-agent and multi-agent practices |
-| Slash Commands | [`slash-commands/`](slash-commands/) | Slash command templates |
-| Tips | [`tips/`](tips/) | Practical notes and tips |
-| Services | [`ai-services/`](ai-services/) | External API service references |
-
-## Start Here
-
-- [Rule module index](agent-instructions/README.md): see how instruction fragments are assembled for each CLI.
-- [Skills guide](skills/README.md): browse installable community and custom skills.
-- [Config file references](config-files/README.md): copy baseline CLI config samples.
-- [MCP setup](mcp/README.md): connect MCP servers as needed.
-- [Packs](packs/README.md): find composite bundles and external toolchain entries.
-- [Tools](tools/README.md): use maintenance tools, migration scripts, and patch runners.
-- [System prompts](system-prompts/README.md): inspect upstream system prompt reference copies.
+| Themes | [`themes/`](themes/) | Themes for Warp / Claude Code, etc. |
+| Sub-agents | [`sub-agents/`](sub-agents/) | subagent && multi-agent practice |
+| Commands | [`slash-commands/`](slash-commands/) | Slash command templates |
+| Tips | [`tips/`](tips/) | Practical tricks you might not know |
 
 ## How to Use
 
-Just copy-paste what you like. Everything is pluggable; if components are linked I've noted it. What works for me may not work for you—test what interests you, drop what doesn't, keep what does, and feel free to mod it. In the end, you'll probably customize it with Pi anyway.
+Skim it, find what interests you, copy-paste it. Everything is pluggable; where modules are linked I've noted it. Mine may not fit you — test what interests you, drop what doesn't, keep what does, and feel free to mod it. In the end, you'll definitely end up modding it with Pi yourself.
 
-Pair it with [Mako's Blog](https://makomakogo.github.io/) for more context.
+Pairs well with [Mako's Blog](https://makomakogo.github.io/).
 
 ## Contributing
 
-If you run into problems, feel free to open an Issue for discussion and feedback. This is a personal project, and PRs are closed.
+If you hit problems, feel free to open an Issue to discuss. Pure personal project — PRs are closed.
 
 ## License
 

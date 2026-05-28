@@ -6,7 +6,6 @@ Claude Code 长运行任务 harness，处理跨上下文窗口的任务持久化
 
 - GitHub：<https://github.com/stellarlinkco/myclaude>
 - 目录：`skills/harness/`
-- License：AGPL-3.0
 
 ## 用到的 hooks
 

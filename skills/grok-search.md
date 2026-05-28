@@ -1,7 +1,5 @@
 # Grok Search
 
-社区 skill 占位页，后续可继续补安装方式、常用工作流和适用边界。
-
 ## 来源
 
 - GitHub: `abelxiaoxing/agent-toolkit`

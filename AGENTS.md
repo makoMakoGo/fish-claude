@@ -9,69 +9,12 @@ Contains reusable rule fragments for project docs, baseline CLI config reference
 
 **There is no application build system, application test suite, or `src/` directory.** Utility scripts may have lightweight validation under `tools/`.
 
-## Architecture
-
-### Composable Module System
-
-Each `.md` file in `agent-instructions/general/`, `agent-instructions/claude/`, `agent-instructions/codex/`, `agent-instructions/opencode/`, `agent-instructions/oh-my-pi/`, and `agent-instructions/antigravity/` is an **independent, composable rule fragment**. Users browse, pick what they need, and concatenate modules into their own global config:
-
-```bash
-# Claude Code
-cat general/01-no-extra-notes.md claude/01-defaults.md claude/02-code-quality.md ... > CLAUDE.md
-
-# Codex
-cat general/01-no-extra-notes.md codex/01-basic-rules.md codex/02-inherited-tool.md ... > AGENTS.md
-
-# OpenCode
-cat general/01-no-extra-notes.md opencode/01-karpathy-rules.md ... > AGENTS.md
-
-# Oh My Pi
-cat general/01-no-extra-notes.md oh-my-pi/01-defaults.md oh-my-pi/02-code-style.md ... > AGENTS.md
-
-# Antigravity CLI
-cat general/01-no-extra-notes.md antigravity/01-reasoning-depth.md ... > AGENTS.md
-```
-
-For Codex, `config.toml` provides a `developer_instructions` field as a high-priority override slot — modules that Codex follows poorly can be moved from `AGENTS.md` into `developer_instructions` for stronger enforcement.
-
-Module details and dependency info are documented in `agent-instructions/README.md`. Baseline CLI config references live under `config-files/`.
-
-### Directory Layout
-
-| Directory                      | Purpose                                                                                    |
-| ------------------------------ | ------------------------------------------------------------------------------------------ |
-| `agent-instructions/general/`  | Shared cross-CLI rule modules                                                              |
-| `agent-instructions/claude/`   | Claude Code rule modules (composable fragments)                                            |
-| `agent-instructions/codex/`    | Codex rule modules                                                                         |
-| `agent-instructions/opencode/` | OpenCode rule modules                                                                      |
-| `agent-instructions/oh-my-pi/` | Oh My Pi rule modules                                                                      |
-| `agent-instructions/antigravity/` | Antigravity CLI rule modules                                                               |
-| `config-files/`                | Baseline CLI config references (`settings.json`, `config.toml`, etc.)                      |
-| `system-prompts/`              | Upstream system prompt references                                                          |
-| `mcp/`                         | MCP server installation & usage guides                                                     |
-| `skills/`                      | Custom skill definitions                                                                   |
-| `output-styles/`               | Personality/style presets for AI output                                                    |
-| `slash-commands/`              | Slash command prompt templates                                                             |
-| `sub-agents/`                  | Sub-agent role layers and related examples                                                 |
-| `packs/`                       | Composite packages (commands + skills + hooks + subagents) and external toolkit references |
-| `preset-cards/`                | Reusable preset cards / personality presets                                                |
-| `themes/`                      | Warp / Claude Code theme references                                                        |
-| `tips/`                        | Practical knowledge fragments                                                              |
-| `assets/`                      | Local README image and badge assets                                                        |
-| `tools/`                       | Local maintenance tools, migration scripts, OMP patch runners                              |
-| `ai-services/`                 | External AI-adjacent API services (search, reader, embedding)                              |
 
 ## Rules for Editing This Repo
 
 1. **Not a business code repo.** No builds, deploys, or `src/` assumptions.
-2. **Do NOT rewrite rule fragments into tutorials or monolithic docs.**
-3. **Do NOT force optional modules into default configurations.**
-4. **Keep modules composable**: one file = one responsibility; edits must preserve copy-paste assembly.
-5. **Correctness first**: make all related index/structure updates needed for a coherent change; do not modify unrelated modules.
-6. **If file structure changes**, update the corresponding directory's `README.md` (every second-level directory carries its own index).
-7. **For `preset-cards/`**, keep preset files as directly reusable prompt text. Put source links, dates, and descriptions in `preset-cards/README.md`, not in the preset body.
-8. **For `mcp/`**, treat each file as an optional setup guide. If an MCP guide is removed, also remove related config samples, instruction dependencies, and README index rows.
-9. **For `tools/`**, keep published `README.md` files reader-facing only. Put maintenance conventions in this `AGENTS.md`, not in tool docs. Organize `tools/` as one tool per second-level directory with a colocated `README.md`, and keep `tools/README.md` as the index.
+2. **Correctness first**: make all related index/structure updates needed for a coherent change; do not modify unrelated modules.
+3. **If file structure changes**, update the corresponding directory's `README.md` (every second-level directory carries its own index).
 
 ## Validation
 

@@ -10,7 +10,7 @@
 优秀的 Vibe Coder 是 "偷啃" 喂出来的。
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![GitHub stars](https://img.shields.io/github/stars/zhu-jl18/fish-claude?style=social)
+![GitHub stars](https://img.shields.io/github/stars/makoMakoGo/fish-claude?style=social)
 
 <br>
 
@@ -53,7 +53,6 @@
 | Sub-agents | [`sub-agents/`](sub-agents/) | subagent && multi-agent 实践 |
 | 命令 | [`slash-commands/`](slash-commands/) | Slash command 模板 |
 | Tips | [`tips/`](tips/) | 你不知道的实用小技巧 |
-| Services | [`ai-services/`](ai-services/) | 外部 API 服务参考 |
 
 ## 食用指南
 
