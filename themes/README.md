@@ -2,31 +2,23 @@
 
 ## Warp
 
-### 主题目录
+| 主题源 | 说明 |
+| ------ | ---- |
+| [warpdotdev/themes](warp/warpdotdev-themes.md) | 官方社区主题（标准 + 特别版 + base16） |
+| [SilentGlasses/warp_themes](warp/silentglasses-themes.md) | 39 个第三方主题，部分带背景图 |
 
-| OS | 路径 |
-|----|------|
+| OS | 主题目录 |
+| -- | -------- |
 | macOS | `~/.warp/themes/` |
 | Linux | `${XDG_DATA_HOME:-$HOME/.local/share}/warp-terminal/themes/` |
 | Windows | `%APPDATA%\warp\Warp\data\themes\` |
 
-### 社区主题仓库
-
-- [warpdotdev/themes](https://github.com/warpdotdev/themes) — 官方社区主题。标准主题（Dracula、Nord、Solarized、Catppuccin 等）+ 特别版（Barbie、Lumon、Oppenheimer、Pride、Asteroid City、Winter、Thanksgiving、Grafbase）+ base16 系列
-- [SilentGlasses/warp_themes](https://github.com/SilentGlasses/warp_themes) — 39 个第三方主题，部分带背景图（Ame-Nami、Neural Nebula、Ukiyo、Kali Blue 等）
-
-克隆后放对应目录，重启 Warp 即可在 Settings → Appearance 中选择。
-
 ## Claude Code
 
-### 主题目录
-
-| Scope | 路径 |
-|-------|------|
+| Scope | 主题目录 |
+| ----- | -------- |
 | User | `~/.claude/themes/` |
 | Plugin | `<plugin>/themes/` |
-
-### 使用方式
 
 - `/theme` 命令创建/切换主题
 - 手动编辑 `~/.claude/themes/*.json`

@@ -2,11 +2,9 @@
 
 把大输出关在 sandbox，只让摘要进上下文，防止窗口被吃满。
 
-## 来源
-
 - GitHub：<https://github.com/mksglu/context-mode>
 
-## 为什么选它
+## 为什么用
 
 ~~我用国产模型跑 Claude Code，有效上下文比官方模型短。~~
 
@@ -17,11 +15,7 @@
 
 ## 怎么工作
 
-两套机制配合：PreToolUse hook 分档拦截/建议，MCP tool 做真正的 sandbox 隔离。
-
-### PreToolUse hook
-
-按工具名 + 命令特征分档：
+PreToolUse hook 分档拦截/建议 + MCP tool 做 sandbox 隔离。
 
 | 场景 | 处理 |
 |------|------|
@@ -30,12 +24,10 @@
 | `gradle` / `mvn` 等构建工具 | 硬拦（modify → echo） |
 | 一般 `Bash` / `Read` / `Grep` | 贴 tip（advisory），建议走 sandbox |
 
-每种 tip 一个 session 只发一次，不会重复刷屏。
+每种 tip 一个 session 只发一次。
 
-### MCP tool（sandbox）
-
-`ctx_execute` 在独立子进程跑代码，原始输出写 SQLite，仅摘要返回对话。`ctx_search` 事后按需检索。这才是真正的隔离——一般 Bash 靠模型收到 tip 后主动选 MCP tool 进 sandbox。
+`ctx_execute` 在独立子进程跑代码，原始输出写 SQLite，仅摘要返回对话。`ctx_search` 事后按需检索。
 
 ## 与 RTK 的关系
 
-不建议一起适用，目前我只在claude code里用 context mode; rtk 在 codex 和 omp 里适用。
+不建议一起用。目前 context-mode 只在 Claude Code 里用；rtk 在 Codex 和 OMP 里用。

@@ -1,6 +1,6 @@
 # preset-cards
 
-可复用的 preset card / 人格预设。
+一些 prompt 预设 或 role 设定。
 
 | 预设 | 来源 | 说明 |
 | --- | --- | --- |

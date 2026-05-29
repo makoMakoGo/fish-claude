@@ -1,6 +1,6 @@
 # Skills 指南
 
-## 各 CLI Skills 发现机制
+## 发现机制
 
 | CLI | User Scope | Project Scope | 兼容路径 |
 |-----|-----------|--------------|------------|

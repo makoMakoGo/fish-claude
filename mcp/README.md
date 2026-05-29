@@ -1,6 +1,6 @@
 # MCP 配置指南
 
-各 MCP Server 的安装配置与注意事项。
+目前还在用的 mcp，主要是 搜索类的：
 
 | MCP | 说明 |
 | --- | ---- |
@@ -12,3 +12,5 @@
 | [Playwright](playwright.md) | 浏览器自动化、页面交互验证与 UI 回归检查 |
 | [Sequential Thinking](sequential-thinking.md) | 分步、可回溯的结构化思考流程 |
 | [Serena](serena.md) | 语义检索、符号定位、项目记忆 |
+
+
