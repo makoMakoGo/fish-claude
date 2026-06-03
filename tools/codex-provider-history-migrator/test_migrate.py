@@ -140,23 +140,32 @@ class RolloutRewriteTests(unittest.TestCase):
             self.assertEqual(lines[1], non_session_meta)
             self.assertEqual(report.files_updated, 1)
 
-    def test_malformed_jsonl_fails_fast(self) -> None:
+    def test_malformed_jsonl_is_skipped_and_valid_lines_still_migrate(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             codex_home = Path(temp)
             path = codex_home / "sessions" / "rollout.jsonl"
             path.parent.mkdir(parents=True)
-            path.write_text('{"type":"session_meta"\n', encoding="utf-8")
+            malformed_line = '{"type":"response_item","payload":{"text":"unterminated'
+            path.write_text(f"{malformed_line}\n{rollout_line('custom')}\n", encoding="utf-8")
+            report = migrator.RolloutReport()
 
-            with self.assertRaisesRegex(ValueError, "无法解析 JSONL"):
-                migrator.rewrite_rollout_file(
-                    path=path,
-                    codex_home=codex_home,
-                    target_provider="openai",
-                    keep_providers=KEEP_OPENAI,
-                    apply=False,
-                    backup_root=None,
-                    report=migrator.RolloutReport(),
-                )
+            migrator.rewrite_rollout_file(
+                path=path,
+                codex_home=codex_home,
+                target_provider="openai",
+                keep_providers=KEEP_OPENAI,
+                apply=True,
+                backup_root=None,
+                report=report,
+            )
+
+            lines = path.read_text(encoding="utf-8").splitlines()
+            self.assertEqual(lines[0], malformed_line)
+            self.assertEqual(json.loads(lines[1])["payload"]["model_provider"], "openai")
+            self.assertEqual(report.parse_errors, 1)
+            self.assertEqual(len(report.parse_error_locations), 1)
+            self.assertIn("rollout.jsonl:1", report.parse_error_locations[0])
+            self.assertEqual(report.files_updated, 1)
 
     def test_session_meta_payload_must_be_object(self) -> None:
         with tempfile.TemporaryDirectory() as temp:

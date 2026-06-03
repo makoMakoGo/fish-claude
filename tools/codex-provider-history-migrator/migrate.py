@@ -32,6 +32,8 @@ class RolloutReport:
     files_needing_update: int = 0
     files_updated: int = 0
     session_meta_rewritten: int = 0
+    parse_errors: int = 0
+    parse_error_locations: list[str] = field(default_factory=list)
     provider_counts_before: Counter[str] = field(default_factory=Counter)
     provider_counts_after: Counter[str] = field(default_factory=Counter)
 
@@ -217,7 +219,10 @@ def rewrite_rollout_file(
         try:
             payload = json.loads(line)
         except json.JSONDecodeError as exc:
-            raise ValueError(f'无法解析 JSONL: {path}:{line_number}: {exc}') from exc
+            report.parse_errors += 1
+            report.parse_error_locations.append(f'{path}:{line_number}: {exc}')
+            rewritten_lines.append(line)
+            continue
 
         if isinstance(payload, dict) and payload.get('type') == 'session_meta':
             session_meta = payload.get('payload')
@@ -413,6 +418,11 @@ def print_summary(
     print(f'- 需要迁移文件数: {rollout_report.files_needing_update}')
     print(f'- 已改写文件数: {rollout_report.files_updated}')
     print(f'- 改写 session_meta 数: {rollout_report.session_meta_rewritten}')
+    print(f'- 跳过无法解析行数: {rollout_report.parse_errors}')
+    for location in rollout_report.parse_error_locations[:20]:
+        print(f'  - {location}')
+    if len(rollout_report.parse_error_locations) > 20:
+        print(f'  - ... 还有 {len(rollout_report.parse_error_locations) - 20} 行')
     print('- 迁移前 provider 分布:')
     for line in format_counts(rollout_report.provider_counts_before):
         print(f'  {line}')
