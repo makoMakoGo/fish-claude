@@ -53,6 +53,7 @@ cd "$repo_root" || exit 1
 
 run_required "Python syntax" \
   python3 -m py_compile \
+  tools/claude-json-history-cleaner/clear-cc-chat-history.py \
   tools/codex-provider-history-migrator/migrate.py \
   tools/codex-provider-history-migrator/test_migrate.py
 
@@ -61,6 +62,9 @@ run_optional "Bun TypeScript build check: omp-patch-custom-mcp" bun \
 
 run_optional "Bun TypeScript build check: omp-patch-codex-websearch-byok" bun \
   bun build tools/omp-patch-codex-websearch-byok/apply.ts --target=node --format=esm --outdir /tmp/fish-claude-validate-codex-websearch --external "*"
+
+run_optional "Node syntax: tokscale-readme-svg" node \
+  node --check tools/tokscale-readme-svg/generate.mjs
 
 run_required "Shell syntax" \
   bash -n tools/validate.sh config-files/droid/statusline.sh

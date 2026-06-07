@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="600" height="166" viewBox="0 0 600 166" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Local Tokscale stats for @makoMakoGo">
+  <defs><clipPath id="win"><rect width="600" height="166" rx="12"/></clipPath></defs>
+  <rect width="600" height="166" rx="12" fill="#FFFFFF"/>
+  <g clip-path="url(#win)"><rect width="600" height="38" fill="#EBEDF0"/></g>
+  <line x1="0" y1="38" x2="600" y2="38" stroke="#D0D7DE"/>
+  <rect x="0.5" y="0.5" width="599" height="165" rx="11.5" fill="none" stroke="#D0D7DE"/>
+  <circle cx="26" cy="19" r="5.5" fill="#FF5F56"/>
+  <circle cx="44" cy="19" r="5.5" fill="#FFBD2E"/>
+  <circle cx="62" cy="19" r="5.5" fill="#27C93F"/>
+  <text x="82" y="23" fill="#656D76" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace">tokscale - @makoMakoGo</text>
+  <text x="22" y="70" font-size="13" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace"><tspan fill="#0969DA" font-weight="700">$</tspan><tspan fill="#1F2328"> tokscale stats</tspan></text>
+  <text x="22" y="100" fill="#656D76" font-size="13" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace">tokens</text>
+  <text x="114" y="100" fill="#0969DA" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace">23,484,826,441</text>
+  <text x="22" y="124" fill="#656D76" font-size="13" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace">cost</text>
+  <text x="114" y="124" fill="#1A7F37" font-size="13" font-weight="700" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace">$10,981.82</text>
+  <text x="22" y="150" fill="#656D76" font-size="11" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace">Generated Jun 7, 2026 (UTC)</text>
+  <text x="578" y="150" fill="#656D76" font-size="10" text-anchor="end" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, Liberation Mono, monospace">history cleaned; actual usage higher</text>
+</svg>

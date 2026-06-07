@@ -12,6 +12,11 @@
       }
     }
   },
+  "permission": {
+    "skill": {
+      "grill-me": "deny"
+    }
+  },
   "provider": {
     "openai-pro": {
       "models": {

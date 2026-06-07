@@ -9,6 +9,10 @@
 
 优秀的 Vibe Coder 是 "偷啃" 喂出来的。
 
+<img src="assets/tokscale.svg" alt="Local Tokscale stats" />
+
+<br>
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![GitHub stars](https://img.shields.io/github/stars/makoMakoGo/fish-claude?style=social)
 
