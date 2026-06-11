@@ -2,15 +2,15 @@
 
 ## 发现机制
 
-| CLI | User Scope | Project Scope | 兼容路径 |
+| CLI | User Scope | Project Scope | 备注 |
 |-----|-----------|--------------|------------|
-| Claude Code | `~/.claude/skills/` | `.claude/skills/` | 无，最干净 |
-| Codex | `~/.codex/skills/` | `.codex/skills/` | `.agents/skills` |
-| Antigravity CLI | `~/.gemini/antigravity-cli/skills/` | `.agents/skills/` | 最混乱 |
-| Warp | `~/.agents/skills/` | `.agents/skills/` | 无法关闭 |
-| OMP | `~/.omp/agent/skills/` | `.omp/agent/skills/` | 可关闭 |
-| OpenCode | `~/.config/opencode/skills/` | `.opencode/skills/` | 可关闭 |
-| Droid | `~/.factory/skills/` | `.factory/skills/` | `.agent/skills/` |
+| Claude Code | `~/.claude/skills/` | `.claude/skills/` | 无兼容路径，最干净 |
+| Codex | `~/.codex/skills/` | `.codex/skills/` | 兼容 `.agents/skills` |
+| Antigravity CLI | `~/.gemini/antigravity-cli/skills/` | `.agents/skills/` | 发现路径最混乱 |
+| Warp | `~/.agents/skills/` | `.agents/skills/` | 发现无法关闭 |
+| OMP | `~/.omp/agent/skills/` | `.omp/agent/skills/` | 发现可关闭 |
+| OpenCode | `~/.config/opencode/skills/` | `.opencode/skills/` | 发现可关闭 |
+| Droid | `~/.factory/skills/` | `.factory/skills/` | 兼容 `.agent/skills/` |
 
 ## Skills 一览
 

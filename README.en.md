@@ -9,6 +9,10 @@ A personal config mirror repo — pick what you need, don't blindly copy.
 
 Great Vibe Coders are fed one stolen bite at a time.
 
+<img src="assets/tokscale.svg" alt="Local Tokscale stats" />
+
+<br>
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![GitHub stars](https://img.shields.io/github/stars/makoMakoGo/fish-claude?style=social)
 
@@ -19,10 +23,6 @@ Great Vibe Coders are fed one stolen bite at a time.
 <img src="assets/badges/oh-my-pi.svg" alt="Oh My Pi">
 <img src="assets/badges/warp.svg" alt="Warp">
 <img src="assets/badges/opencode.svg" alt="OpenCode">
-
-<br>
-
-<img src="assets/tokscale.svg" alt="Local Tokscale stats" />
 
 <br>
 
@@ -51,6 +51,7 @@ Not a tutorial collection, not a generic framework — just a backup repo of the
 | Tools | [`tools/`](tools/) | Maintenance scripts and custom patches |
 | Output styles | [`output-styles/`](output-styles/) | A few interesting style presets |
 | Preset Cards | [`preset-cards/`](preset-cards/) | Useful preset cards |
+| System Prompts | [`system-prompts/`](system-prompts/) | Third-party system prompt captures, research reference only |
 | Themes | [`themes/`](themes/) | Themes for Warp / Claude Code, etc. |
 | Sub-agents | [`sub-agents/`](sub-agents/) | subagent && multi-agent practice |
 | Commands | [`slash-commands/`](slash-commands/) | Slash command templates |
@@ -64,7 +65,7 @@ Pairs well with [Mako's Blog](https://makomakogo.github.io/).
 
 ## Contributing
 
-If you hit problems, feel free to open an Issue to discuss. Pure personal project — PRs are closed.
+If you hit problems, feel free to open an Issue to discuss. Pure personal project — PRs are not accepted and will be closed on sight.
 
 ## License
 

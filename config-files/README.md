@@ -17,6 +17,8 @@
 |------|---------|
 | `claude/example.settings.json` | `~/.claude/settings.json` |
 
+示例中的模型 ID 为 2026-05 快照，复制前自行替换为当前最新。
+
 ## Droid
 
 | 文件 | 目标路径 |
@@ -32,7 +34,7 @@
 |------|---------|
 | `codex/default.config.toml` | `~/.codex/config.toml` |
 | `../sub-agents/codex/*.toml` | `~/.codex/agents/` |
-| `../sub-agents/codex/role-layer.example.toml` | 写法示例 |
+| `../sub-agents/codex/role-layer.example.toml` | —（仅写法示例，不部署） |
 
 ## OpenCode
 

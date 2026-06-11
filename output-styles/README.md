@@ -4,4 +4,4 @@
 
 | 文件 | 来源 | 说明 |
 | --- | --- | --- |
-| [ojousama-engineer.md](ojousama-engineer.md) | 哈雷彗星 | 偏大小姐工程师风格的输出设定 |
+| [ojousama-engineer.md](ojousama-engineer.md) | [哈雷彗星](https://github.com/Haleclipse) | 偏大小姐工程师风格的输出设定 |

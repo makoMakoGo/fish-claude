@@ -28,10 +28,14 @@
 ## Gemini Deep Think
 
 - file: `gemini-deep-think.md`
+- source: 公开流传版本转载，原始出处不详
+- date: `2026-05-01`
 
 ## Gemini CLI
 
 - file: `gemini-cli.md`
+- source: `https://github.com/google-gemini/gemini-cli`
+- date: `2026-03-10`
 
 ## OpenCode
 

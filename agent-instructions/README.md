@@ -2,6 +2,9 @@
 
 不同的 CLI 内置的工具不同，适合的模型不同，适配的 MCP 也不同，因此需要差异化对待。因此本部分被拆分成 **独立、可自由组合**的模块——按需选取后拼接为全局的 `AGENTS.md` 等。
 
+> [!NOTE]
+> `droid/` 与 `warp/` 目前是占位目录，模块待补。
+
 ## 全局提示词存储位置
 
 | CLI         | 全局文件路径                   |
@@ -24,6 +27,7 @@
 | 03  | [git-commit-push](general/03-git-commit-push.md) | Git 提交 / push / commit message 通用规则 | — |
 | 04  | [completion-discipline](general/04-completion-discipline.md) | 防止局部验证、连续 patch、乐观完成 | — |
 | 05  | [serena](general/05-serena.md) | Serena 可用时的语义检索与 memory 使用约束 | Serena MCP 可选模块 |
+
 ## Claude Code
 
 | #   | 模块                                          | 职责                                   | 依赖                                                              |

@@ -20,7 +20,7 @@
         "CLAUDE_CODE_SIMPLE_SYSTEM_PROMPT": "1",
         "CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY": "1"
     },
-    "includeCoAuthoredBy": true,
+    "includeCoAuthoredBy": false,
     "statusLine": {
         "command": "npx ccsp@latest",
         "type": "command"

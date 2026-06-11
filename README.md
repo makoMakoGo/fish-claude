@@ -51,6 +51,7 @@
 | Tools | [`tools/`](tools/) | 维护脚本和自定义 patch |
 | 输出风格 | [`output-styles/`](output-styles/) | 一些有意思的风格预设 |
 | Preset Cards | [`preset-cards/`](preset-cards/) | 有用的 Preset Card |
+| System Prompts | [`system-prompts/`](system-prompts/) | 第三方系统提示词捕获，仅研究参考 |
 | 主题 | [`themes/`](themes/) | Warp / Claude Code 等的主题 |
 | Sub-agents | [`sub-agents/`](sub-agents/) | subagent && multi-agent 实践 |
 | 命令 | [`slash-commands/`](slash-commands/) | Slash command 模板 |
@@ -64,7 +65,7 @@
 
 ## 贡献
 
-如有问题，欢迎提交 Issue 讨论交流；纯个人项目，已关闭 PR入口。
+如有问题，欢迎提交 Issue 讨论交流。纯个人项目，不收 PR，提了会被直接关闭。
 
 ## 许可证
 
