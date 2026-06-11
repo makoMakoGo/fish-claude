@@ -1,6 +1,6 @@
 --- a/src/web/search/providers/codex.ts
 +++ b/src/web/search/providers/codex.ts
-@@ -2,15 +2,19 @@
+@@ -2,16 +2,20 @@
   * OpenAI Codex Web Search Provider
   *
   * Uses Codex's built-in web_search tool via the Responses API.
@@ -12,8 +12,9 @@
   */
  import * as os from "node:os";
 +import * as path from "node:path";
- import { type AuthStorage, getBundledModels } from "@oh-my-pi/pi-ai";
- import { decodeJwt } from "@oh-my-pi/pi-ai/utils/oauth/openai-codex";
+ import type { AuthStorage, FetchImpl } from "@oh-my-pi/pi-ai";
+ import { decodeJwt } from "@oh-my-pi/pi-ai/oauth/openai-codex";
+ import { getBundledModels } from "@oh-my-pi/pi-catalog/models";
 -import { $env, readSseJson } from "@oh-my-pi/pi-utils";
 +import { $env, getAgentDir, isEnoent, readSseJson } from "@oh-my-pi/pi-utils";
 +import { YAML } from "bun";
@@ -22,7 +23,7 @@
  import type { SearchResponse, SearchSource } from "../../../web/search/types";
  import { SearchProviderError } from "../../../web/search/types";
  import type { SearchParams } from "./base";
-@@ -33,8 +37,29 @@
+@@ -34,8 +38,29 @@
  const DEFAULT_INSTRUCTIONS =
  	"You are a helpful assistant with web search capabilities. Search the web to answer the user's question accurately and cite your sources.";
  
@@ -53,7 +54,7 @@
  	return configuredModel ? configuredModel : undefined;
  }
  
-@@ -54,6 +79,108 @@
+@@ -55,6 +80,108 @@
  
  	return bundledModels[0]?.id ? [bundledModels[0].id] : [FALLBACK_MODEL];
  }
@@ -162,7 +163,7 @@
  
  function shouldRetryWithNextDefaultModel(error: unknown): boolean {
  	if (!(error instanceof SearchProviderError)) return false;
-@@ -83,6 +210,7 @@
+@@ -85,6 +212,7 @@
  	arguments?: string;
  	content?: CodexContentPart[];
  	summary?: Array<{ type: string; text: string }>;
@@ -170,7 +171,7 @@
  }
  
  interface CodexContentPart {
-@@ -269,6 +397,20 @@
+@@ -297,6 +425,20 @@
  /**
   * Builds HTTP headers for Codex API requests.
   */
@@ -191,7 +192,7 @@
  function buildCodexHeaders(accessToken: string, accountId: string): Record<string, string> {
  	return {
  		Authorization: `Bearer ${accessToken}`,
-@@ -281,6 +423,22 @@
+@@ -309,6 +451,22 @@
  	};
  }
  
@@ -214,7 +215,7 @@
  /**
   * Calls the Codex Responses API with web search tool enabled.
   * The caller provides the exact model id to send; retry / fallback policy
-@@ -288,7 +446,7 @@
+@@ -316,7 +474,7 @@
   * overrides from the default ChatGPT-account model-selection path.
   */
  async function callCodexSearch(
@@ -223,7 +224,7 @@
  	query: string,
  	options: {
  		signal?: AbortSignal;
-@@ -303,10 +461,19 @@
+@@ -332,10 +490,19 @@
  	requestId: string;
  	usage?: { inputTokens: number; outputTokens: number; totalTokens: number };
  }> {
@@ -247,7 +248,7 @@
  
  	const body: Record<string, unknown> = {
  		model: requestedModel,
-@@ -351,6 +518,7 @@
+@@ -381,6 +548,7 @@
  	const answerParts: string[] = [];
  	const streamedAnswerParts: string[] = [];
  	const sources: SearchSource[] = [];
@@ -255,7 +256,7 @@
  	let model = requestedModel;
  	let requestId = "";
  	let usage: { inputTokens: number; outputTokens: number; totalTokens: number } | undefined;
-@@ -385,6 +553,11 @@
+@@ -415,6 +583,11 @@
  						}
  					}
  				}
@@ -267,7 +268,7 @@
  			}
  
  			// Handle reasoning summary as part of answer
-@@ -439,6 +612,11 @@
+@@ -472,6 +645,11 @@
  			addSource(sources, source);
  		}
  	}
@@ -279,7 +280,7 @@
  
  	return {
  		answer,
-@@ -453,7 +631,9 @@
+@@ -486,7 +664,9 @@
   * Executes a web search using OpenAI Codex's built-in web search tool.
   *
   * Default-model behavior:
@@ -290,7 +291,7 @@
   *   upstream error verbatim.
   * - Otherwise prefer ChatGPT-account-safe bundled defaults (GPT-5.4, GPT-5
   *   Codex, GPT-5, …) and retry the next candidate only when Codex returns the
-@@ -461,50 +641,67 @@
+@@ -494,51 +674,69 @@
   *   `gpt-5-codex-mini` first on ChatGPT accounts, which OpenAI rejects.
   */
  export async function searchCodex(params: SearchParams): Promise<SearchResponse> {
@@ -328,6 +329,7 @@
 -				systemPrompt: params.systemPrompt,
 -				searchContextSize: "high",
 -				modelId,
+-				fetch: params.fetch,
 -			});
 -			break;
 -		} catch (error) {
@@ -349,6 +351,7 @@
 +			systemPrompt: params.systemPrompt,
 +			searchContextSize: "high",
 +			modelId: backend.model,
++			fetch: params.fetch,
 +		});
 +	} else {
 +		const configuredModel = getConfiguredModel();
@@ -374,6 +377,7 @@
 +					systemPrompt: params.systemPrompt,
 +					searchContextSize: "high",
 +					modelId,
++					fetch: params.fetch,
 +				});
 +				break;
 +			} catch (error) {
@@ -396,17 +400,16 @@
  	}
  
  	let sources = result.sources;
-@@ -534,7 +731,9 @@
+@@ -568,6 +766,9 @@
   * Checks if Codex web search is available.
   */
  export async function hasCodexSearch(authStorage: AuthStorage): Promise<boolean> {
--	// `isAvailable` runs before every request — keep the probe cheap.
 +	const byok = await loadBYOKConfig();
 +	if (byok) return true;
 +
+ 	// `isAvailable` runs before every request — keep the probe cheap.
  	// `hasOAuth(...)` is a synchronous in-memory check that returns true as soon
  	// as a Codex OAuth credential is loaded, without driving the refresh
- 	// pipeline. The actual refresh happens lazily in `searchCodex`.
 --- a/src/cli/web-search-cli.ts
 +++ b/src/cli/web-search-cli.ts
 @@ -6,8 +6,14 @@

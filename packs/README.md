@@ -20,7 +20,6 @@
 | --- | --- |
 | [code-dispatcher-toolkit](code-dispatcher-toolkit.md) |claude codex gemini 编排 |
 | [rtk](rtk.md) | Rust Token Killer|
-| [myclaude-harness](myclaude-harness.md) | `stellarlinkco/myclaude` |
 | [context-mode](context-mode.md) | 在 sandbox 内处理大输出 |
 | [nmem](nmem.md) | 跨 AI 工具共享的本地记忆库和知识图谱 |
 | [mattpocock-skills](mattpocock-skills.md) | 需求澄清、文档协作、TDD、debugging  |

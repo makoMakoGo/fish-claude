@@ -16,8 +16,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ![GitHub stars](https://img.shields.io/github/stars/makoMakoGo/fish-claude?style=social)
 
-<br>
-
 <img src="assets/badges/claude-code.svg" alt="Claude Code">
 <img src="assets/badges/codex.svg" alt="Codex">
 <img src="assets/badges/antigravity.svg" alt="Antigravity">

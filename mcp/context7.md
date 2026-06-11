@@ -4,17 +4,13 @@
 
 ## 安装
 
-依赖：`npx`（通过 Node.js 提供）。
-
-建议先在 [context7.com/dashboard](https://context7.com/dashboard) 申请免费 API Key 以获得更高速率限制。
+先在 [context7.com/dashboard](https://context7.com/dashboard) 申请免费 API Key 以获得更高速率限制。
 
 ### Claude Code 本地连接
 
 ```bash
 claude mcp add --scope user context7 -- npx -y @upstash/context7-mcp --api-key YOUR_API_KEY
 ```
-
-去掉 `--scope user` 则仅对当前项目生效。
 
 ### Claude Code 远程连接
 

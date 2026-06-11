@@ -1,0 +1,124 @@
+{
+  "$schema": "https://raw.githubusercontent.com/code-yeongyu/oh-my-openagent/dev/assets/oh-my-opencode.schema.json",
+  "claude_code": {
+    "agents": false,
+    "commands": false,
+    "hooks": false,
+    "mcp": false,
+    "plugins": false,
+    "skills": false
+  },
+  "agents": {
+    "atlas": {
+      "model": "openai-pro/gpt-5.5",
+      "variant": "high"
+    },
+    "explore": {
+      "fallback_models": [
+        {
+          "model": "zai-coding-plan/glm-5.1"
+        }
+      ],
+      "model": "openai-pro/gpt-5.5",
+      "variant": "high"
+    },
+    "hephaestus": {
+      "fallback_models": [
+        {
+          "model": "openai-pro/gpt-5.4",
+          "variant": "xhigh"
+        }
+      ],
+      "model": "openai-pro/gpt-5.5",
+      "variant": "high"
+    },
+    "librarian": {
+      "model": "openai-pro/gpt-5.5",
+      "variant": "medium"
+    },
+    "metis": {
+      "model": "openai-pro/gpt-5.5"
+    },
+    "momus": {
+      "fallback_models": [
+        {
+          "model": "zai-coding-plan/glm-5.1"
+        }
+      ],
+      "model": "openai-pro/gpt-5.5",
+      "variant": "xhigh"
+    },
+    "multimodal-looker": {
+      "fallback_models": [
+        {
+          "model": "openai-pro/gpt-5.4",
+          "variant": "xhigh"
+        }
+      ],
+      "model": "openai-pro/gpt-5.5",
+      "variant": "medium"
+    },
+    "oracle": {
+      "model": "openai-pro/gpt-5.5",
+      "variant": "xhigh"
+    },
+    "prometheus": {
+      "model": "openai-pro/gpt-5.5",
+      "variant": "high"
+    },
+    "sisyphus": {
+      "model": "openai-pro/gpt-5.5",
+      "variant": "xhigh"
+    },
+    "sisyphus-junior": {
+      "model": "openai-pro/gpt-5.4",
+      "variant": "xhigh"
+    }
+  },
+  "categories": {
+    "artistry": {
+      "fallback_models": [
+        {
+          "model": "zai-coding-plan/glm-5.1"
+        }
+      ],
+      "model": "openai-pro/gpt-5.5",
+      "variant": "high"
+    },
+    "deep": {
+      "model": "openai-pro/gpt-5.5",
+      "variant": "xhigh"
+    },
+    "quick": {
+      "model": "zai-coding-plan/glm-5.1"
+    },
+    "ultrabrain": {
+      "fallback_models": [
+        {
+          "model": "zai-coding-plan/glm-5.1"
+        }
+      ],
+      "model": "openai-pro/gpt-5.5",
+      "variant": "xhigh"
+    },
+    "unspecified-high": {
+      "fallback_models": [
+        {
+          "model": "zai-coding-plan/glm-5.1"
+        }
+      ],
+      "model": "openai-pro/gpt-5.5",
+      "variant": "high"
+    },
+    "unspecified-low": {
+      "model": "zai-coding-plan/glm-5.1"
+    },
+    "visual-engineering": {
+      "model": "openai-pro/gpt-5.5",
+      "variant": "high"
+    },
+    "writing": {
+      "model": "zai-coding-plan/glm-5.1"
+    }
+  }
+}
