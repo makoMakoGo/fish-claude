@@ -1,0 +1,24 @@
+{
+  // 只拦真实坏过的结构问题：标题/表格缺空行、表格管道与列数不一致；其余规则关闭。
+  // 第三方逐字捕获不检（与 link-check 的排除口径一致），目录索引 README 照检。
+  // 注意：排除必须写在 globs 里（顺序重包含），不能用 ignores —— 含 "!" 的 ignores
+  // 会让 config 规则静默失效（markdownlint-cli2 v0.22.1 实测）。
+  "gitignore": true,
+  "globs": [
+    "**/*.md",
+    "!node_modules/**",
+    "!system-prompts/*.md",
+    "system-prompts/README.md",
+    "!preset-cards/*.md",
+    "preset-cards/README.md",
+    "!skills/gemini-deep-reasoning/**",
+    "!output-styles/ojousama-engineer.md"
+  ],
+  "config": {
+    "default": false,
+    "MD022": true,
+    "MD055": true,
+    "MD056": true,
+    "MD058": true
+  }
+}

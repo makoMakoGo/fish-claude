@@ -20,4 +20,13 @@ while IFS= read -r keep; do
   fi
 done < <(git ls-files | grep -E '(^|/)\.gitkeep$')
 
+# markdown 结构检查（标题/表格空行、表格管道与列数）；规则与忽略见 .markdownlint-cli2.jsonc
+if command -v npx >/dev/null 2>&1; then
+  if ! npx --yes markdownlint-cli2; then
+    failures=1
+  fi
+else
+  printf 'skip: markdownlint (npx not found)\n' >&2
+fi
+
 exit "$failures"

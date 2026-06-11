@@ -18,3 +18,13 @@ jobs:
 
       - name: Run repo hygiene checks
         run: bash tools/check-repo-hygiene.sh
+
+      - name: Check internal Markdown links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # 外链由每周的 link-check 负责；这里只在 push 时快查仓库内相对链接
+          args: >-
+            --offline
+            --no-progress
+            --exclude-path 'system-prompts/'
+            "**/*.md"
