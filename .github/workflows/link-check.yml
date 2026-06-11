@@ -1,6 +1,8 @@
 name: link-check
 
 on:
+  schedule:
+    - cron: '23 3 * * 1' # 每周一 03:23 UTC
   workflow_dispatch:
 
 permissions:
