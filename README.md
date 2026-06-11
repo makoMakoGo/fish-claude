@@ -11,18 +11,20 @@
 
 <img src="assets/tokscale.svg" alt="Local Tokscale stats" />
 
+<sub>本人真实用量，由 <a href="tools/tokscale-readme-svg/">tokscale-readme-svg</a> 生成</sub>
+
 <br>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 ![GitHub stars](https://img.shields.io/github/stars/makoMakoGo/fish-claude?style=social)
 
 <img src="assets/badges/claude-code.svg" alt="Claude Code">
 <img src="assets/badges/codex.svg" alt="Codex">
-<img src="assets/badges/antigravity.svg" alt="Antigravity">
 <img src="assets/badges/droid.svg" alt="Droid">
 <img src="assets/badges/oh-my-pi.svg" alt="Oh My Pi">
 <img src="assets/badges/warp.svg" alt="Warp">
 <img src="assets/badges/opencode.svg" alt="OpenCode">
+<img src="assets/badges/antigravity.svg" alt="Antigravity">
 
 <br>
 
@@ -38,6 +40,12 @@
 - Oh My Pi + Codex + Droid
 - Warp
 - OpenCode + Antigravity
+
+## 先看这几个
+
+- [codex-provider-history-migrator](tools/codex-provider-history-migrator/) —— 换 model provider 后找回 Codex 会话历史不再丢
+- [agent-instructions](agent-instructions/) —— 模块化拼装你自己的全局规则
+- [一份 AGENTS.md 喂所有 CLI](tips/shared-agents-md.md) —— 很少有人知道的小技巧
 
 ## 都有什么
 

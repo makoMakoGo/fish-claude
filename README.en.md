@@ -11,18 +11,20 @@ Great Vibe Coders are fed one stolen bite at a time.
 
 <img src="assets/tokscale.svg" alt="Local Tokscale stats" />
 
+<sub>My real usage, rendered by <a href="tools/tokscale-readme-svg/">tokscale-readme-svg</a></sub>
+
 <br>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 ![GitHub stars](https://img.shields.io/github/stars/makoMakoGo/fish-claude?style=social)
 
 <img src="assets/badges/claude-code.svg" alt="Claude Code">
 <img src="assets/badges/codex.svg" alt="Codex">
-<img src="assets/badges/antigravity.svg" alt="Antigravity">
 <img src="assets/badges/droid.svg" alt="Droid">
 <img src="assets/badges/oh-my-pi.svg" alt="Oh My Pi">
 <img src="assets/badges/warp.svg" alt="Warp">
 <img src="assets/badges/opencode.svg" alt="OpenCode">
+<img src="assets/badges/antigravity.svg" alt="Antigravity">
 
 <br>
 
@@ -38,6 +40,12 @@ Not a tutorial collection, not a generic framework — just a backup repo of the
 - Oh My Pi + Codex + Droid
 - Warp
 - OpenCode + Antigravity
+
+## Start Here
+
+- [codex-provider-history-migrator](tools/codex-provider-history-migrator/) — get your Codex chat history back after a model provider switch
+- [agent-instructions](agent-instructions/) — assemble your own global rules from pluggable modules
+- [One AGENTS.md to feed every CLI](tips/shared-agents-md.md) — a trick few people know
 
 ## What's Inside
 
