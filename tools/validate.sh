@@ -51,6 +51,9 @@ check_powershell() {
 
 cd "$repo_root" || exit 1
 
+run_required "Repo hygiene" \
+  bash tools/check-repo-hygiene.sh
+
 run_required "Python syntax" \
   python3 -m py_compile \
   tools/claude-json-history-cleaner/clear-cc-chat-history.py \
@@ -67,7 +70,7 @@ run_optional "Node syntax: tokscale-readme-svg" node \
   node --check tools/tokscale-readme-svg/generate.mjs
 
 run_required "Shell syntax" \
-  bash -n tools/validate.sh config-files/droid/statusline.sh
+  bash -n tools/validate.sh tools/check-repo-hygiene.sh config-files/droid/statusline.sh
 
 run_optional "PowerShell ScriptAnalyzer lint" pwsh check_powershell
 
