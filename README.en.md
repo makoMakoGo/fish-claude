@@ -68,4 +68,4 @@ If you hit problems, feel free to open an Issue to discuss. Pure personal projec
 
 ## License
 
-MIT
+Original content in this repo is released under MIT. Third-party material — system prompt captures under `system-prompts/` and sourced content under `preset-cards/` and elsewhere — remains the property of its original authors or companies, is included for research reference only, and is not covered by the MIT grant.

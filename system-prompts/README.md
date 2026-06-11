@@ -1,5 +1,7 @@
 # system-prompts
 
+以下均为第三方工具系统提示词的捕获或转载，版权归原方所有，仅供研究参考，不适用本仓库 MIT 许可。
+
 ## AtomCode
 
 - file: `atomcode.md`
