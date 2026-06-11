@@ -18,12 +18,15 @@ jobs:
       - name: Check Markdown links
         uses: lycheeverse/lychee-action@v2
         with:
+          # npmjs.com 对 CI 请求一律 403；system-prompts/ 是第三方提示词逐字捕获，原文示例路径不可检
           args: >-
             --verbose
             --no-progress
             --accept 200,204,206,300,301,302,303,307,308,429
             --exclude-loopback
             --exclude-private
+            --exclude '^https://www\.npmjs\.com/'
+            --exclude-path 'system-prompts/'
             "**/*.md"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
