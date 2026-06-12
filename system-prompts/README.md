@@ -5,8 +5,8 @@
 ## AtomCode
 
 - file: `atomcode.md`
-- source: AtomCode session capture
-- date: `2026-05-16`
+- source: `https://gitcode.com/atomgit_atomcode/atomcode.git`
+- date: `2026-06-12`
 
 ## Factory Droid
 
@@ -22,7 +22,7 @@
 
 - file: `codex-cli.md`
 - source: `https://github.com/openai/codex.git`
-- date: `2026-05-04`
+- date: `2026-06-12`
 
 
 ## Gemini Deep Think
@@ -37,14 +37,20 @@
 - source: `https://github.com/google-gemini/gemini-cli`
 - date: `2026-03-10`
 
+## Kimi Code
+
+- file: `kimi-code.md`
+- source: `https://github.com/MoonshotAI/kimi-code.git`
+- date: `2026-06-12`
+
 ## OpenCode
 
 - file: `opencode.md`
 - source: `https://github.com/anomalyco/opencode.git`
-- date: `2026-05-03`
+- date: `2026-06-12`
 
 ## Oh My Pi
 
 - file: `oh-my-pi.md`
-- source: `https://github.com/nicobailon/oh-my-pi.git`
-- date: `2026-04-13`
+- source: `https://github.com/can1357/oh-my-pi.git`
+- date: `2026-06-13`

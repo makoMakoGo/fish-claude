@@ -7,16 +7,16 @@
 
 ## 全局提示词存储位置
 
-| CLI         | 全局文件路径                   |
-| ----------- | ------------------------------ |
-| OMP         | `~/.omp/agent/AGENTS.md`       |
-| Claude Code | `~/.claude/CLAUDE.md`          |
-| Codex       | `~/.codex/AGENTS.md`           |
-| Droid       | `~/.factory/AGENTS.md`        |
-| Antigravity CLI | `~/.gemini/GEMINI.md`  |
-| Kimi Code   | `~/.kimi-code/AGENTS.md`|
-| Warp        |  Personal → Rules，或 `/add-rule` |
-| OpenCode    | `~/.config/opencode/AGENTS.md` |
+| CLI             | 全局文件路径                   |
+| --------------- | ------------------------------ |
+| OMP             | `~/.omp/agent/AGENTS.md`       |
+| Claude Code     | `~/.claude/CLAUDE.md`          |
+| Codex           | `~/.codex/AGENTS.md`           |
+| Droid           | `~/.factory/AGENTS.md`         |
+| Antigravity CLI | `~/.gemini/GEMINI.md`          |
+| Kimi Code       | `~/.kimi-code/AGENTS.md`       |
+| Warp            | Personal → Rules，或 `/add-rule` |
+| OpenCode        | `~/.config/opencode/AGENTS.md` |
 
 
 ## General
