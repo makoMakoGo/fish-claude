@@ -38,7 +38,7 @@ Use lightweight domain prefixes:
 
 Prefer direct repo domain prefixes over conventional-commit scoped forms. Do not write `chore(mcp): ...` when `mcp: ...` is clearer.
 
-Common prefixes:
+Common prefixes examples:
 
 - `mcp:` MCP guides and MCP config references
 - `agy:` Antigravity CLI instructions/config
@@ -48,11 +48,12 @@ Common prefixes:
 - `skills:` skill references and skill indexes
 - `tools:` maintenance tools and patch runners
 - `docs:` broad documentation-only updates
+- `word:` modify text expression style 
 - `chore:` broad repo maintenance that does not fit a tighter domain
 
 ## Local Repo Clones
 
 If you are on my WSL2 environment, you find these git repo cloned when you need:
-- `codex`, `oh-my-pi`, `rtk`, `context-mode`, `pi-mono`, `tokscale` → `~/01-workspace/`
-- `myclaude`, `beautiful-mermaid-cli`, `awesome-deepseek-agent` → `~/02-workspace/`
+- `codex`, `oh-my-pi`, `rtk`, `context-mode`, `pi-mono`, `tokscale`, `claude-code`, `kimi-code`, `opencode` → `~/01-workspace/`
+- `myclaude`, `oh-my-openagent`, `awesome-deepseek-agent` → `~/02-workspace/`
 - `code-dispatcher-toolkit` → `~/personal-workspace/`

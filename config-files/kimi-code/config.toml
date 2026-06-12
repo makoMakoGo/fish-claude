@@ -1,0 +1,47 @@
+default_thinking = true
+default_model = "kimi-k2.7-code"
+merge_all_available_skills = false
+telemetry = false
+
+[thinking]
+mode = "on"
+effort = "xhigh"
+
+[providers.kimi-for-coding]
+type = "kimi"
+base_url = "https://api.kimi.com/coding/v1"
+api_key = "sk-your-kimi-code-api-key-here"
+
+[providers.openai-pro]
+type = "openai_responses"
+api_key = "sk-your-openai-pro-api-key-here"
+base_url = "https://your-openai-responses-compatible-endpoint.example.com"
+
+[providers.openai-pro.custom_headers]
+User-Agent = "codex_vscode/0.128.0-alpha.1"
+
+[models."kimi-k2.7-code"]
+provider = "kimi-for-coding"
+model = "kimi-k2.7-code"
+max_context_size = 262144
+capabilities = [ "thinking", "tool_use", "image_in" ]
+display_name = "kimi-k2.7-code"
+
+[models."openai-pro/gpt-5.5"]
+provider = "openai-pro"
+model = "gpt-5.5"
+max_context_size = 272000
+max_output_size = 128000
+capabilities = [ "thinking", "image_in", "tool_use" ]
+display_name = "GPT-5.5"
+
+[models."openai-pro/gpt-5.4"]
+provider = "openai-pro"
+model = "gpt-5.4"
+max_context_size = 888000
+max_output_size = 128000
+capabilities = [ "thinking", "image_in", "tool_use" ]
+display_name = "GPT-5.4"
+
+[experimental]
+micro_compaction = true

@@ -22,6 +22,7 @@
 <img src="assets/badges/codex.svg" alt="Codex">
 <img src="assets/badges/droid.svg" alt="Droid">
 <img src="assets/badges/oh-my-pi.svg" alt="Oh My Pi">
+<img src="assets/badges/kimi-code.svg" alt="Kimi Code">
 <img src="assets/badges/warp.svg" alt="Warp">
 <img src="assets/badges/opencode.svg" alt="OpenCode">
 <img src="assets/badges/antigravity.svg" alt="Antigravity">
@@ -38,6 +39,7 @@
 
 - Pi + Claude Code
 - Oh My Pi + Codex + Droid
+- Kimi Code
 - Warp
 - OpenCode + Antigravity
 
@@ -73,7 +75,7 @@
 
 ## 贡献
 
-如有问题，欢迎提交 Issue 讨论交流。纯个人项目，不收 PR，提了会被直接关闭。
+如有问题，欢迎提交 Issue 讨论交流。纯个人项目，不收 PR。
 
 ## 许可证
 

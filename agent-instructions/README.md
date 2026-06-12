@@ -13,8 +13,9 @@
 | Claude Code | `~/.claude/CLAUDE.md`          |
 | Codex       | `~/.codex/AGENTS.md`           |
 | Droid       | `~/.factory/AGENTS.md`        |
-| Antigravity CLI | `~/.gemini/GEMINI.md` / workspace `AGENTS.md` |
-| Warp        | Warp Drive（云端，App 内 Personal → Rules，或 `/add-rule`） |
+| Antigravity CLI | `~/.gemini/GEMINI.md`  |
+| Kimi Code   | `~/.kimi-code/AGENTS.md`|
+| Warp        |  Personal → Rules，或 `/add-rule` |
 | OpenCode    | `~/.config/opencode/AGENTS.md` |
 
 
@@ -61,7 +62,7 @@
 
 | #   | 模块                                         | 职责                                      | 依赖 |
 | --- | -------------------------------------------- | ----------------------------------------- | ---- |
-| 01  | [reasoning-depth](antigravity/01-reasoning-depth.md) | Antigravity 深度推理 prompt hint（`EFFORT LEVEL`） | — |
+| 01  | [reasoning-depth](antigravity/01-reasoning-depth.md) | Antigravity 深度推理 prompt hint | — |
 
 ## OpenCode
 

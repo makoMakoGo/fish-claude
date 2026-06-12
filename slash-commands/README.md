@@ -17,5 +17,5 @@ slash 没有统一标准，且正被 skills 吸收。
 | OpenCode        | Markdown 或 JSON             | `~/.config/opencode/command/` | `.opencode/command/`  |
 | Droid           | Markdown                     | `~/.factory/commands/`        | `.factory/commands/`  |
 | Antigravity CLI | 无自定义入口                 | —                             | —                     |
-| Warp            | Warp Drive                   | Warp Drive（云端账号）        | —                     |
+| Warp            | Warp Drive                   | Warp Drive        | —                     |
 | OMP             | extension 注册               | extension 形式                | 同用户级（extension） |

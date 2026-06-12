@@ -1,0 +1,15 @@
+# ~/.kimi-code/tui.toml
+# Client preferences for kimi-code.
+# Agent/runtime settings stay in ~/.kimi-code/config.toml.
+
+theme = "auto" # "auto" | "dark" | "light"
+
+[editor]
+command = "" # Empty uses $VISUAL / $EDITOR
+
+[notifications]
+enabled = true # true | false
+notification_condition = "unfocused" # "unfocused" | "always"
+
+[upgrade]
+auto_install = true # true | false
