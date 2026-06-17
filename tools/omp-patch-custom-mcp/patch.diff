@@ -1,7 +1,7 @@
 --- a/src/config/settings-schema.ts
 +++ b/src/config/settings-schema.ts
-@@ -1913,6 +1913,18 @@
- 		ui: { tab: "tools", label: "MCP Project Config", description: "Load .mcp.json/mcp.json from project root" },
+@@ -3164,6 +3164,18 @@
+ 		},
  	},
  
 +	"mcp.enableClaudeUser": {
@@ -19,10 +19,12 @@
  	"mcp.discoveryMode": {
  		type: "boolean",
  		default: false,
-@@ -2534,6 +2546,16 @@
+@@ -4142,6 +4154,16 @@
+ 	ignoredSkills?: string[];
+ 	includeSkills?: string[];
  	disabledExtensions?: string[];
- }
- 
++}
++
 +export interface MCPSettings {
 +	enableProjectConfig?: boolean;
 +	enableClaudeUser?: boolean;
@@ -31,11 +33,9 @@
 +	discoveryDefaultServers?: string[];
 +	notifications?: boolean;
 +	notificationDebounceMs?: number;
-+}
-+
+ }
+ 
  export interface CommitSettings {
- 	mapReduceEnabled: boolean;
- 	mapReduceMinFiles: number;
 --- a/src/mcp/config.ts
 +++ b/src/mcp/config.ts
 @@ -16,6 +16,10 @@
@@ -104,7 +104,7 @@
  		});
 --- a/src/mcp/manager.ts
 +++ b/src/mcp/manager.ts
-@@ -118,6 +118,10 @@
+@@ -139,6 +139,10 @@
  export interface MCPDiscoverOptions {
  	/** Whether to load project-level config (default: true) */
  	enableProjectConfig?: boolean;
@@ -115,7 +115,7 @@
  	/** Whether to filter out Exa MCP servers (default: true) */
  	filterExa?: boolean;
  	/** Whether to filter out browser MCP servers when builtin browser tool is enabled (default: false) */
-@@ -263,6 +267,8 @@
+@@ -306,6 +310,8 @@
  	async discoverAndConnect(options?: MCPDiscoverOptions): Promise<MCPLoadResult> {
  		const { configs, exaApiKeys, sources } = await loadAllMCPConfigs(this.cwd, {
  			enableProjectConfig: options?.enableProjectConfig,
@@ -126,18 +126,18 @@
  		});
 --- a/src/sdk.ts
 +++ b/src/sdk.ts
-@@ -1071,6 +1071,8 @@
- 					}
- 				},
- 				enableProjectConfig: settings.get("mcp.enableProjectConfig") ?? true,
-+				enableClaudeUser: settings.get("mcp.enableClaudeUser") ?? true,
-+				enableCodexUser: settings.get("mcp.enableCodexUser") ?? true,
- 				// Always filter Exa - we have native integration
- 				filterExa: true,
- 				// Filter browser MCP servers when builtin browser tool is active
+@@ -1608,6 +1608,8 @@
+ 		const mcpDiscoverOptions = {
+ 			onConnecting: onMCPConnecting,
+ 			enableProjectConfig: settings.get("mcp.enableProjectConfig") ?? true,
++			enableClaudeUser: settings.get("mcp.enableClaudeUser") ?? true,
++			enableCodexUser: settings.get("mcp.enableCodexUser") ?? true,
+ 			// Always filter Exa - we have native integration
+ 			filterExa: true,
+ 			// Filter browser MCP servers when builtin browser tool is active
 --- a/src/modes/controllers/mcp-command-controller.ts
 +++ b/src/modes/controllers/mcp-command-controller.ts
-@@ -1466,7 +1466,13 @@
+@@ -1570,7 +1570,13 @@
  		await this.ctx.mcpManager.disconnectAll();
  
  		// Rediscover and connect

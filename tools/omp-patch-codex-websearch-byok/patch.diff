@@ -12,7 +12,7 @@
   */
  import * as os from "node:os";
 +import * as path from "node:path";
- import type { AuthStorage, FetchImpl } from "@oh-my-pi/pi-ai";
+ import { type AuthStorage, type FetchImpl, type OAuthAccess, withOAuthAccess } from "@oh-my-pi/pi-ai";
  import { decodeJwt } from "@oh-my-pi/pi-ai/oauth/openai-codex";
  import { getBundledModels } from "@oh-my-pi/pi-catalog/models";
 -import { $env, readSseJson } from "@oh-my-pi/pi-utils";
@@ -23,7 +23,7 @@
  import type { SearchResponse, SearchSource } from "../../../web/search/types";
  import { SearchProviderError } from "../../../web/search/types";
  import type { SearchParams } from "./base";
-@@ -34,8 +38,29 @@
+@@ -35,8 +39,29 @@
  const DEFAULT_INSTRUCTIONS =
  	"You are a helpful assistant with web search capabilities. Search the web to answer the user's question accurately and cite your sources.";
  
@@ -54,7 +54,7 @@
  	return configuredModel ? configuredModel : undefined;
  }
  
-@@ -55,6 +80,108 @@
+@@ -56,6 +81,108 @@
  
  	return bundledModels[0]?.id ? [bundledModels[0].id] : [FALLBACK_MODEL];
  }
@@ -163,7 +163,7 @@
  
  function shouldRetryWithNextDefaultModel(error: unknown): boolean {
  	if (!(error instanceof SearchProviderError)) return false;
-@@ -85,6 +212,7 @@
+@@ -86,6 +213,7 @@
  	arguments?: string;
  	content?: CodexContentPart[];
  	summary?: Array<{ type: string; text: string }>;
@@ -171,28 +171,7 @@
  }
  
  interface CodexContentPart {
-@@ -297,6 +425,20 @@
- /**
-  * Builds HTTP headers for Codex API requests.
-  */
-+async function resolveCodexBackend(
-+	authStorage: AuthStorage,
-+	sessionId: string | undefined,
-+	signal: AbortSignal | undefined,
-+): Promise<CodexBackend | null> {
-+	const byok = await loadBYOKConfig();
-+	if (byok) return { type: "byok", ...byok };
-+
-+	const oauth = await findCodexAuth(authStorage, sessionId, signal);
-+	if (oauth) return { type: "oauth", ...oauth };
-+
-+	return null;
-+}
-+
- function buildCodexHeaders(accessToken: string, accountId: string): Record<string, string> {
- 	return {
- 		Authorization: `Bearer ${accessToken}`,
-@@ -309,6 +451,22 @@
+@@ -310,6 +438,22 @@
  	};
  }
  
@@ -215,7 +194,7 @@
  /**
   * Calls the Codex Responses API with web search tool enabled.
   * The caller provides the exact model id to send; retry / fallback policy
-@@ -316,7 +474,7 @@
+@@ -317,7 +461,7 @@
   * overrides from the default ChatGPT-account model-selection path.
   */
  async function callCodexSearch(
@@ -224,7 +203,7 @@
  	query: string,
  	options: {
  		signal?: AbortSignal;
-@@ -332,10 +490,19 @@
+@@ -333,10 +477,19 @@
  	requestId: string;
  	usage?: { inputTokens: number; outputTokens: number; totalTokens: number };
  }> {
@@ -248,7 +227,7 @@
  
  	const body: Record<string, unknown> = {
  		model: requestedModel,
-@@ -381,6 +548,7 @@
+@@ -382,6 +535,7 @@
  	const answerParts: string[] = [];
  	const streamedAnswerParts: string[] = [];
  	const sources: SearchSource[] = [];
@@ -256,7 +235,7 @@
  	let model = requestedModel;
  	let requestId = "";
  	let usage: { inputTokens: number; outputTokens: number; totalTokens: number } | undefined;
-@@ -415,6 +583,11 @@
+@@ -416,6 +570,11 @@
  						}
  					}
  				}
@@ -268,19 +247,28 @@
  			}
  
  			// Handle reasoning summary as part of answer
-@@ -472,6 +645,11 @@
- 			addSource(sources, source);
- 		}
+@@ -461,7 +620,7 @@
+ 	const streamedIsPlaceholder = streamedAnswer.length > 0 && isImagePlaceholderAnswer(streamedAnswer);
+ 	const hasFinalText = finalAnswer.length > 0 && !finalIsPlaceholder;
+ 	const hasStreamedText = streamedAnswer.length > 0 && !streamedIsPlaceholder;
+-	if (!hasFinalText && !hasStreamedText && sources.length === 0) {
++	if (!hasFinalText && !hasStreamedText && sources.length === 0 && toolSources.length === 0) {
+ 		throw new SearchProviderError("codex", "Codex returned image-only response", 502);
  	}
-+	if (sources.length === 0) {
-+		for (const source of toolSources) {
+ 	const answer = hasFinalText ? finalAnswer : hasStreamedText ? streamedAnswer : "";
+@@ -470,6 +629,11 @@
+ 	// and bare URLs from the synthesized answer so callers still receive sources.
+ 	if (sources.length === 0 && answer.length > 0) {
+ 		for (const source of extractTextSources(answer)) {
 +			addSource(sources, source);
 +		}
 +	}
- 
- 	return {
- 		answer,
-@@ -486,7 +664,9 @@
++	if (sources.length === 0) {
++		for (const source of toolSources) {
+ 			addSource(sources, source);
+ 		}
+ 	}
+@@ -487,7 +651,9 @@
   * Executes a web search using OpenAI Codex's built-in web search tool.
   *
   * Default-model behavior:
@@ -291,52 +279,51 @@
   *   upstream error verbatim.
   * - Otherwise prefer ChatGPT-account-safe bundled defaults (GPT-5.4, GPT-5
   *   Codex, GPT-5, …) and retry the next candidate only when Codex returns the
-@@ -494,51 +674,69 @@
+@@ -495,54 +661,73 @@
   *   `gpt-5-codex-mini` first on ChatGPT accounts, which OpenAI rejects.
   */
  export async function searchCodex(params: SearchParams): Promise<SearchResponse> {
--	const auth = await findCodexAuth(params.authStorage, params.sessionId, params.signal);
--	if (!auth) {
-+	const backend = await resolveCodexBackend(params.authStorage, params.sessionId, params.signal);
-+	if (!backend) {
- 		throw new Error(
+-	const seed = await findCodexAuth(params.authStorage, params.sessionId, params.signal);
+-	if (!seed) {
+-		throw new Error(
 -			"No Codex OAuth credentials found. Login with 'omp /login openai-codex' to enable Codex web search.",
-+			"No Codex search backend available. Either configure a Responses-compatible provider (baseUrl+apiKey) in models.yml, or login with 'omp /login openai-codex'.",
- 		);
- 	}
- 
+-		);
+-	}
+-
 -	const configuredModel = getConfiguredModel();
 -	const modelCandidates = configuredModel ? [configuredModel] : getDefaultModelCandidates();
 -
--	let result:
--		| {
--				answer: string;
--				sources: SearchSource[];
--				model: string;
--				requestId: string;
--				usage?: { inputTokens: number; outputTokens: number; totalTokens: number };
--		  }
--		| undefined;
--	let lastError: unknown;
+-	const result = await withOAuthAccess(
+-		params.authStorage,
+-		"openai-codex",
+-		async access => {
+-			// Derive ALL auth material from the access this attempt received —
+-			// a refreshed/rotated credential carries a different bearer and
+-			// ChatGPT account id than the seed.
+-			const accountId = access.accountId ?? getAccountIdFromJwt(access.accessToken);
+-			if (!accountId) {
+-				throw new Error("Codex OAuth credential is missing a ChatGPT account id");
+-			}
+-			const auth = { accessToken: access.accessToken, accountId };
 -
--	for (let index = 0; index < modelCandidates.length; index += 1) {
--		const modelId = modelCandidates[index];
--		if (!modelId) continue;
+-			let lastError: unknown;
+-			for (let index = 0; index < modelCandidates.length; index += 1) {
+-				const modelId = modelCandidates[index];
+-				if (!modelId) continue;
 -
--		try {
--			result = await callCodexSearch(auth, params.query, {
--				signal: params.signal,
--				systemPrompt: params.systemPrompt,
--				searchContextSize: "high",
--				modelId,
--				fetch: params.fetch,
--			});
--			break;
--		} catch (error) {
--			lastError = error;
--			const isLastCandidate = index === modelCandidates.length - 1;
--			if (configuredModel || isLastCandidate || !shouldRetryWithNextDefaultModel(error)) {
--				throw error;
+-				try {
+-					return await callCodexSearch(auth, params.query, {
+-						signal: params.signal,
+-						systemPrompt: params.systemPrompt,
+-						searchContextSize: "high",
+-						modelId,
+-						fetch: params.fetch,
+-					});
+-				} catch (error) {
+-					lastError = error;
+-					const isLastCandidate = index === modelCandidates.length - 1;
+-					if (configuredModel || isLastCandidate || !shouldRetryWithNextDefaultModel(error)) {
+-						throw error;
 +	let result: {
 +		answer: string;
 +		sources: SearchSource[];
@@ -345,62 +332,74 @@
 +		usage?: { inputTokens: number; outputTokens: number; totalTokens: number };
 +	};
 +
-+	if (backend.type === "byok") {
-+		result = await callCodexSearch(backend, params.query, {
++	const byok = await loadBYOKConfig();
++	if (byok) {
++		result = await callCodexSearch({ type: "byok", ...byok }, params.query, {
 +			signal: params.signal,
 +			systemPrompt: params.systemPrompt,
 +			searchContextSize: "high",
-+			modelId: backend.model,
++			modelId: byok.model,
 +			fetch: params.fetch,
 +		});
 +	} else {
++		const seed = await findCodexAuth(params.authStorage, params.sessionId, params.signal);
++		if (!seed) {
++			throw new Error(
++				"No Codex search backend available. Either configure a Responses-compatible provider (baseUrl+apiKey) in models.yml, or login with 'omp /login openai-codex'.",
++			);
++		}
++
 +		const configuredModel = getConfiguredModel();
 +		const modelCandidates = configuredModel ? [configuredModel] : getDefaultModelCandidates();
-+		let oauthResult:
-+			| {
-+					answer: string;
-+					sources: SearchSource[];
-+					model: string;
-+					requestId: string;
-+					usage?: { inputTokens: number; outputTokens: number; totalTokens: number };
-+			  }
-+			| undefined;
-+		let lastError: unknown;
 +
-+		for (let index = 0; index < modelCandidates.length; index += 1) {
-+			const modelId = modelCandidates[index];
-+			if (!modelId) continue;
-+
-+			try {
-+				oauthResult = await callCodexSearch(backend, params.query, {
-+					signal: params.signal,
-+					systemPrompt: params.systemPrompt,
-+					searchContextSize: "high",
-+					modelId,
-+					fetch: params.fetch,
-+				});
-+				break;
-+			} catch (error) {
-+				lastError = error;
-+				const isLastCandidate = index === modelCandidates.length - 1;
-+				if (configuredModel || isLastCandidate || !shouldRetryWithNextDefaultModel(error)) {
-+					throw error;
++		result = await withOAuthAccess(
++			params.authStorage,
++			"openai-codex",
++			async access => {
++				// Derive ALL auth material from the access this attempt received —
++				// a refreshed/rotated credential carries a different bearer and
++				// ChatGPT account id than the seed.
++				const accountId = access.accountId ?? getAccountIdFromJwt(access.accessToken);
++				if (!accountId) {
++					throw new Error("Codex OAuth credential is missing a ChatGPT account id");
 +				}
- 			}
- 		}
--	}
--
--	if (!result) {
--		throw lastError ?? new Error("Codex search failed without returning a result");
++				const backend: CodexBackend = { type: "oauth", accessToken: access.accessToken, accountId };
 +
-+		if (!oauthResult) {
-+			throw lastError ?? new Error("Codex search failed without returning a result");
-+		}
-+		result = oauthResult;
- 	}
++				let lastError: unknown;
++				for (let index = 0; index < modelCandidates.length; index += 1) {
++					const modelId = modelCandidates[index];
++					if (!modelId) continue;
++
++					try {
++						return await callCodexSearch(backend, params.query, {
++							signal: params.signal,
++							systemPrompt: params.systemPrompt,
++							searchContextSize: "high",
++							modelId,
++							fetch: params.fetch,
++						});
++					} catch (error) {
++						lastError = error;
++						const isLastCandidate = index === modelCandidates.length - 1;
++						if (configuredModel || isLastCandidate || !shouldRetryWithNextDefaultModel(error)) {
++							throw error;
++						}
+ 					}
+ 				}
+-			}
+-			throw lastError ?? new Error("Codex search failed without returning a result");
+-		},
+-		{ sessionId: params.sessionId, signal: params.signal, seed: seed.access },
+-	);
++				throw lastError ?? new Error("Codex search failed without returning a result");
++			},
++			{ sessionId: params.sessionId, signal: params.signal, seed: seed.access },
++		);
++	}
  
  	let sources = result.sources;
-@@ -568,6 +766,9 @@
+ 
+@@ -571,6 +756,9 @@
   * Checks if Codex web search is available.
   */
  export async function hasCodexSearch(authStorage: AuthStorage): Promise<boolean> {

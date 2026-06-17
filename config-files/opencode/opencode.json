@@ -17,6 +17,9 @@
       "grill-me": "deny"
     }
   },
+  "plugin": [
+    "oh-my-openagent@latest"
+  ],
   "provider": {
     "openai-pro": {
       "models": {

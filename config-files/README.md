@@ -47,3 +47,4 @@
 |------|---------|
 | `opencode/opencode.json` | `~/.config/opencode/opencode.json` |
 | `opencode/oh-my-openagent.json` | `~/.config/opencode/oh-my-openagent.json` |
+| `opencode/tui.json` | `~/.config/opencode/tui.json` |

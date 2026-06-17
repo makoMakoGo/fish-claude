@@ -16,7 +16,8 @@
     "explore": {
       "fallback_models": [
         {
-          "model": "zai-coding-plan/glm-5.1"
+          "model": "zhipuai-coding-plan/glm-5.2",
+          "reasoningEffort": "max"
         }
       ],
       "model": "openai-pro/gpt-5.5",
@@ -37,12 +38,14 @@
       "variant": "medium"
     },
     "metis": {
-      "model": "openai-pro/gpt-5.5"
+      "model": "openai-pro/gpt-5.5",
+      "variant": "xhigh"
     },
     "momus": {
       "fallback_models": [
         {
-          "model": "zai-coding-plan/glm-5.1"
+          "model": "zhipuai-coding-plan/glm-5.2",
+          "reasoningEffort": "max"
         }
       ],
       "model": "openai-pro/gpt-5.5",
@@ -79,7 +82,8 @@
     "artistry": {
       "fallback_models": [
         {
-          "model": "zai-coding-plan/glm-5.1"
+          "model": "zhipuai-coding-plan/glm-5.2",
+          "reasoningEffort": "max"
         }
       ],
       "model": "openai-pro/gpt-5.5",
@@ -90,12 +94,14 @@
       "variant": "xhigh"
     },
     "quick": {
-      "model": "zai-coding-plan/glm-5.1"
+      "model": "zhipuai-coding-plan/glm-5.2",
+      "reasoningEffort": "max"
     },
     "ultrabrain": {
       "fallback_models": [
         {
-          "model": "zai-coding-plan/glm-5.1"
+          "model": "zhipuai-coding-plan/glm-5.2",
+          "reasoningEffort": "max"
         }
       ],
       "model": "openai-pro/gpt-5.5",
@@ -104,21 +110,24 @@
     "unspecified-high": {
       "fallback_models": [
         {
-          "model": "zai-coding-plan/glm-5.1"
+          "model": "zhipuai-coding-plan/glm-5.2",
+          "reasoningEffort": "max"
         }
       ],
       "model": "openai-pro/gpt-5.5",
       "variant": "high"
     },
     "unspecified-low": {
-      "model": "zai-coding-plan/glm-5.1"
+      "model": "zhipuai-coding-plan/glm-5.2",
+      "reasoningEffort": "max"
     },
     "visual-engineering": {
       "model": "openai-pro/gpt-5.5",
       "variant": "high"
     },
     "writing": {
-      "model": "zai-coding-plan/glm-5.1"
+      "model": "zhipuai-coding-plan/glm-5.2",
+      "reasoningEffort": "max"
     }
   }
 }
