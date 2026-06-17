@@ -1,4 +1,6 @@
-lastChangelogVersion: 15.2.3
+lastChangelogVersion: 15.10.8
+autolearn:
+  enabled: false
 skills:
   enabled: true
   enableCodexUser: false
@@ -18,14 +20,14 @@ mcp:
 defaultThinkingLevel: xhigh
 serviceTier: priority
 modelRoles:
-  default: openai-pro/gpt-5.5:xhigh
-  smol: xiaomi-token-plan/mimo-v2.5-pro:xhigh
+  default: openai-pro/gpt-5.5:high
+  smol: openai-pro/gpt-5.5
   slow: openai-pro/gpt-5.5:xhigh
-  designer: openai-owl/gpt-5.4:xhigh
-  commit: openai-owl/gpt-5.4:medium
-  vision: openai-owl/gpt-5.4(high)
-  task: openai-owl/gpt-5.4:high
-  plan: openai-owl/gpt-5.4(high)
+  designer: openai-pro/gpt-5.5:high
+  commit: openai-pro/gpt-5.5
+  vision: openai-pro/gpt-5.5:high
+  task: openai-pro/gpt-5.5:xhigh
+  plan: openai-pro/gpt-5.5:xhigh
 async:
   enabled: false
 memories:
@@ -51,6 +53,9 @@ disabledProviders:
   - windsurf
   - vscode
   - github
+  - agents-md
+  - mcp-json
+  - omp-managed
 display:
   showTokenUsage: true
 statusLine:
@@ -76,3 +81,11 @@ theme:
 symbolPreset: ascii
 github:
   enabled: true
+extensions:
+  - /home/travis/.omp/agent/extensions/swarm-extension-local
+dev:
+  autoqa:
+    consent: granted
+setupVersion: 1
+lsp:
+  enabled: false
