@@ -149,6 +149,50 @@ function detectPatchState(packageRoot: string): { state: PatchState; details?: s
 	};
 }
 
+const CLI_BUNDLE_EXTERNALS = [
+	"mupdf",
+	"@oh-my-pi/pi-natives",
+	"@huggingface/transformers",
+	"fastembed",
+	"onnxruntime-node",
+	"puppeteer-core",
+	"@puppeteer/browsers",
+	"@babel/parser",
+	"@xterm/headless",
+	"turndown",
+	"turndown-plugin-gfm",
+	"@mozilla/readability",
+	"linkedom",
+	"@agentclientprotocol/sdk",
+] as const;
+
+function rebuildCliBundle(packageRoot: string): void {
+	console.log("[omp-patch-codex-websearch-byok] Rebuilding dist/cli.js...");
+	const args = [
+		"build",
+		"--target=bun",
+		"--outdir",
+		"dist",
+		"--minify",
+		"--keep-names",
+		...CLI_BUNDLE_EXTERNALS.flatMap(dep => ["--external", dep]),
+		"--define",
+		'process.env.PI_BUNDLED="true"',
+		"./src/cli.ts",
+	];
+	const result = spawnSync("bun", args, {
+		cwd: packageRoot,
+		stdio: "inherit",
+		encoding: "utf8",
+	});
+	if (result.error) {
+		throw result.error;
+	}
+	if (result.status !== 0) {
+		throw new Error(`bun ${args.join(" ")} failed with exit code ${result.status ?? "unknown"}`);
+	}
+}
+
 function handleApplyMode(ompEntry: string, packageRoot: string): number {
 	console.log("[omp-patch-codex-websearch-byok] Applying patch...");
 	const patchState = detectPatchState(packageRoot);
@@ -156,6 +200,7 @@ function handleApplyMode(ompEntry: string, packageRoot: string): number {
 
 	if (patchState.state === "already-applied") {
 		console.log("[omp-patch-codex-websearch-byok] Patch is already applied.");
+		rebuildCliBundle(packageRoot);
 		return EXIT_OK;
 	}
 
@@ -174,6 +219,7 @@ function handleApplyMode(ompEntry: string, packageRoot: string): number {
 
 	console.log("");
 	console.log("[omp-patch-codex-websearch-byok] Patch applied.");
+	rebuildCliBundle(packageRoot);
 	return EXIT_OK;
 }
 
@@ -202,6 +248,7 @@ function handleReverseMode(ompEntry: string, packageRoot: string): number {
 
 	console.log("");
 	console.log("[omp-patch-codex-websearch-byok] Patch reversed.");
+	rebuildCliBundle(packageRoot);
 	return EXIT_OK;
 }
 

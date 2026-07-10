@@ -1,6 +1,6 @@
 --- a/src/web/search/providers/codex.ts
 +++ b/src/web/search/providers/codex.ts
-@@ -2,16 +2,20 @@
+@@ -2,16 +2,21 @@
   * OpenAI Codex Web Search Provider
   *
   * Uses Codex's built-in web_search tool via the Responses API.
@@ -20,10 +20,11 @@
 +import { YAML } from "bun";
  import packageJson from "../../../../package.json" with { type: "json" };
 +import { resolveConfigValue } from "../../../config/resolve-config-value";
++import { parseConfiguredThinkingLevel } from "../../../thinking";
  import type { SearchResponse, SearchSource } from "../../../web/search/types";
  import { SearchProviderError } from "../../../web/search/types";
  import type { SearchParams } from "./base";
-@@ -35,8 +39,29 @@
+@@ -35,9 +40,38 @@
  const DEFAULT_INSTRUCTIONS =
  	"You are a helpful assistant with web search capabilities. Search the web to answer the user's question accurately and cite your sources.";
  
@@ -48,13 +49,23 @@
 +	return { provider: provider || undefined, modelId };
 +}
 +
++function stripConfiguredThinkingSuffix(modelId: string): string {
++	const colonIndex = modelId.lastIndexOf(":");
++	if (colonIndex === -1) return modelId;
++
++	const suffix = modelId.slice(colonIndex + 1);
++	return parseConfiguredThinkingLevel(suffix) ? modelId.slice(0, colonIndex) : modelId;
++}
++
  function getConfiguredModel(): string | undefined {
 -	const configuredModel = $env.PI_CODEX_WEB_SEARCH_MODEL?.trim();
+-	return configuredModel ? configuredModel : undefined;
 +	const configuredModel = resolveRequestedModel($env.PI_CODEX_WEB_SEARCH_MODEL)?.modelId;
- 	return configuredModel ? configuredModel : undefined;
++	return configuredModel ? stripConfiguredThinkingSuffix(configuredModel) : undefined;
  }
  
-@@ -56,6 +81,108 @@
+ function getDefaultModelCandidates(): string[] {
+@@ -56,6 +90,114 @@
  
  	return bundledModels[0]?.id ? [bundledModels[0].id] : [FALLBACK_MODEL];
  }
@@ -125,7 +136,13 @@
 +	if (!requestedModel) return availableModels[0] ?? null;
 +	if (requestedModel.provider && requestedModel.provider !== providerName) return null;
 +
-+	return availableModels.find(modelId => modelId === requestedModel.modelId) ?? null;
++	const exactModel = availableModels.find(modelId => modelId === requestedModel.modelId);
++	if (exactModel) return exactModel;
++
++	const modelWithoutThinkingSuffix = stripConfiguredThinkingSuffix(requestedModel.modelId);
++	if (modelWithoutThinkingSuffix === requestedModel.modelId) return null;
++
++	return availableModels.find(modelId => modelId === modelWithoutThinkingSuffix) ?? null;
 +}
 +
 +async function loadBYOKConfig(): Promise<BYOKConfig | null> {
@@ -163,7 +180,7 @@
  
  function shouldRetryWithNextDefaultModel(error: unknown): boolean {
  	if (!(error instanceof SearchProviderError)) return false;
-@@ -86,6 +213,7 @@
+@@ -86,6 +228,7 @@
  	arguments?: string;
  	content?: CodexContentPart[];
  	summary?: Array<{ type: string; text: string }>;
@@ -171,7 +188,7 @@
  }
  
  interface CodexContentPart {
-@@ -310,6 +438,22 @@
+@@ -310,6 +453,22 @@
  	};
  }
  
@@ -194,7 +211,7 @@
  /**
   * Calls the Codex Responses API with web search tool enabled.
   * The caller provides the exact model id to send; retry / fallback policy
-@@ -317,7 +461,7 @@
+@@ -317,7 +476,7 @@
   * overrides from the default ChatGPT-account model-selection path.
   */
  async function callCodexSearch(
@@ -203,7 +220,7 @@
  	query: string,
  	options: {
  		signal?: AbortSignal;
-@@ -333,10 +477,19 @@
+@@ -333,10 +492,19 @@
  	requestId: string;
  	usage?: { inputTokens: number; outputTokens: number; totalTokens: number };
  }> {
@@ -227,7 +244,7 @@
  
  	const body: Record<string, unknown> = {
  		model: requestedModel,
-@@ -382,6 +535,7 @@
+@@ -382,6 +550,7 @@
  	const answerParts: string[] = [];
  	const streamedAnswerParts: string[] = [];
  	const sources: SearchSource[] = [];
@@ -235,7 +252,7 @@
  	let model = requestedModel;
  	let requestId = "";
  	let usage: { inputTokens: number; outputTokens: number; totalTokens: number } | undefined;
-@@ -416,6 +570,11 @@
+@@ -416,6 +585,11 @@
  						}
  					}
  				}
@@ -247,7 +264,7 @@
  			}
  
  			// Handle reasoning summary as part of answer
-@@ -461,7 +620,7 @@
+@@ -461,7 +635,7 @@
  	const streamedIsPlaceholder = streamedAnswer.length > 0 && isImagePlaceholderAnswer(streamedAnswer);
  	const hasFinalText = finalAnswer.length > 0 && !finalIsPlaceholder;
  	const hasStreamedText = streamedAnswer.length > 0 && !streamedIsPlaceholder;
@@ -256,7 +273,7 @@
  		throw new SearchProviderError("codex", "Codex returned image-only response", 502);
  	}
  	const answer = hasFinalText ? finalAnswer : hasStreamedText ? streamedAnswer : "";
-@@ -470,6 +629,11 @@
+@@ -470,6 +644,11 @@
  	// and bare URLs from the synthesized answer so callers still receive sources.
  	if (sources.length === 0 && answer.length > 0) {
  		for (const source of extractTextSources(answer)) {
@@ -268,7 +285,7 @@
  			addSource(sources, source);
  		}
  	}
-@@ -487,7 +651,9 @@
+@@ -487,7 +666,9 @@
   * Executes a web search using OpenAI Codex's built-in web search tool.
   *
   * Default-model behavior:
@@ -279,7 +296,7 @@
   *   upstream error verbatim.
   * - Otherwise prefer ChatGPT-account-safe bundled defaults (GPT-5.4, GPT-5
   *   Codex, GPT-5, …) and retry the next candidate only when Codex returns the
-@@ -495,54 +661,73 @@
+@@ -495,54 +676,73 @@
   *   `gpt-5-codex-mini` first on ChatGPT accounts, which OpenAI rejects.
   */
  export async function searchCodex(params: SearchParams): Promise<SearchResponse> {
@@ -399,7 +416,7 @@
  
  	let sources = result.sources;
  
-@@ -571,6 +756,9 @@
+@@ -571,6 +771,9 @@
   * Checks if Codex web search is available.
   */
  export async function hasCodexSearch(authStorage: AuthStorage): Promise<boolean> {
@@ -409,21 +426,3 @@
  	// `isAvailable` runs before every request — keep the probe cheap.
  	// `hasOAuth(...)` is a synchronous in-memory check that returns true as soon
  	// as a Codex OAuth credential is loaded, without driving the refresh
---- a/src/cli/web-search-cli.ts
-+++ b/src/cli/web-search-cli.ts
-@@ -6,8 +6,14 @@
- 
- import { APP_NAME } from "@oh-my-pi/pi-utils";
- import chalk from "chalk";
-+import { Settings } from "../config/settings";
- import { initTheme, theme } from "../modes/theme/theme";
--import { runSearchQuery, type SearchQueryParams } from "../web/search/index";
-+import {
-+	isSearchProviderPreference,
-+	runSearchQuery,
-+	setPreferredSearchProvider,
-+	type SearchQueryParams,
-+} from "../web/search/index";
- import { SEARCH_PROVIDER_ORDER } from "../web/search/provider";
- import { renderSearchResult } from "../web/search/render";
- import type { SearchProviderId } from "../web/search/types";
