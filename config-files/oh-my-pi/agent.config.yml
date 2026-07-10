@@ -28,6 +28,9 @@ modelRoles:
   vision: openai-pro/gpt-5.5:high
   task: openai-pro/gpt-5.5:xhigh
   plan: openai-pro/gpt-5.5:xhigh
+  advisor: xai-oauth/grok-composer-2.5-fast
+advisor:
+  enabled: true
 async:
   enabled: false
 memories:
@@ -41,7 +44,7 @@ task:
     merge: patch
     commits: generic
 providers:
-  webSearch: exa
+  webSearch: codex
 disabledProviders:
   - claude
   - claude-plugins

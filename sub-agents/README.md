@@ -28,6 +28,5 @@
 | [default](codex/default.toml) | 通用派发 sub-agent，回报要求结论 + 证据 + 下一步 |
 | [worker](codex/worker.toml) | 实现型 sub-agent，先验证改动再回报 |
 | [explorer](codex/explorer.toml) | 只读探索，收集证据不改文件 |
-| [awaiter](codex/awaiter.toml) | 盯长任务到终态再回报，禁止臆断完成 |
-| [spark](codex/spark.toml) | 基于 gpt-5.3-codex-spark 的快速小任务 lane，128k 纯文本上下文 |
+| [spark](codex/spark.toml) | 基于 gpt-5.6-terra 的快速小任务 lane，支持 372K 上下文与图像输入 |
 | [role-layer.example](codex/role-layer.example.toml) | role layer 写法示例（含 layering 规则注释），不直接部署 |

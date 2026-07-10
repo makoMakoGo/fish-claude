@@ -1,9 +1,9 @@
-model = "gpt-5.5"
+model = "gpt-5.6-sol"
 model_provider = "openai"
 cli_auth_credentials_store = "file"
-model_reasoning_effort = "xhigh"
+model_reasoning_effort = "ultra"
 model_reasoning_summary = "detailed"
-plan_mode_reasoning_effort = "high"
+plan_mode_reasoning_effort = "ultra"
 sandbox_mode = "workspace-write"
 suppress_unstable_features_warning = true
 developer_instructions = "Minimize fault tolerance and avoid fallback mechanisms. No over-designing."
@@ -24,7 +24,7 @@ browser_use_external = false
 computer_use = false
 in_app_browser = false
 image_generation = false
-multi_agent_v2 = false
+multi_agent_v2 = { enabled = true, hide_spawn_agent_metadata = false, tool_namespace = "agents" }
 prevent_idle_sleep = true
 goals = true
 apply_patch_streaming_events = true
@@ -47,12 +47,8 @@ description = "Use for specific codebase questions and read-only evidence gather
 config_file = "agents/explorer.toml"
 
 [agents.spark]
-description = "Use for low-context, speed-first, text-only repo reading, targeted evidence gathering, and simple bounded tasks within Spark's 128k context. Avoid broad multi-file exploration or multimodal work."
+description = "Use for speed-first repository reading, targeted evidence gathering, and simple bounded tasks. Keep the assignment narrow and avoid broad multi-file exploration unless explicitly requested."
 config_file = "agents/spark.toml"
-
-[agents.awaiter]
-description = "Use for long-running wait or poll workflows."
-config_file = "agents/awaiter.toml"
 
 [notice]
 fast_default_opt_out = true
