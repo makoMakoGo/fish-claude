@@ -66,6 +66,7 @@ Not a tutorial collection, not a generic framework — just a backup repo of the
 | Sub-agents | [`sub-agents/`](sub-agents/) | subagent && multi-agent practice |
 | Commands | [`slash-commands/`](slash-commands/) | Slash command templates |
 | Tips | [`tips/`](tips/) | Practical tricks you might not know |
+| GitHub Apps | [`github-apps/`](github-apps/) | GitHub Apps/Bots I use (review, deps, perf) |
 
 ## How to Use
 

@@ -66,6 +66,7 @@
 | Sub-agents | [`sub-agents/`](sub-agents/) | subagent && multi-agent 实践 |
 | 命令 | [`slash-commands/`](slash-commands/) | Slash command 模板 |
 | Tips | [`tips/`](tips/) | 你不知道的实用小技巧 |
+| GitHub Apps | [`github-apps/`](github-apps/) | 我挂的 GitHub App / Bot（review、依赖、性能） |
 
 ## 食用指南
 
