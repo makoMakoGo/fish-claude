@@ -22,9 +22,12 @@
 
 ## Codex CLI
 
-- file: `codex-cli.md`
+- file: `codex-cli-gpt-5.5.md`
+- model: `gpt-5.5` with friendly personality
+- file: `codex-cli-gpt-5.6.md`
+- model: `gpt-5.6-sol`
 - source: `https://github.com/openai/codex.git`
-- date: `2026-06-12`
+- date: `2026-07-17`
 
 
 ## Gemini Deep Think
@@ -43,7 +46,7 @@
 
 - file: `kimi-code.md`
 - source: `https://github.com/MoonshotAI/kimi-code.git`
-- date: `2026-06-12`
+- date: `2026-07-17`
 
 ## OpenCode
 
@@ -55,4 +58,4 @@
 
 - file: `oh-my-pi.md`
 - source: `https://github.com/can1357/oh-my-pi.git`
-- date: `2026-06-13`
+- date: `2026-07-17`
