@@ -1,0 +1,93 @@
+{
+  "providers": {
+    "openai-pro": {
+      "name": "OpenAI Pro",
+      "baseUrl": "https://your-openai-responses-compatible-endpoint.example.com",
+      "apiKey": "sk-your-openai-pro-api-key-here",
+      "api": "openai-responses",
+      "authHeader": true,
+      "headers": {
+        "User-Agent": "codex_vscode/0.128.0-alpha.1"
+      },
+      "models": [
+        {
+          "id": "gpt-5.6-sol",
+          "name": "GPT-5.6 Sol",
+          "reasoning": true,
+          "thinkingLevelMap": {
+            "off": "none",
+            "minimal": "minimal",
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": "xhigh",
+            "max": "max"
+          },
+          "contextWindow": 372000,
+          "maxTokens": 128000,
+          "input": [
+            "text",
+            "image"
+          ]
+        },
+        {
+          "id": "gpt-5.5",
+          "name": "GPT-5.5",
+          "reasoning": true,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": null,
+            "low": null,
+            "medium": "medium",
+            "high": "high",
+            "xhigh": "xhigh"
+          },
+          "contextWindow": 272000,
+          "maxTokens": 128000,
+          "input": [
+            "text",
+            "image"
+          ]
+        },
+        {
+          "id": "gpt-5.4",
+          "name": "GPT-5.4",
+          "reasoning": true,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": null,
+            "low": null,
+            "medium": "medium",
+            "high": "high",
+            "xhigh": "xhigh"
+          },
+          "contextWindow": 888000,
+          "maxTokens": 128000,
+          "input": [
+            "text",
+            "image"
+          ]
+        },
+        {
+          "id": "gpt-5.3-codex-spark",
+          "name": "GPT-5.3 Codex Spark",
+          "reasoning": true,
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": null,
+            "low": null,
+            "medium": "medium",
+            "high": "high",
+            "xhigh": "xhigh"
+          },
+          "contextWindow": 128000,
+          "maxTokens": 128000,
+          "input": [
+            "text",
+            "image"
+          ]
+        }
+      ]
+    }
+  }
+}

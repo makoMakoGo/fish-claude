@@ -2,6 +2,13 @@
 
 各 CLI 的基础配置参考。
 
+## Pi
+
+| 文件 | 目标路径 |
+|------|---------|
+| `pi/settings.json` | `~/.pi/agent/settings.json` |
+| `pi/models.json` | `~/.pi/agent/models.json` |
+
 ## Oh My Pi
 
 | 文件 | 目标路径 |
