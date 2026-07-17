@@ -155,6 +155,7 @@ const CLI_BUNDLE_EXTERNALS = [
 	"@huggingface/transformers",
 	"fastembed",
 	"onnxruntime-node",
+	"omp-legacy-pi-modules",
 	"puppeteer-core",
 	"@puppeteer/browsers",
 	"@babel/parser",

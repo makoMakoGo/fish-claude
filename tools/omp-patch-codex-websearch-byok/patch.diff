@@ -1,36 +1,31 @@
 --- a/src/web/search/providers/codex.ts
 +++ b/src/web/search/providers/codex.ts
-@@ -2,16 +2,21 @@
-  * OpenAI Codex Web Search Provider
-  *
-  * Uses Codex's built-in web_search tool via the Responses API.
-- * Auth is resolved through `AuthStorage.getOAuthAccess("openai-codex")` so the
-+ * Supports either ChatGPT OAuth credentials or a configured Responses-compatible backend.
-+ * OAuth auth is resolved through `AuthStorage.getOAuthAccess("openai-codex")` so the
-  * broker is the sole refresh authority — this module never opens a sibling
-  * SQLite store, never POSTs the broker sentinel to an OpenAI token endpoint.
-  */
- import * as os from "node:os";
-+import * as path from "node:path";
- import { type AuthStorage, type FetchImpl, type OAuthAccess, withOAuthAccess } from "@oh-my-pi/pi-ai";
- import { decodeJwt } from "@oh-my-pi/pi-ai/oauth/openai-codex";
- import { getBundledModels } from "@oh-my-pi/pi-catalog/models";
--import { $env, readSseJson } from "@oh-my-pi/pi-utils";
-+import { $env, getAgentDir, isEnoent, readSseJson } from "@oh-my-pi/pi-utils";
-+import { YAML } from "bun";
+@@ -15,6 +15,11 @@
+ import { CODEX_CLIENT_VERSION, OPENAI_HEADER_VALUES, OPENAI_HEADERS } from "@oh-my-pi/pi-catalog/wire/codex";
+ import { $env, readSseJson } from "@oh-my-pi/pi-utils";
  import packageJson from "../../../../package.json" with { type: "json" };
++import { ModelsConfigFile } from "../../../config/models-config";
++import type { ModelsConfig } from "../../../config/models-config-schema";
++import { isSettingsInitialized, settings } from "../../../config/settings";
 +import { resolveConfigValue } from "../../../config/resolve-config-value";
 +import { parseConfiguredThinkingLevel } from "../../../thinking";
  import type { SearchResponse, SearchSource } from "../../../web/search/types";
  import { SearchProviderError } from "../../../web/search/types";
  import type { SearchParams } from "./base";
-@@ -35,9 +40,38 @@
+@@ -41,11 +46,40 @@
  const DEFAULT_INSTRUCTIONS =
  	"You are a helpful assistant with web search capabilities. Search the web to answer the user's question accurately and cite your sources.";
  
 +interface RequestedModel {
 +	provider?: string;
 +	modelId: string;
++}
++
+ type CodexSearchModel = Model<"openai-codex-responses">;
+ 
+ interface CodexModelCandidate {
+ 	modelId: string;
+ 	catalogModel?: CodexSearchModel;
 +}
 +
 +function resolveRequestedModel(rawValue: string | undefined): RequestedModel | null {
@@ -55,39 +50,32 @@
 +
 +	const suffix = modelId.slice(colonIndex + 1);
 +	return parseConfiguredThinkingLevel(suffix) ? modelId.slice(0, colonIndex) : modelId;
-+}
-+
- function getConfiguredModel(): string | undefined {
+ }
+ 
+ function getBundledCodexModels(): CodexSearchModel[] {
+@@ -59,11 +93,12 @@
+ }
+ 
+ function getConfiguredModel(): CodexModelCandidate | undefined {
 -	const configuredModel = $env.PI_CODEX_WEB_SEARCH_MODEL?.trim();
--	return configuredModel ? configuredModel : undefined;
-+	const configuredModel = resolveRequestedModel($env.PI_CODEX_WEB_SEARCH_MODEL)?.modelId;
-+	return configuredModel ? stripConfiguredThinkingSuffix(configuredModel) : undefined;
+-	if (!configuredModel) return undefined;
+-
+-	const catalogModel = getBundledCodexModels().find(model => model.id === configuredModel);
+-	return { modelId: configuredModel, ...(catalogModel ? { catalogModel } : {}) };
++	const requestedModel = resolveRequestedModel($env.PI_CODEX_WEB_SEARCH_MODEL);
++	if (!requestedModel) return undefined;
++
++	const modelId = stripConfiguredThinkingSuffix(requestedModel.modelId);
++	const catalogModel = getBundledCodexModels().find(model => model.id === modelId);
++	return { modelId, ...(catalogModel ? { catalogModel } : {}) };
  }
  
- function getDefaultModelCandidates(): string[] {
-@@ -56,6 +90,114 @@
- 
- 	return bundledModels[0]?.id ? [bundledModels[0].id] : [FALLBACK_MODEL];
+ function getDefaultModelCandidates(): CodexModelCandidate[] {
+@@ -86,6 +121,85 @@
+ 	const fallbackModel = bundledModels[0];
+ 	return fallbackModel ? [{ modelId: fallbackModel.id, catalogModel: fallbackModel }] : [{ modelId: FALLBACK_MODEL }];
  }
-+
-+interface ModelsConfigProvider {
-+	api?: string;
-+	baseUrl?: string;
-+	apiKey?: string;
-+	models?: Array<{
-+		id?: string;
-+	}>;
-+}
-+
-+interface ModelsConfig {
-+	providers?: Record<string, ModelsConfigProvider>;
-+}
-+
-+interface AgentConfig {
-+	modelRoles?: {
-+		default?: string;
-+	};
-+}
++type ModelsConfigProvider = NonNullable<ModelsConfig["providers"]>[string];
 +
 +interface BYOKConfig {
 +	baseUrl: string;
@@ -95,30 +83,17 @@
 +	model: string;
 +}
 +
-+const RESPONSES_APIS = new Set(["openai-responses", "openai-codex-responses"]);
++const RESPONSES_APIS: Record<string, true> = {
++	"openai-responses": true,
++	"openai-codex-responses": true,
++};
 +
-+async function readYamlConfig<T>(filePath: string): Promise<T | null> {
-+	try {
-+		const raw = await Bun.file(filePath).text();
-+		const parsed = YAML.parse(raw);
-+		if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
-+			return null;
-+		}
-+
-+		return parsed as T;
-+	} catch (error) {
-+		if (isEnoent(error)) return null;
-+		throw error;
-+	}
-+}
-+
-+async function getRequestedByokModel(): Promise<RequestedModel | null> {
++function getRequestedByokModel(): RequestedModel | null {
 +	const requestedByEnv = resolveRequestedModel($env.PI_CODEX_WEB_SEARCH_MODEL);
 +	if (requestedByEnv) return requestedByEnv;
 +
-+	const configPath = path.join(getAgentDir(), "config.yml");
-+	const config = await readYamlConfig<AgentConfig>(configPath);
-+	return resolveRequestedModel(config?.modelRoles?.default);
++	const configuredDefault = isSettingsInitialized() ? settings.getModelRole("default") : undefined;
++	return resolveRequestedModel(configuredDefault);
 +}
 +
 +function selectConfiguredModel(
@@ -146,15 +121,17 @@
 +}
 +
 +async function loadBYOKConfig(): Promise<BYOKConfig | null> {
-+	const requestedModel = await getRequestedByokModel();
-+	const modelsPath = path.join(getAgentDir(), "models.yml");
-+	const config = await readYamlConfig<ModelsConfig>(modelsPath);
-+	const providers = config?.providers;
++	const requestedModel = getRequestedByokModel();
++	const loaded = await ModelsConfigFile.tryLoadAsync();
++	if (loaded.status === "error") throw loaded.error;
++	if (loaded.status !== "ok") return null;
++
++	const providers = loaded.value.providers;
 +	if (!providers) return null;
 +
 +	for (const [providerName, providerConfig] of Object.entries(providers)) {
 +		const api = providerConfig.api?.trim();
-+		if (!api || !RESPONSES_APIS.has(api)) continue;
++		if (!api || RESPONSES_APIS[api] !== true) continue;
 +
 +		const model = selectConfiguredModel(providerName, providerConfig, requestedModel);
 +		if (!model) continue;
@@ -180,15 +157,17 @@
  
  function shouldRetryWithNextDefaultModel(error: unknown): boolean {
  	if (!(error instanceof SearchProviderError)) return false;
-@@ -86,6 +228,7 @@
+@@ -116,6 +230,9 @@
  	arguments?: string;
  	content?: CodexContentPart[];
  	summary?: Array<{ type: string; text: string }>;
-+	action?: { type?: string; url?: string };
++	action?: {
++		url?: string;
++	};
  }
  
  interface CodexContentPart {
-@@ -310,6 +453,22 @@
+@@ -341,6 +458,22 @@
  	};
  }
  
@@ -211,7 +190,7 @@
  /**
   * Calls the Codex Responses API with web search tool enabled.
   * The caller provides the exact model id to send; retry / fallback policy
-@@ -317,7 +476,7 @@
+@@ -348,7 +481,7 @@
   * overrides from the default ChatGPT-account model-selection path.
   */
  async function callCodexSearch(
@@ -220,17 +199,19 @@
  	query: string,
  	options: {
  		signal?: AbortSignal;
-@@ -333,10 +492,19 @@
+@@ -365,11 +498,21 @@
  	requestId: string;
  	usage?: { inputTokens: number; outputTokens: number; totalTokens: number };
  }> {
 -	const url = `${CODEX_BASE_URL}${CODEX_RESPONSES_PATH}`;
 -	const headers = buildCodexHeaders(auth.accessToken, auth.accountId);
 -
--	const requestedModel = options.modelId;
+-	const requestedModel = options.model.modelId;
+-	const usesResponsesLite = options.model.catalogModel?.useResponsesLite === true;
 +	let url: string;
 +	let headers: Record<string, string>;
 +	let requestedModel: string;
++	let usesResponsesLite = false;
 +
 +	if (backend.type === "byok") {
 +		url = resolveResponsesUrl(backend.baseUrl);
@@ -239,12 +220,13 @@
 +	} else {
 +		url = `${CODEX_BASE_URL}${CODEX_RESPONSES_PATH}`;
 +		headers = buildCodexHeaders(backend.accessToken, backend.accountId);
-+		requestedModel = options.modelId;
++		requestedModel = options.model.modelId;
++		usesResponsesLite = options.model.catalogModel?.useResponsesLite === true;
 +	}
  
  	const body: Record<string, unknown> = {
  		model: requestedModel,
-@@ -382,6 +550,7 @@
+@@ -427,6 +570,7 @@
  	const answerParts: string[] = [];
  	const streamedAnswerParts: string[] = [];
  	const sources: SearchSource[] = [];
@@ -252,7 +234,7 @@
  	let model = requestedModel;
  	let requestId = "";
  	let usage: { inputTokens: number; outputTokens: number; totalTokens: number } | undefined;
-@@ -416,6 +585,11 @@
+@@ -461,6 +605,11 @@
  						}
  					}
  				}
@@ -264,7 +246,7 @@
  			}
  
  			// Handle reasoning summary as part of answer
-@@ -461,7 +635,7 @@
+@@ -506,7 +655,7 @@
  	const streamedIsPlaceholder = streamedAnswer.length > 0 && isImagePlaceholderAnswer(streamedAnswer);
  	const hasFinalText = finalAnswer.length > 0 && !finalIsPlaceholder;
  	const hasStreamedText = streamedAnswer.length > 0 && !streamedIsPlaceholder;
@@ -273,7 +255,7 @@
  		throw new SearchProviderError("codex", "Codex returned image-only response", 502);
  	}
  	const answer = hasFinalText ? finalAnswer : hasStreamedText ? streamedAnswer : "";
-@@ -470,6 +644,11 @@
+@@ -515,6 +664,11 @@
  	// and bare URLs from the synthesized answer so callers still receive sources.
  	if (sources.length === 0 && answer.length > 0) {
  		for (const source of extractTextSources(answer)) {
@@ -285,19 +267,19 @@
  			addSource(sources, source);
  		}
  	}
-@@ -487,7 +666,9 @@
+@@ -532,7 +686,9 @@
   * Executes a web search using OpenAI Codex's built-in web search tool.
   *
   * Default-model behavior:
 - * - If `PI_CODEX_WEB_SEARCH_MODEL` is set, use it exactly once and surface any
-+ * - If a Responses-compatible backend is configured in models.yml, use its
++ * - If a Responses-compatible backend is configured in models.yml/models.yaml, use its
 + *   selected model exactly once and surface any upstream error verbatim.
 + * - If `PI_CODEX_WEB_SEARCH_MODEL` is set for OAuth, use it exactly once and surface any
   *   upstream error verbatim.
-  * - Otherwise prefer ChatGPT-account-safe bundled defaults (GPT-5.4, GPT-5
-  *   Codex, GPT-5, …) and retry the next candidate only when Codex returns the
-@@ -495,54 +676,73 @@
-  *   `gpt-5-codex-mini` first on ChatGPT accounts, which OpenAI rejects.
+  * - Otherwise prefer ChatGPT-account-safe bundled defaults (GPT-5.6 Luna,
+  *   Terra, Sol, GPT-5.5, …) and retry the next candidate only when Codex
+@@ -541,55 +697,78 @@
+  *   rejects.
   */
  export async function searchCodex(params: SearchParams): Promise<SearchResponse> {
 -	const seed = await findCodexAuth(params.authStorage, params.sessionId, params.signal);
@@ -325,15 +307,16 @@
 -
 -			let lastError: unknown;
 -			for (let index = 0; index < modelCandidates.length; index += 1) {
--				const modelId = modelCandidates[index];
--				if (!modelId) continue;
+-				const candidate = modelCandidates[index];
+-				if (!candidate) continue;
 -
 -				try {
 -					return await callCodexSearch(auth, params.query, {
 -						signal: params.signal,
 -						systemPrompt: params.systemPrompt,
 -						searchContextSize: "high",
--						modelId,
+-						model: candidate,
+-						sessionId: params.sessionId,
 -						fetch: params.fetch,
 -					});
 -				} catch (error) {
@@ -355,14 +338,14 @@
 +			signal: params.signal,
 +			systemPrompt: params.systemPrompt,
 +			searchContextSize: "high",
-+			modelId: byok.model,
++			model: { modelId: byok.model },
 +			fetch: params.fetch,
 +		});
 +	} else {
 +		const seed = await findCodexAuth(params.authStorage, params.sessionId, params.signal);
 +		if (!seed) {
 +			throw new Error(
-+				"No Codex search backend available. Either configure a Responses-compatible provider (baseUrl+apiKey) in models.yml, or login with 'omp /login openai-codex'.",
++				"No Codex search backend available. Either configure a Responses-compatible provider (baseUrl+apiKey) in models.yml/models.yaml, or login with 'omp /login openai-codex'.",
 +			);
 +		}
 +
@@ -380,19 +363,24 @@
 +				if (!accountId) {
 +					throw new Error("Codex OAuth credential is missing a ChatGPT account id");
 +				}
-+				const backend: CodexBackend = { type: "oauth", accessToken: access.accessToken, accountId };
++				const backend: CodexBackend = {
++					type: "oauth",
++					accessToken: access.accessToken,
++					accountId,
++				};
 +
 +				let lastError: unknown;
 +				for (let index = 0; index < modelCandidates.length; index += 1) {
-+					const modelId = modelCandidates[index];
-+					if (!modelId) continue;
++					const candidate = modelCandidates[index];
++					if (!candidate) continue;
 +
 +					try {
 +						return await callCodexSearch(backend, params.query, {
 +							signal: params.signal,
 +							systemPrompt: params.systemPrompt,
 +							searchContextSize: "high",
-+							modelId,
++							model: candidate,
++							sessionId: params.sessionId,
 +							fetch: params.fetch,
 +						});
 +					} catch (error) {
@@ -416,7 +404,7 @@
  
  	let sources = result.sources;
  
-@@ -571,6 +771,9 @@
+@@ -618,6 +797,9 @@
   * Checks if Codex web search is available.
   */
  export async function hasCodexSearch(authStorage: AuthStorage): Promise<boolean> {
