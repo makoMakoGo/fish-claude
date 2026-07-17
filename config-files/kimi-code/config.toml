@@ -1,16 +1,9 @@
-default_thinking = true
-default_model = "kimi-k2.7-code"
+default_model = "zai-coding-plan/glm-5.2"
 merge_all_available_skills = false
-telemetry = false
 
 [thinking]
-mode = "on"
-effort = "xhigh"
-
-[providers.kimi-for-coding]
-type = "kimi"
-base_url = "https://api.kimi.com/coding/v1"
-api_key = "sk-your-kimi-code-api-key-here"
+enabled = true
+effort = "max"
 
 [providers.openai-pro]
 type = "openai_responses"
@@ -20,12 +13,60 @@ base_url = "https://your-openai-responses-compatible-endpoint.example.com"
 [providers.openai-pro.custom_headers]
 User-Agent = "codex_vscode/0.128.0-alpha.1"
 
-[models."kimi-k2.7-code"]
-provider = "kimi-for-coding"
-model = "kimi-k2.7-code"
-max_context_size = 262144
-capabilities = [ "thinking", "tool_use", "image_in" ]
-display_name = "kimi-k2.7-code"
+[providers.zai-coding-plan]
+type = "openai"
+api_key = "your-zai-coding-plan-api-key-here"
+base_url = "https://api.z.ai/api/coding/paas/v4"
+
+[providers.moonshot]
+type = "anthropic"
+api_key = "sk-your-kimi-code-api-key-here"
+base_url = "https://api.kimi.com/coding/"
+
+[providers.kimi-for-coding]
+type = "anthropic"
+api_key = "sk-your-kimi-code-api-key-here"
+base_url = "https://api.kimi.com/coding"
+
+[models.kimi-k3]
+provider = "moonshot"
+model = "k3"
+max_context_size = 1000000
+capabilities = [ "image_in", "thinking", "tool_use" ]
+support_efforts = [ "max" ]
+default_effort = "max"
+adaptive_thinking = true
+display_name = "K3"
+
+[models."openai-pro/gpt-5.6-luna"]
+provider = "openai-pro"
+model = "gpt-5.6-luna"
+max_context_size = 272000
+max_output_size = 128000
+capabilities = [ "thinking", "image_in", "tool_use" ]
+support_efforts = [ "max" ]
+default_effort = "max"
+display_name = "GPT-5.6 Luna"
+
+[models."openai-pro/gpt-5.6-terra"]
+provider = "openai-pro"
+model = "gpt-5.6-terra"
+max_context_size = 272000
+max_output_size = 128000
+capabilities = [ "thinking", "image_in", "tool_use" ]
+support_efforts = [ "low", "medium", "high", "xhigh", "max" ]
+default_effort = "max"
+display_name = "GPT-5.6 Terra"
+
+[models."openai-pro/gpt-5.6-sol"]
+provider = "openai-pro"
+model = "gpt-5.6-sol"
+max_context_size = 272000
+max_output_size = 128000
+capabilities = [ "thinking", "image_in", "tool_use" ]
+support_efforts = [ "low", "medium", "high", "xhigh", "max" ]
+default_effort = "max"
+display_name = "GPT-5.6 Sol"
 
 [models."openai-pro/gpt-5.5"]
 provider = "openai-pro"
@@ -33,6 +74,8 @@ model = "gpt-5.5"
 max_context_size = 272000
 max_output_size = 128000
 capabilities = [ "thinking", "image_in", "tool_use" ]
+support_efforts = [ "medium", "high", "xhigh" ]
+default_effort = "xhigh"
 display_name = "GPT-5.5"
 
 [models."openai-pro/gpt-5.4"]
@@ -41,7 +84,58 @@ model = "gpt-5.4"
 max_context_size = 888000
 max_output_size = 128000
 capabilities = [ "thinking", "image_in", "tool_use" ]
+support_efforts = [ "medium", "high", "xhigh" ]
+default_effort = "xhigh"
 display_name = "GPT-5.4"
+
+[models."zai-coding-plan/glm-5.2"]
+provider = "zai-coding-plan"
+model = "glm-5.2"
+max_context_size = 1000000
+max_output_size = 131072
+capabilities = [ "thinking", "tool_use" ]
+display_name = "GLM-5.2"
+reasoning_key = "reasoning_content"
+
+[models."kimi-for-coding/k2p5"]
+provider = "kimi-for-coding"
+model = "k2p5"
+max_context_size = 262144
+max_output_size = 32768
+capabilities = [ "image_in", "video_in", "thinking", "tool_use" ]
+display_name = "Kimi K2.5"
+
+[models."kimi-for-coding/k2p7"]
+provider = "kimi-for-coding"
+model = "k2p7"
+max_context_size = 262144
+max_output_size = 32768
+capabilities = [ "image_in", "video_in", "thinking", "tool_use" ]
+display_name = "Kimi K2.7 Code"
+
+[models."kimi-for-coding/kimi-k2-thinking"]
+provider = "kimi-for-coding"
+model = "kimi-k2-thinking"
+max_context_size = 262144
+max_output_size = 32768
+capabilities = [ "thinking", "tool_use" ]
+display_name = "Kimi K2 Thinking"
+
+[models."kimi-for-coding/kimi-for-coding-highspeed"]
+provider = "kimi-for-coding"
+model = "kimi-for-coding-highspeed"
+max_context_size = 262144
+max_output_size = 32768
+capabilities = [ "image_in", "video_in", "thinking", "tool_use" ]
+display_name = "Kimi For Coding HighSpeed"
+
+[models."kimi-for-coding/k2p6"]
+provider = "kimi-for-coding"
+model = "k2p6"
+max_context_size = 262144
+max_output_size = 32768
+capabilities = [ "image_in", "video_in", "thinking", "tool_use" ]
+display_name = "Kimi K2.6"
 
 [experimental]
 micro_compaction = true

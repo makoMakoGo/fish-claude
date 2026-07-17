@@ -1,4 +1,3 @@
-lastChangelogVersion: 15.10.8
 autolearn:
   enabled: false
 skills:
@@ -18,25 +17,31 @@ mcp:
   enableClaudeUser: false
   enableCodexUser: false
 defaultThinkingLevel: xhigh
-serviceTier: priority
+tier:
+  openai: priority
+  anthropic: priority
+  google: priority
 modelRoles:
-  default: openai-pro/gpt-5.5:high
-  smol: openai-pro/gpt-5.5
-  slow: openai-pro/gpt-5.5:xhigh
-  designer: openai-pro/gpt-5.5:high
-  commit: openai-pro/gpt-5.5
-  vision: openai-pro/gpt-5.5:high
-  task: openai-pro/gpt-5.5:xhigh
-  plan: openai-pro/gpt-5.5:xhigh
-  advisor: xai-oauth/grok-composer-2.5-fast
+  default: openai-pro/gpt-5.6-sol:xhigh
+  smol: openai-pro/gpt-5.6-terra:max
+  slow: openai-pro/gpt-5.6-sol:max
+  designer: xai-oauth/grok-4.5:xhigh
+  commit: openai-pro/gpt-5.6-sol:xhigh
+  vision: openai-pro/gpt-5.6-sol:xhigh
+  task: openai-pro/gpt-5.6-sol:xhigh
+  plan: openai-pro/gpt-5.6-sol:max
+  advisor: openai-pro/gpt-5.6-sol:xhigh
+  tiny: openai-pro/gpt-5.6-luna:max
 advisor:
   enabled: true
+compaction:
+  strategy: context-full
 async:
   enabled: false
 memories:
   enabled: false
 task:
-  eager: false
+  eager: default
   maxConcurrency: 32
   maxRecursionDepth: 2
   isolation:
@@ -92,3 +97,8 @@ dev:
 setupVersion: 1
 lsp:
   enabled: false
+hideThinkingBlock: false
+retry:
+  fallbackChains:
+    tiny:
+      - xai-oauth/grok-4.5

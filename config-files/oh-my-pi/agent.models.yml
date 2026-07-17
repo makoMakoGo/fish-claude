@@ -42,6 +42,114 @@ providers:
     headers:
       User-Agent: codex_vscode/0.128.0-alpha.1
     models:
+      - id: gpt-5.6-sol
+        name: GPT-5.6 Sol
+        reasoning: true
+        thinking:
+          mode: effort
+          efforts:
+            - low
+            - medium
+            - high
+            - xhigh
+            - max
+          defaultLevel: xhigh
+        cost:
+          input: 5
+          output: 30
+          cacheRead: 0.5
+          cacheWrite: 6.25
+        contextWindow: 272000
+        maxTokens: 128000
+        input:
+          - text
+          - image
+      - id: gpt-5.6-terra
+        name: GPT-5.6 Terra
+        reasoning: true
+        thinking:
+          mode: effort
+          efforts:
+            - xhigh
+            - max
+          defaultLevel: max
+        cost:
+          input: 5
+          output: 30
+          cacheRead: 0.5
+          cacheWrite: 6.25
+        contextWindow: 272000
+        maxTokens: 128000
+        input:
+          - text
+          - image
+      - id: gpt-5.6-luna
+        name: GPT-5.6 Luna
+        reasoning: true
+        thinking:
+          mode: effort
+          efforts:
+            - low
+            - medium
+            - high
+            - xhigh
+            - max
+          defaultLevel: max
+        cost:
+          input: 5
+          output: 30
+          cacheRead: 0.5
+          cacheWrite: 6.25
+        contextWindow: 272000
+        maxTokens: 128000
+        input:
+          - text
+          - image
+      - id: gpt-5.5
+        name: GPT-5.5
+        reasoning: true
+        thinking:
+          minLevel: high
+          maxLevel: xhigh
+          mode: effort
+        contextWindow: 272000
+        maxTokens: 128000
+        input:
+          - text
+          - image
+      - id: gpt-5.4
+        name: GPT-5.4
+        reasoning: true
+        thinking:
+          minLevel: high
+          maxLevel: xhigh
+          mode: effort
+        contextWindow: 888000
+        maxTokens: 128000
+        input:
+          - text
+          - image
+      - id: gpt-5.3-codex-spark
+        name: GPT-5.3 Codex Spark
+        reasoning: true
+        thinking:
+          minLevel: high
+          maxLevel: xhigh
+          mode: effort
+        contextWindow: 128000
+        maxTokens: 128000
+        input:
+          - text
+          - image
+
+  openai-owlc:
+    baseUrl: https://your-openai-owlc-compatible-endpoint.example.com/v1
+    apiKey: sk-your-openai-owlc-api-key-here
+    api: openai-responses
+    authHeader: true
+    headers:
+      User-Agent: codex_vscode/0.128.0-alpha.1
+    models:
       - id: gpt-5.5
         name: GPT-5.5
         reasoning: true
@@ -97,6 +205,7 @@ providers:
           extraBody:
             thinking:
               type: enabled
+
       - id: deepseek-v4-flash
         name: DeepSeek V4 Flash
         reasoning: true
@@ -121,6 +230,23 @@ providers:
           extraBody:
             thinking:
               type: enabled
+
+  tencent:
+    baseUrl: https://your-tencent-compatible-endpoint.example.com/v1
+    apiKey: sk-your-tencent-api-key-here
+    api: openai-completions
+    authHeader: true
+    models:
+      - id: hy3
+        name: Tencent HY3 (WorkBuddy)
+        reasoning: false
+        input:
+          - text
+        contextWindow: 262144
+        maxTokens: 131072
+        compat:
+          supportsDeveloperRole: false
+          maxTokensField: max_tokens
 
   xiaomi-token-plan:
     baseUrl: https://token-plan-cn.xiaomimimo.com/v1
